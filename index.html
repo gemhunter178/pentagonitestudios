@@ -1,9 +1,88 @@
----
-layout: template
-title: Gem's other website!
----
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://www.w3schools.com/w3css/tryw3css_templates_teal.htm -->
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Gem's other website!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="/Pictures/Logo_favicon.png">
+    <link rel="stylesheet" href="/original_template_files/w3.css">
+    <link rel="stylesheet" href="/original_template_files/w3-theme-teal.css">
+    <link rel="stylesheet" href="/original_template_files/font-awesome.min.css">
+    <link rel="stylesheet" href="/autumn.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link id="avast_os_ext_custom_font" href="chrome-extension://eofcbnmajmjmplflapaojjnihcjkigck/common/ui/fonts/fonts.css" rel="stylesheet" type="text/css"><style type="text/css">.backpack.dropzone {
+      font-family: 'SF UI Display', 'Segoe UI';
+      font-size: 15px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 250px;
+      height: 150px;
+      font-weight: lighter;
+      color: white;
+      will-change: right;
+      z-index: 2147483647;
+      bottom: 20%;
+      background: #333;
+      position: fixed;
+      user-select: none;
+      transition: left .5s, right .5s;
+      right: 0px; }
+      .backpack.dropzone .animation {
+        height: 80px;
+        width: 250px;
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
+      .backpack.dropzone .title::before {
+        content: 'Save to'; }
+      .backpack.dropzone.closed {
+        right: -250px; }
+      .backpack.dropzone.hover .animation {
+        animation: sxt-play-anim-hover 0.91s steps(21);
+        animation-fill-mode: forwards;
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/hoverstate.png") left center; }
 
-<!-- Header -->
+    @keyframes sxt-play-anim-hover {
+      from {
+        background-position: 0px; }
+      to {
+        background-position: -5250px; } }
+      .backpack.dropzone.saving .title::before {
+        content: 'Saving to'; }
+      .backpack.dropzone.saving .animation {
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saving_loop.png") left center;
+        animation: sxt-play-anim-saving steps(59) 2.46s infinite; }
+
+    @keyframes sxt-play-anim-saving {
+      100% {
+        background-position: -14750px; } }
+      .backpack.dropzone.saved .title::before {
+        content: 'Saved to'; }
+      .backpack.dropzone.saved .animation {
+        background: url("chrome-extension://lifbcibllhkdhoafpjfnlhfpfgnpldfl/assets/backpack/dropzone/saved.png") left center;
+        animation: sxt-play-anim-saved steps(20) 0.83s forwards; }
+
+    @keyframes sxt-play-anim-saved {
+      100% {
+        background-position: -5000px; } }
+    </style>
+    <!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
+    <script src="/nav_helpers.js"></script>
+  </head>
+  <body>
+    <!-- Side Navigation -->
+    <nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+      <h1 class="w3-xxxlarge w3-text-theme">Where to?</h1>
+      <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
+      <a href="/" class="w3-bar-item w3-button">Home</a>
+      <a href="/nightbot.html" class="w3-bar-item w3-button">List of nightbot urlfetch extends</a>
+      <a href="https://www.w3schools.com/w3css/tryw3css_templates_teal.htm" class="w3-bar-item w3-button"><i class="fa fa-external-link"></i> The original template!</a>
+    </nav>
+
+    <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
   <div class="w3-center">
@@ -65,3 +144,21 @@ title: Gem's other website!
 
 
 </div>
+
+
+    <!-- Footer -->
+    <footer class="w3-container w3-theme-dark">
+      <h3>Credits n' such</h3>
+      <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+      <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+        <span class="w3-text w3-theme w3-padding">Go To Top</span>&nbsp;
+        <a class="w3-text-white" href="#"><span class="w3-xlarge">
+        <i class="fa fa-chevron-circle-up"></i></span></a>
+      </div>
+      <p><a href="https://www.w3schools.com/w3css/w3css_references.asp" class="w3-btn w3-theme" target="_blank">W3.CSS Reference</a></p>
+      <p>edited/adapted by Gem!</p>
+	  <p>optimizations and usability improvements by <a href="https://github.com/thesecretmaster" target="_blank">thesecretmaster</a>!</p>
+      <p style="padding-bottom:2vh">Hosted by Github pages</p>
+    </footer>
+  </body>
+</html>
