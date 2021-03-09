@@ -58,7 +58,7 @@ if (showPromo) {
   msg += ' Follow her ' + promo[prmNum];
 }
 
-if (user === 'Gemhunter178') {
+if (/^Gemhunter178$/i.test(user)) {
   const opt = text.split(' ');
   switch (opt[0]) {
     case 'wave':
