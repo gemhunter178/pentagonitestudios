@@ -6,6 +6,9 @@
 /* These ESLint errors should be handled, but for now I just want to get it to pass */
 /* eslint-disable no-unused-expressions, no-case-declarations, no-unused-expressions */
 
+/* previous message on Kae's (for future implementation maybe? (Abi came up with this)
+Gem is an AWESOME artist and mod(who can do everything)!! Follow her on Twitter! https://twitter.com/gemhunter178 and comission her on discord!! */
+
 const messages = [
   'does art, grows cacti, and knows a lot of fun facts! smolCool',
   'wrangles with nightbot more often than not smolFite',
@@ -49,7 +52,14 @@ if (/nopromo/i.test(text)) {
   showPromo = false;
 }
 
-let msg = desc + ' - Gem (she/them) - ' + messages[Math.floor(Math.random() * messages.length)];
+let msgNum = parseInt(text.replace(/\D/g, ''));
+let msgFlavor = messages[Math.floor(Math.random() * messages.length)];
+if (!isNaN(msgNum)) {
+  msgNum = msgNum % messages.length;
+  msgFlavor = msgNum + ': ' + messages[msgNum];
+}
+
+let msg = desc + ' - Gem (she/them) - ' + msgFlavor;
 if (showPromo) {
   let prmNum = 0;
   if (Math.random() > 0.7) {
@@ -62,7 +72,7 @@ if (/^Gemhunter178$/i.test(user)) {
   const opt = text.split(' ');
   switch (opt[0]) {
     case 'wave':
-      'Gem says hi and apologizes if she missed someone!';
+      'Gem says hi and apologizes if she missed someone! maizWave';
       break;
 
     case 'typo':
