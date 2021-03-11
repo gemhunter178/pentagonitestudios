@@ -44,13 +44,13 @@ const messages = [
   'has a background in traditional art! (colored pencil, graphite, acrylic, oil etc.) abbybaPaint',
   'will probably open a shop...eventually... smolS',
   'loves variegated plants...but they do be expensive lycelHands',
-  'is the baker of her house! 🍰 🍞',
+  'is the baker of her house! 🍰 🍞'
 ];
 
 const promo = [
   'twitter! https://twitter.com/gemhunter178',
   'insta! https://www.instagram.com/gemhunterdoesart/',
-  'twitch!...eventually https://www.twitch.tv/gemhunter178',
+  'twitch!...eventually https://www.twitch.tv/gemhunter178'
 ];
 
 let showPromo = true;
