@@ -34,17 +34,23 @@ const messages = [
   'has been to active mines for rocks! 🪨',
   'has all 7 continents representing in her rock collection! smolWow',
   'is attempting to help out with endangered cacti breeding 🌵',
-  'probably needs more sleep smolNap',
+  'probably needs more sleep smolEyeroll smolNap',
   'can help out with making nightbot commands! lycelYay',
   'knows how to bake and decorate cakes! abbybaNom',
   'occasionally does photography! 📸',
-  "is hoping that all of these text options don't have a typo... smolS"
+  "is hoping that all of these text options don't have a typo... smolS",
+  'did winter guard before! She actually has color guard flag right next to her desk!',
+  'played flute and was then drum major in marching band! 🎶',
+  'has a background in traditional art! (colored pencil, graphite, acrylic, oil etc.) abbybaPaint',
+  'will probably open a shop...eventually... smolS',
+  'loves variegated plants...but they do be expensive lycelHands',
+  'is the baker of her house! 🍰 🍞',
 ];
 
 const promo = [
   'twitter! https://twitter.com/gemhunter178',
   'insta! https://www.instagram.com/gemhunterdoesart/',
-  'twitch!...eventually https://www.twitch.tv/gemhunter178'
+  'twitch!...eventually https://www.twitch.tv/gemhunter178',
 ];
 
 let showPromo = true;
@@ -65,7 +71,7 @@ if (showPromo) {
   if (Math.random() > 0.7) {
     prmNum = 1 + Math.floor(Math.random() * (promo.length - 1));
   }
-  msg += ' Follow her ' + promo[prmNum];
+  msg += '  Follow her ' + promo[prmNum];
 }
 
 if (/^Gemhunter178$/i.test(user)) {

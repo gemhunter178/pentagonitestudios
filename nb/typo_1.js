@@ -2,12 +2,12 @@
 /* global text:true */
 
 /* These ESLint errors should be handled, but for now I just want to get it to pass */
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, prefer-const */
 
 let iptNum = 1;
 if (text.length === 0) {
   text = 'You gotta enter a sentence to typo, silly!';
-} else if (/^help$|^\\?$|^info$/.test(text)){
+} else if (/^help$|^\\?$|^info$/.test(text)) {
   text = "Gem's typo v1! allows even more cursed typos if you start with typo[num], up to 10";
   iptNum = 0;
 } else {
@@ -36,7 +36,7 @@ for (i = 0; i < words.length; i++) {
   let ltrs = words[i].split('');
   for (j = 1; j < ltrs.length - 1; j++) {
     if (Math.random() < (0.15 * iptNum)) {
-      if(Math.random() < 0.7) {
+      if (Math.random() < 0.7) {
         tmp = ltrs[j];
         ltrs[j] = ltrs[j + 1];
         ltrs[j + 1] = tmp;
