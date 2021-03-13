@@ -18,6 +18,7 @@ if (cvrtvals.length < 2) {
 
 const temperature = ['C','F','K'];
 /*const len = ['ft','m','in','cm','mm','gabo'];*/
+
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val)) {
 	helpTrg = 2;
@@ -47,8 +48,7 @@ if (helpTrg !== 0) {
 	let unit1 = cvrtvals[0].replace(/\d/,'');
 	let unit2 = cvrtvals[1].replace(/\d/,'');
 	let calc = true;
-	let testFor = new RegExp('\\b('temperature.join('|')')\\b');
-	if (testFor.test(unit1) && testFor.test(unit2)){
+	if (temperature.includes(unit1) && temperature.includes(unit2)) {
 		switch (unit1) {
 			
 			case 'C':

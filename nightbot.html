@@ -1581,7 +1581,7 @@
           <span>
             <a href="/nb/typo_1.js" target="_blank"><b>typo_1.js</b></a>
             <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/typo_1.min.js" class="copybtn fa fa-clipboard"></i>:
-            <span class="command-description"><p>same as the typo algo above but allows some control of level of typos made if the sentence starts with “typo[number]”, up to 10.</p>
+            <span class="command-description"><p>same as the typo algo above but allows some control of level of typos made if the sentence contains “typo[number]”, up to 10.</p>
 </span>
           </span>
           <div class="command-detailbox">
@@ -1701,6 +1701,7 @@
 
 <span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
 <span class="cm">/*const len = ['ft','m','in','cm','mm','gabo'];*/</span>
+
 <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
 	<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -1730,8 +1731,7 @@
 	<span class="kd">let</span> <span class="nx">unit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
 	<span class="kd">let</span> <span class="nx">unit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
 	<span class="kd">let</span> <span class="nx">calc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-	<span class="kd">let</span> <span class="nx">testFor</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="se">\\</span><span class="s1">b(</span><span class="dl">'</span><span class="nx">temperature</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">|</span><span class="dl">'</span><span class="p">)</span><span class="dl">'</span><span class="s1">)</span><span class="se">\\</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
-	<span class="k">if</span> <span class="p">(</span><span class="nx">testFor</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">testFor</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">unit2</span><span class="p">)){</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">temperature</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">temperature</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit2</span><span class="p">))</span> <span class="p">{</span>
 		<span class="k">switch</span> <span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="p">{</span>
 			
 			<span class="k">case</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">:</span>
