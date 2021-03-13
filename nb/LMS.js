@@ -1,3 +1,6 @@
+/* ignore an apparent trailing space in a sentence*/
+/* eslint-disable no-trailing-spaces*/
+
 const LMS = ['This is a nice stick',
   'I like sticks (peck peck)',
   'Lemme Smash, please',
@@ -16,7 +19,8 @@ const LMS = ['This is a nice stick',
   'Wot? No wait lemme smash!',
   'What has my life come to?',
   'Becky thought my tail was big',
-  'Becky used to Lemme Smash', 'but Becky is smashing Ben. Ben is a hoe. (heck)',
+  'Becky used to Lemme Smash', 
+  'but Becky is smashing Ben. Ben is a hoe. (heck)',
   'Fuck this nest, fuck Ben!',
   'I need you Becky',
   'Becky lemme smash!',

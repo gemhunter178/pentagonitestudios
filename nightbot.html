@@ -180,7 +180,10 @@
             
             
             <p>variables: <code>LMS</code></p>
-            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">LMS</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">This is a nice stick</span><span class="dl">'</span><span class="p">,</span>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* ignore an apparent trailing space in a sentence*/</span>
+<span class="cm">/* eslint-disable no-trailing-spaces*/</span>
+
+<span class="kd">const</span> <span class="nx">LMS</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">This is a nice stick</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">I like sticks (peck peck)</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Lemme Smash, please</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">No Ron, go find Becky</span><span class="dl">'</span><span class="p">,</span>
@@ -198,7 +201,8 @@
   <span class="dl">'</span><span class="s1">Wot? No wait lemme smash!</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">What has my life come to?</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Becky thought my tail was big</span><span class="dl">'</span><span class="p">,</span>
-  <span class="dl">'</span><span class="s1">Becky used to Lemme Smash</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">but Becky is smashing Ben. Ben is a hoe. (heck)</span><span class="dl">'</span><span class="p">,</span>
+  <span class="dl">'</span><span class="s1">Becky used to Lemme Smash</span><span class="dl">'</span><span class="p">,</span> 
+  <span class="dl">'</span><span class="s1">but Becky is smashing Ben. Ben is a hoe. (heck)</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Fuck this nest, fuck Ben!</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">I need you Becky</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">Becky lemme smash!</span><span class="dl">'</span><span class="p">,</span>
@@ -1663,6 +1667,120 @@
 <span class="k">if</span> <span class="p">(</span><span class="nx">regTest</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
   <span class="nx">trg</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
+          </div>
+        </li>
+      
+        <li>
+          <span class="expand-detailbox">+</span>
+          <span>
+            <a href="/nb/convert.js" target="_blank"><b>convert.js</b></a>
+            <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/convert.min.js" class="copybtn fa fa-clipboard"></i>:
+            <span class="command-description"><p>[WIP] requires an input string ‘<em>text</em>’ in the form ‘[number][inputUnit] to [outputUnit]’ or ‘[number][inputUnit] [outputUnit]’. this will attempt to convert the input to output.</p>
+</span>
+          </span>
+          <div class="command-detailbox">
+            
+            
+            <p>variables: <code>text</code>, <code>msg</code>, <code>val</code>, <code>helpTrg</code></p>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* These ESLint errors should be handled, but for now I just want to get it to pass */</span>
+<span class="cm">/* eslint-disable no-tabs*/</span>
+
+<span class="kd">var</span> <span class="nx">msg</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="sr">/</span><span class="se">\b</span><span class="sr">help</span><span class="se">\b</span><span class="sr">/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
+	<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="k">if</span> <span class="p">(</span><span class="sr">/temp/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
+		<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+to/i</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
+	<span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
+	<span class="cm">/*const len = ['ft','m','in','cm','mm','gabo'];*/</span>
+	<span class="nx">cvrtvals</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">cvrtvals</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
+	<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">helpTrg</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+	<span class="cm">/* error handling, basically */</span>
+	<span class="k">switch</span> <span class="p">(</span><span class="nx">helpTrg</span><span class="p">)</span> <span class="p">{</span>
+		
+		<span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units</span><span class="dl">'</span><span class="p">;</span>
+		  <span class="k">break</span><span class="p">;</span>
+		
+		<span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">requires a value to convert from lycelIdk</span><span class="dl">'</span><span class="p">;</span>
+		  <span class="k">break</span><span class="p">;</span>
+		
+		<span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current accepted units for temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">temperature</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">);</span>
+		  <span class="k">break</span><span class="p">;</span>
+		
+		<span class="k">case</span> <span class="k">default</span><span class="p">:</span>
+		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units</span><span class="dl">'</span><span class="p">;</span>
+		  <span class="k">break</span><span class="p">;</span>
+		
+	<span class="p">}</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+	<span class="kd">let</span> <span class="nx">unit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
+	<span class="kd">let</span> <span class="nx">unit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
+	<span class="kd">let</span> <span class="nx">calc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+	<span class="kd">let</span> <span class="nx">testFor</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="dl">'</span><span class="se">\\</span><span class="s1">b(</span><span class="dl">'</span><span class="nx">temperature</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">|</span><span class="dl">'</span><span class="p">)</span><span class="dl">'</span><span class="s1">)</span><span class="se">\\</span><span class="s1">b</span><span class="dl">'</span><span class="p">);</span>
+	<span class="k">if</span> <span class="p">(</span><span class="nx">testFor</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">testFor</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">unit2</span><span class="p">)){</span>
+		<span class="k">switch</span> <span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="nx">val</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">-</span><span class="mf">273.15</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="nl">default</span><span class="p">:</span>
+			  <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+			  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error parsing temperature conversion, start</span><span class="dl">'</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+		<span class="p">}</span>
+		<span class="k">switch</span> <span class="p">(</span><span class="nx">unit2</span><span class="p">)</span> <span class="p">{</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">*</span><span class="mf">1.8</span><span class="o">+</span><span class="mi">32</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="k">case</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">:</span>
+			  <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">+</span><span class="mf">273.15</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+			<span class="nl">default</span><span class="p">:</span>
+			  <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+			  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error parsing temperature conversion, end</span><span class="dl">'</span><span class="p">;</span>
+			  <span class="k">break</span><span class="p">;</span>
+			
+		<span class="p">}</span>
+	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+		<span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+		<span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature</span><span class="dl">'</span><span class="p">;</span>
+	<span class="p">}</span>
+	
+	<span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nx">msg</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+	<span class="p">}</span>		
+<span class="p">}</span>
+
+<span class="nx">msg</span><span class="p">;</span></code></pre></figure>
           </div>
         </li>
       
