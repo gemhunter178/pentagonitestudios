@@ -1681,8 +1681,10 @@
             
             
             <p>variables: <code>text</code>, <code>msg</code>, <code>val</code>, <code>helpTrg</code>, <code>cvrtvals</code>, <code>temperature</code>, <code>length</code>, <code>volume</code>, <code>massweight</code></p>
-            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* whitespace issues */</span>
-<span class="cm">/* eslint-disable no-tabs, indent */</span>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* global text */</span>
+
+<span class="cm">/* whitespace issues */</span>
+<span class="cm">/* eslint-disable no-tabs, indent, no-unused-expressions */</span>
 
 <span class="kd">let</span> <span class="nx">msg</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -2094,10 +2096,9 @@
     <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Either unit types do not match or it has yet to be implemented smolShrug | </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | debug: val-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit1-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit2-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>
 
-  <span class="cm">/* optionally can use toPrecision() on val for more/less digits */</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
-  <span class="p">}</span>    
+    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">msg</span><span class="p">;</span></code></pre></figure>
