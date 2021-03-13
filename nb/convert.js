@@ -7,6 +7,8 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   helpTrg = 1;
   if (/temp/i.test(text)) {
     helpTrg = 3;
+  } else if (/length/i.test(text)) {
+    helpTrg = 4;
   }
 }
 
@@ -17,7 +19,7 @@ if (cvrtvals.length < 2) {
 }
 
 const temperature = ['C', 'F', 'K'];
-/* const len = ['ft','m','in','cm','mm','gabo']; */
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'gabo'];
 
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
@@ -26,10 +28,6 @@ if (isNaN(val) && helpTrg === 0) {
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
-    case 1:
-      msg = 'Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units';
-      break;
-    
     case 2:
       msg = 'requires a value to convert from lycelIdk';
       break;
@@ -38,30 +36,35 @@ if (helpTrg !== 0) {
       msg = 'current accepted units for temperature: ' + temperature.join(', ');
       break;
     
+    case 4:
+      msg = 'current accepted units for length: ' + length.join(', ');
+      break;
+    
     default:
-      msg = 'Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units';
+      msg = 'Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs';
       break;
   }
 } else {
   const unit1 = cvrtvals[0].replace(/\d/g, '');
   const unit2 = cvrtvals[1].replace(/\d/g, '');
   let calc = true;
+  const gaboVal = 1.8288;
   if (temperature.includes(unit1) && temperature.includes(unit2)) {
     switch (unit1) {
       case 'C':
         break;
       
       case 'F':
-        val = (val-32)*5/9;
+        val = (val-32) * 5/9;
         break;
       
       case 'K':
-        val = val-273.15;
+        val = val - 273.15;
         break;
       
       default:
         calc = false;
-        msg = 'error parsing temperature conversion, start';
+        msg = 'error in temperature conversion, start';
         break;
     }
     switch (unit2) {
@@ -69,25 +72,100 @@ if (helpTrg !== 0) {
         break;
       
       case 'F':
-        val = val*1.8+32;
+        val = val * 1.8 + 32;
         break;
       
       case 'K':
-        val = val+273.15;
+        val = val + 273.15;
         break;
       
       default:
         calc = false;
-        msg = 'error parsing temperature conversion, end';
+        msg = 'error in temperature conversion, end';
+        break;
+    }
+  } else if (length.includes(unit1) && length.includes(unit2)) {
+    switch (unit1) {
+      case 'm':
+        break;
+      
+      case 'cm':
+        val = val / 100;
+        break;
+      
+      case 'mm':
+        val = val / 1000;
+        break;
+        
+      case 'km':
+        val = val * 1000;
+        break;
+        
+      case 'ft':
+        val = val * 0.3048;
+        break;
+      
+      case 'in':
+        val = val * 0.0254;
+        break;
+      
+      case 'mi':
+        val = val * 1609.344;
+        break;
+      
+      case 'gabo':
+        val = val * gaboVal;
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in length conversion, start';
+        break;
+    }
+    switch (unit2) {
+      case 'm':
+        break;
+      
+      case 'cm':
+        val = val * 100;
+        break;
+      
+      case 'mm':
+        val = val * 1000;
+        break;
+        
+      case 'km':
+        val = val / 1000;
+        break;
+        
+      case 'ft':
+        val = val / 0.3048;
+        break;
+      
+      case 'in':
+        val = val / 0.0254;
+        break;
+      
+      case 'mi':
+        val = val / 1609.344;
+        break;
+      
+      case 'gabo':
+        val = val / gaboVal;
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in length conversion, end';
         break;
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
+    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature, length | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
   }
   
   if (calc) {
-    msg = cvrtvals[0] + ' = ' + val + unit2;
+    msg = cvrtvals[0] + ' = ' + val.toPrecision(6) + unit2;
   }    
 }
 

@@ -1690,6 +1690,8 @@
   <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="sr">/temp/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
     <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/length/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -1700,7 +1702,7 @@
 <span class="p">}</span>
 
 <span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
-<span class="cm">/* const len = ['ft','m','in','cm','mm','gabo']; */</span>
+<span class="kd">const</span> <span class="nx">length</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cm</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">mm</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">km</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ft</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">];</span>
 
 <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">helpTrg</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -1709,10 +1711,6 @@
 <span class="k">if</span> <span class="p">(</span><span class="nx">helpTrg</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="cm">/* error handling, basically */</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">helpTrg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units</span><span class="dl">'</span><span class="p">;</span>
-      <span class="k">break</span><span class="p">;</span>
-    
     <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
       <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">requires a value to convert from lycelIdk</span><span class="dl">'</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
@@ -1721,30 +1719,35 @@
       <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current accepted units for temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">temperature</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">);</span>
       <span class="k">break</span><span class="p">;</span>
     
+    <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current accepted units for length: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">length</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">);</span>
+      <span class="k">break</span><span class="p">;</span>
+    
     <span class="nl">default</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units</span><span class="dl">'</span><span class="p">;</span>
+      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs</span><span class="dl">'</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">unit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
   <span class="kd">const</span> <span class="nx">unit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\d</span><span class="sr">/g</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
   <span class="kd">let</span> <span class="nx">calc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">gaboVal</span> <span class="o">=</span> <span class="mf">1.8288</span><span class="p">;</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">temperature</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">temperature</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit2</span><span class="p">))</span> <span class="p">{</span>
     <span class="k">switch</span> <span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">case</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">:</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span><span class="o">*</span><span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="o">-</span><span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">-</span><span class="mf">273.15</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">-</span> <span class="mf">273.15</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="nl">default</span><span class="p">:</span>
         <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error parsing temperature conversion, start</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error in temperature conversion, start</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
     <span class="k">switch</span> <span class="p">(</span><span class="nx">unit2</span><span class="p">)</span> <span class="p">{</span>
@@ -1752,25 +1755,100 @@
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">*</span><span class="mf">1.8</span><span class="o">+</span><span class="mi">32</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">1.8</span> <span class="o">+</span> <span class="mi">32</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span><span class="o">+</span><span class="mf">273.15</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">+</span> <span class="mf">273.15</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="nl">default</span><span class="p">:</span>
         <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error parsing temperature conversion, end</span><span class="dl">'</span><span class="p">;</span>
+        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error in temperature conversion, end</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">length</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">length</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="nx">unit2</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">unit1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">cm</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">mm</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+        
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">km</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+        
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">ft</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">0.3048</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">0.0254</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">1609.344</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="nx">gaboVal</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error in length conversion, start</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">unit2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">:</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">cm</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">100</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">mm</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+        
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">km</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+        
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">ft</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.3048</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.0254</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">1609.344</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="nx">gaboVal</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+      
+      <span class="nl">default</span><span class="p">:</span>
+        <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">error in length conversion, end</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature | debug: val-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit1-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit2-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature, length | debug: val-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit1-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit2-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>
   
   <span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>    
 <span class="p">}</span>
 
