@@ -16,7 +16,7 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   }
 }
 
-text = text.replace(/\s+to/i, '');
+text = text.replace(/\s+to\s+/i, ' ');
 const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2) {
   helpTrg = 1;
