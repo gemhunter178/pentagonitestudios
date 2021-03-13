@@ -1,4 +1,4 @@
-/* global text */
+/* global text:true */
 
 /* whitespace issues */
 /* eslint-disable no-tabs, indent, no-unused-expressions */
@@ -16,6 +16,9 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   } else if (/\bmass|\bwei/i.test(text)) {
     helpTrg = 6;
   }
+} else if (/\s*debug\s*/.test(text)) {
+  helpTrg = -2;
+  text = text.replace(/\s*debug\s*/, ' ');
 }
 
 text = text.replace(/\s+to\s+/i, ' ');
@@ -23,7 +26,7 @@ const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2) {
   helpTrg = 1;
 }
-
+/* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
 const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'gabo^3'];
@@ -31,6 +34,8 @@ const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'Jupiter'
 const accptUnits = 'current unit types: temperature, length, volume, mass/weight';
 
 let val = parseFloat(cvrtvals[0]);
+let getUnitRegex = new RegExp(/^[\d.-]*/);
+
 if (isNaN(val) && helpTrg === 0) {
   helpTrg = 2;
 } else if (/format_time/.test(cvrtvals[0])) {
@@ -40,8 +45,14 @@ if (isNaN(val) && helpTrg === 0) {
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
+    case -2:
+      const dUnit1 = cvrtvals[0].replace(getUnitRegex, '');
+      const dUnit2 = cvrtvals[1].replace(getUnitRegex, '');
+      msg = 'debug: text- ' + text + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
+      break;
+
     case -1:
-      msg = '"format_time" cannot be used as input abbybaPensive ';
+      msg = '"format_time" cannot be used as input here abbybaPensive ';
       break;
 
     case 2:
@@ -69,8 +80,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  let unit1 = cvrtvals[0].replace(/^[\d.-]*/, '');
-  let unit2 = cvrtvals[1].replace(/^[\d.-]*/, '');
+  let unit1 = cvrtvals[0].replace(getUnitRegex, '');
+  let unit2 = cvrtvals[1].replace(getUnitRegex, '');
   let calc = true;
   const origVal = val;
   const gaboVal = 1.8288;
@@ -410,7 +421,7 @@ if (helpTrg !== 0) {
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits + ' | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
+    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits;
   }
 
   if (calc) {
