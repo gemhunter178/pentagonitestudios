@@ -49,7 +49,7 @@ if (helpTrg !== 0) {
       break;
     
     default:
-      msg = '!convert by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs |' + accptUnits;
+      msg = '!convert by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs | ' + accptUnits;
       break;
   }
 } else {
