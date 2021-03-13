@@ -1680,7 +1680,7 @@
           <div class="command-detailbox">
             
             
-            <p>variables: <code>text</code>, <code>msg</code>, <code>val</code>, <code>helpTrg</code></p>
+            <p>variables: <code>text</code>, <code>msg</code>, <code>val</code>, <code>helpTrg</code>, <code>cvrtvals</code>, <code>temperature</code></p>
             <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* These ESLint errors should be handled, but for now I just want to get it to pass */</span>
 <span class="cm">/* eslint-disable no-tabs*/</span>
 
@@ -1691,15 +1691,16 @@
 	<span class="k">if</span> <span class="p">(</span><span class="sr">/temp/i</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
 		<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 	<span class="p">}</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-	<span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+to/i</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
-	<span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
-	<span class="cm">/*const len = ['ft','m','in','cm','mm','gabo'];*/</span>
-	<span class="nx">cvrtvals</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
-	<span class="k">if</span> <span class="p">(</span><span class="nx">cvrtvals</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-		<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-	<span class="p">}</span>
 <span class="p">}</span>
+
+<span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+to/i</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
+<span class="kd">let</span> <span class="nx">cvrtvals</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">cvrtvals</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
+<span class="cm">/*const len = ['ft','m','in','cm','mm','gabo'];*/</span>
 <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">))</span> <span class="p">{</span>
 	<span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>

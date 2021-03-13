@@ -8,15 +8,16 @@ if (/\bhelp\b/i.test(text)) {
 	if (/temp/i.test(text)) {
 		helpTrg = 3;
 	}
-} else {
-	text = text.replace(/\s+to/i,'');
-	const temperature = ['C','F','K'];
-	/*const len = ['ft','m','in','cm','mm','gabo'];*/
-	cvrtvals = text.split(' ');
-	if (cvrtvals.length < 2) {
-		helpTrg = 1;
-	}
 }
+
+text = text.replace(/\s+to/i,'');
+let cvrtvals = text.split(' ');
+if (cvrtvals.length < 2) {
+	helpTrg = 1;
+}
+
+const temperature = ['C','F','K'];
+/*const len = ['ft','m','in','cm','mm','gabo'];*/
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val)) {
 	helpTrg = 2;
