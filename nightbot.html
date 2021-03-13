@@ -1717,7 +1717,7 @@
 <span class="kd">const</span> <span class="nx">accptUnits</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current unit types: temperature, length, volume, mass/weight</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-<span class="kd">let</span> <span class="nx">getUnitRegex</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="sr">/^</span><span class="se">[\d</span><span class="sr">.-</span><span class="se">]</span><span class="sr">*/</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">getUnitRegex</span> <span class="o">=</span> <span class="sr">/^</span><span class="se">[\d</span><span class="sr">.-</span><span class="se">]</span><span class="sr">*/</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">helpTrg</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
@@ -1728,11 +1728,12 @@
 <span class="k">if</span> <span class="p">(</span><span class="nx">helpTrg</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="cm">/* error handling, basically */</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">helpTrg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+    <span class="k">case</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
       <span class="kd">const</span> <span class="nx">dUnit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="nx">getUnitRegex</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
       <span class="kd">const</span> <span class="nx">dUnit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="nx">getUnitRegex</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
       <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">debug: text- </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">text</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | val- </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | unit1- </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">dUnit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | unit2- </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">dUnit2</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
 
     <span class="k">case</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
       <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">"format_time" cannot be used as input here abbybaPensive </span><span class="dl">'</span><span class="p">;</span>

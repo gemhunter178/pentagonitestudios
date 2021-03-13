@@ -34,7 +34,7 @@ const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'Jupiter'
 const accptUnits = 'current unit types: temperature, length, volume, mass/weight';
 
 let val = parseFloat(cvrtvals[0]);
-let getUnitRegex = new RegExp(/^[\d.-]*/);
+const getUnitRegex = /^[\d.-]*/;
 
 if (isNaN(val) && helpTrg === 0) {
   helpTrg = 2;
@@ -45,11 +45,12 @@ if (isNaN(val) && helpTrg === 0) {
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
-    case -2:
+    case -2: {
       const dUnit1 = cvrtvals[0].replace(getUnitRegex, '');
       const dUnit2 = cvrtvals[1].replace(getUnitRegex, '');
       msg = 'debug: text- ' + text + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
       break;
+    }
 
     case -1:
       msg = '"format_time" cannot be used as input here abbybaPensive ';
