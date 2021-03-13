@@ -28,10 +28,17 @@ const accptUnits = 'current types accepted: temperature, length, volume';
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
   helpTrg = 2;
+} else if (val <= 0) {
+  helpTrg = -1;
 }
+
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
+    case -1:
+      msg = 'You thought entering that value would be funny, did you?';
+      break;
+    
     case 2:
       msg = 'requires a value to convert from lycelIdk';
       break;
@@ -53,8 +60,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  const unit1 = cvrtvals[0].replace(/\d/g, '');
-  const unit2 = cvrtvals[1].replace(/\d/g, '');
+  const unit1 = cvrtvals[0].replace(/\b[\d\.]*/, '');
+  const unit2 = cvrtvals[1].replace(/\b[\d\.]*/, '');
   let calc = true;
   const gaboVal = 1.8288;
   if (temperature.includes(unit1) && temperature.includes(unit2)) {
