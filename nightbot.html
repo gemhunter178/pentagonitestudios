@@ -1750,8 +1750,8 @@
       <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="kd">let</span> <span class="nx">unit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\b[\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">*|</span><span class="se">\b\-</span><span class="sr">/</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
-  <span class="kd">let</span> <span class="nx">unit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\b[\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">*|</span><span class="se">\b\-</span><span class="sr">/</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">unit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\b[\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">*|</span><span class="se">\b</span><span class="sr">-/</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
+  <span class="kd">let</span> <span class="nx">unit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\b[\d</span><span class="sr">.</span><span class="se">]</span><span class="sr">*|</span><span class="se">\b</span><span class="sr">-/</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
   <span class="kd">let</span> <span class="nx">calc</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">origVal</span> <span class="o">=</span> <span class="nx">val</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">gaboVal</span> <span class="o">=</span> <span class="mf">1.8288</span><span class="p">;</span>
@@ -1911,7 +1911,7 @@
         <span class="k">break</span><span class="p">;</span>
 
       <span class="k">case</span> <span class="dl">'</span><span class="s1">qt</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span>  <span class="nx">val</span> <span class="o">*</span> <span class="mf">0.946352946</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">0.946352946</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
       <span class="k">case</span> <span class="dl">'</span><span class="s1">pt</span><span class="dl">'</span><span class="p">:</span>
@@ -1963,7 +1963,7 @@
         <span class="k">break</span><span class="p">;</span>
 
       <span class="k">case</span> <span class="dl">'</span><span class="s1">qt</span><span class="dl">'</span><span class="p">:</span>
-        <span class="nx">val</span> <span class="o">=</span>  <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.946352946</span><span class="p">;</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.946352946</span><span class="p">;</span>
         <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> quarts</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
@@ -2093,9 +2093,10 @@
     <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
     <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Either unit types do not match or it has yet to be implemented smolShrug | </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> | debug: val-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit1-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> unit2-</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>
-  
+
+  <span class="cm">/* optionally can use toPrecision() on val for more/less digits */</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>    
 <span class="p">}</span>
 

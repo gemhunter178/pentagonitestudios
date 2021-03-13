@@ -67,8 +67,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  let unit1 = cvrtvals[0].replace(/\b[\d.]*|\b\-/, '');
-  let unit2 = cvrtvals[1].replace(/\b[\d.]*|\b\-/, '');
+  let unit1 = cvrtvals[0].replace(/\b[\d.]*|\b-/, '');
+  let unit2 = cvrtvals[1].replace(/\b[\d.]*|\b-/, '');
   let calc = true;
   const origVal = val;
   const gaboVal = 1.8288;
@@ -228,7 +228,7 @@ if (helpTrg !== 0) {
         break;
 
       case 'qt':
-        val =  val * 0.946352946;
+        val = val * 0.946352946;
         break;
 
       case 'pt':
@@ -280,7 +280,7 @@ if (helpTrg !== 0) {
         break;
 
       case 'qt':
-        val =  val / 0.946352946;
+        val = val / 0.946352946;
         unit2 = ' quarts';
         break;
 
@@ -410,9 +410,10 @@ if (helpTrg !== 0) {
     calc = false;
     msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits + ' | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
   }
-  
+
+  /* optionally can use toPrecision() on val for more/less digits */
   if (calc) {
-    msg = origVal + unit1 + ' = ' + val.toPrecision(6) + unit2;
+    msg = origVal + unit1 + ' = ' + val + unit2;
   }    
 }
 
