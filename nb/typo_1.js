@@ -37,7 +37,7 @@ for (let i = 0; i < words.length; i++) {
   for (let j = 1; j < ltrs.length - 1; j++) {
     if (Math.random() < (0.15 * iptNum)) {
       if (Math.random() < 0.7) {
-        tmp = ltrs[j];
+        let tmp = ltrs[j];
         ltrs[j] = ltrs[j + 1];
         ltrs[j + 1] = tmp;
         j++;
