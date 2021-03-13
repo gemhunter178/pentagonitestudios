@@ -83,7 +83,7 @@ if (helpTrg !== 0) {
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature';
+    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature | debug: val-' + val + 'unit1-' + unit1 + 'unit2-' + unit2;
   }
   
   if (calc) {
