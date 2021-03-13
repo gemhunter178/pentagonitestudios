@@ -1708,13 +1708,13 @@
 <span class="kd">const</span> <span class="nx">temperature</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">];</span>
 <span class="kd">const</span> <span class="nx">length</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">m</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cm</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">mm</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">km</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ft</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">in</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">light-seconds</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">furlong</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">smoot</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">];</span>
 <span class="kd">const</span> <span class="nx">volume</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">L</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">m^3</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cm^3</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">gal</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">qt</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">pt</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">floz</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">tsp</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Tbsp</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">gabo^3</span><span class="dl">'</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">massweight</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">kg</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">lbs</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ct</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jupiter</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">solar_mass</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">massweight</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">kg</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">metric_ton</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ton</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">lbs</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">oz</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ct</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Jupiter</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">solar_mass</span><span class="dl">'</span><span class="p">];</span>
 <span class="kd">const</span> <span class="nx">accptUnits</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current unit types: temperature, length, volume, mass/weight</span><span class="dl">'</span><span class="p">;</span>
 
 <span class="kd">let</span> <span class="nx">val</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">helpTrg</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/format_time/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/format_time/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
   <span class="nx">helpTrg</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -2011,8 +2011,21 @@
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">metric_ton</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="nx">unit1</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> metric tons</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">ton</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">2000</span> <span class="o">/</span> <span class="mf">2.20462262</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
       <span class="k">case</span> <span class="dl">'</span><span class="s1">lbs</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">2.20462262</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">oz</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">35.27396195</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
       <span class="k">case</span> <span class="dl">'</span><span class="s1">ct</span><span class="dl">'</span><span class="p">:</span>
@@ -2040,8 +2053,21 @@
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">metric_ton</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> metric tons</span><span class="dl">'</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">ton</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">2000</span> <span class="o">*</span> <span class="mf">2.20462262</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
       <span class="k">case</span> <span class="dl">'</span><span class="s1">lbs</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">2.20462262</span><span class="p">;</span>
+        <span class="k">break</span><span class="p">;</span>
+
+      <span class="k">case</span> <span class="dl">'</span><span class="s1">oz</span><span class="dl">'</span><span class="p">:</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">*</span> <span class="mf">35.27396195</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
 
       <span class="k">case</span> <span class="dl">'</span><span class="s1">ct</span><span class="dl">'</span><span class="p">:</span>

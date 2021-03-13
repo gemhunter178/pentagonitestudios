@@ -25,13 +25,13 @@ if (cvrtvals.length < 2) {
 const temperature = ['C', 'F', 'K'];
 const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'gabo^3'];
-const massweight = ['kg', 'g', 'lbs', 'ct', 'Jupiter', 'solar_mass'];
+const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'Jupiter', 'solar_mass'];
 const accptUnits = 'current unit types: temperature, length, volume, mass/weight';
 
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
   helpTrg = 2;
-} else if (/format_time/.test(cvrtvals[0]) {
+} else if (/format_time/.test(cvrtvals[0])) {
   helpTrg = -1;
 }
 
@@ -328,8 +328,21 @@ if (helpTrg !== 0) {
         val = val / 1000;
         break;
 
+      case 'metric_ton':
+        val = val * 1000;
+        unit1 = ' metric tons';
+        break;
+
+      case 'ton':
+        val = val * 2000 / 2.20462262;
+        break;
+
       case 'lbs':
         val = val / 2.20462262;
+        break;
+
+      case 'oz':
+        val = val / 35.27396195;
         break;
 
       case 'ct':
@@ -357,8 +370,21 @@ if (helpTrg !== 0) {
         val = val * 1000;
         break;
 
+      case 'metric_ton':
+        val = val / 1000;
+        unit2 = ' metric tons';
+        break;
+
+      case 'ton':
+        val = val / 2000 * 2.20462262;
+        break;
+
       case 'lbs':
         val = val * 2.20462262;
+        break;
+
+      case 'oz':
+        val = val * 35.27396195;
         break;
 
       case 'ct':
