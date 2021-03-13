@@ -7,10 +7,12 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   helpTrg = 1;
   if (/\btemp/i.test(text)) {
     helpTrg = 3;
-  } else if (/\blength/i.test(text)) {
+  } else if (/\blen/i.test(text)) {
     helpTrg = 4;
   } else if (/\bvol/i.test(text)) {
     helpTrg = 5;
+  } else if (/\bmass|\bwei/i.test(text)) {
+    helpTrg = 6;
   }
 }
 
@@ -21,9 +23,10 @@ if (cvrtvals.length < 2) {
 }
 
 const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'furlong', 'smoot', 'gabo'];
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'gabo^3'];
-const accptUnits = 'current types accepted: temperature, length, volume';
+const massweight = ['kg', 'g', 'lbs', 'ct', 'Jupiter', 'solar_mass'];
+const accptUnits = 'current unit types: temperature, length, volume, mass/weight';
 
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
@@ -55,8 +58,12 @@ if (helpTrg !== 0) {
       msg = 'current accepted units for volume: ' + volume.join(', ');
       break;
     
+    case 6:
+      msg = 'current accepted units for mass/earth-reative weight: ' + massweight.join(', ');
+      break;
+    
     default:
-      msg = '!convert by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs | ' + accptUnits;
+      msg = '!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. 6 sig figs results | ' + accptUnits;
       break;
   }
 } else {
@@ -128,6 +135,10 @@ if (helpTrg !== 0) {
         val = val * 1609.344;
         break;
       
+      case 'light-seconds':
+        val = val * 299792458;
+        break;
+      
       case 'furlong':
         val = val * 201.168;
         break;
@@ -171,6 +182,10 @@ if (helpTrg !== 0) {
       
       case 'mi':
         val = val / 1609.344;
+        break;
+      
+      case 'light-seconds':
+        val = val / 299792458;
         break;
       
       case 'furlong':
@@ -289,7 +304,65 @@ if (helpTrg !== 0) {
         msg = 'error in volume conversion, end';
         break;
     }
-    
+  } else if (massweight.includes(unit1) && massweight.includes(unit2)) {
+    switch (unit1) {
+      case 'kg':
+        break;
+      
+      case 'g':
+        val = val / 1000;
+        break;
+      
+      case 'lbs':
+        val = val / 2.20462262;
+        break;
+        
+      case 'ct':
+        val = val * 0.0002;
+        break;
+      
+      case 'Jupiter':
+        val = val * 1.898e+27;
+        break;
+      
+      case 'solar_mass':
+        val = val * 1.989e+30;
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in mass/weight conversion, start';
+        break;
+    }
+    switch (unit2) {
+      case 'kg':
+        break;
+      
+      case 'g':
+        val = val * 1000;
+        break;
+      
+      case 'lbs':
+        val = val * 2.20462262;
+        break;
+        
+      case 'ct':
+        val = val / 0.0002;
+        break;
+      
+      case 'Jupiter':
+        val = val / 1.898e+27;
+        break;
+      
+      case 'solar_mass':
+        val = val / 1.989e+30;
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in mass/weight conversion, end';
+        break;
+    }
   } else {
     calc = false;
     msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits + ' | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
