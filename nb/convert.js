@@ -67,8 +67,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  const unit1 = cvrtvals[0].replace(/\b[\d\.]*/, '');
-  const unit2 = cvrtvals[1].replace(/\b[\d\.]*/, '');
+  let unit1 = cvrtvals[0].replace(/\b[\d\.]*/, '');
+  let unit2 = cvrtvals[1].replace(/\b[\d\.]*/, '');
   let calc = true;
   const gaboVal = 1.8288;
   if (temperature.includes(unit1) && temperature.includes(unit2)) {
