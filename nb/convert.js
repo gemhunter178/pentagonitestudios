@@ -5,10 +5,12 @@ let msg;
 let helpTrg = 0;
 if (/\bhelp\b/i.test(text) || text.length === 0) {
   helpTrg = 1;
-  if (/temp/i.test(text)) {
+  if (/\btemp/i.test(text)) {
     helpTrg = 3;
-  } else if (/length/i.test(text)) {
+  } else if (/\blength/i.test(text)) {
     helpTrg = 4;
+  } else if (/\bvol/i.test(text)) {
+    helpTrg = 5;
   }
 }
 
@@ -19,7 +21,9 @@ if (cvrtvals.length < 2) {
 }
 
 const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'gabo'];
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'furlong', 'smoot', 'gabo'];
+const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'gabo^3'];
+const accptUnits = 'current types accepted: temperature, length, volume';
 
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
@@ -40,8 +44,12 @@ if (helpTrg !== 0) {
       msg = 'current accepted units for length: ' + length.join(', ');
       break;
     
+    case 5:
+      msg = 'current accepted units for volume: ' + volume.join(', ');
+      break;
+    
     default:
-      msg = 'Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs';
+      msg = '!convert by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. Answers in 6 sig figs |' + accptUnits;
       break;
   }
 } else {
@@ -113,6 +121,14 @@ if (helpTrg !== 0) {
         val = val * 1609.344;
         break;
       
+      case 'furlong':
+        val = val * 201.168;
+        break;
+      
+      case 'smoot':
+        val = val * 1.7018;
+        break;
+      
       case 'gabo':
         val = val * gaboVal;
         break;
@@ -150,6 +166,14 @@ if (helpTrg !== 0) {
         val = val / 1609.344;
         break;
       
+      case 'furlong':
+        val = val / 201.168;
+        break;
+      
+      case 'smoot':
+        val = val / 1.7018;
+        break;
+      
       case 'gabo':
         val = val / gaboVal;
         break;
@@ -159,9 +183,109 @@ if (helpTrg !== 0) {
         msg = 'error in length conversion, end';
         break;
     }
+  } else if (volume.includes(unit1) && volume.includes(unit2)) {
+    switch (unit1) {
+      case 'L':
+        break;
+      
+      case 'm^3':
+        val = val * 1000;
+        break;
+      
+      case 'cm^3':
+        val = val * 0.001;
+        break;
+      
+      case 'gal':
+        val = val * 3.785411784;
+        break;
+      
+      case 'qt':
+        val =  val * 0.946352946;
+        break;
+      
+      case 'pt':
+        val = val * 0.473176473;
+        break;
+      
+      case 'c':
+        val = val * 0.2365882365;
+        break;
+      
+      case 'floz':
+        val = val * 0.0295735295625;
+        break;
+      
+      case 'tsp':
+        val = val * 0.00492892159375;
+        break;
+      
+      case 'Tbsp':
+        val = val * 0.01478676478125;
+        break;
+      
+      case 'gabo^3':
+        val = val * (gaboVal ** 3) * 1000;
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in volume conversion, start';
+        break;
+    }
+    switch (unit2) {
+      case 'L':
+        break;
+      
+      case 'm^3':
+        val = val / 1000;
+        break;
+      
+      case 'cm^3':
+        val = val / 0.001;
+        break;
+      
+      case 'gal':
+        val = val / 3.785411784;
+        break;
+      
+      case 'qt':
+        val =  val / 0.946352946;
+        break;
+      
+      case 'pt':
+        val = val / 0.473176473;
+        break;
+      
+      case 'c':
+        val = val / 0.2365882365;
+        break;
+      
+      case 'floz':
+        val = val / 0.0295735295625;
+        break;
+      
+      case 'tsp':
+        val = val / 0.00492892159375;
+        break;
+      
+      case 'Tbsp':
+        val = val / 0.01478676478125;
+        break;
+      
+      case 'gabo^3':
+        val = (val / 1000) / (gaboVal ** 3);
+        break;
+      
+      default:
+        calc = false;
+        msg = 'error in volume conversion, end';
+        break;
+    }
+    
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature, length | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
+    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits + ' | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
   }
   
   if (calc) {
