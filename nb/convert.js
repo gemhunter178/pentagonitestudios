@@ -67,8 +67,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  let unit1 = cvrtvals[0].replace(/\b[\d.]*|\b-/, '');
-  let unit2 = cvrtvals[1].replace(/\b[\d.]*|\b-/, '');
+  let unit1 = cvrtvals[0].replace(/\b[\d.-]*/, '');
+  let unit2 = cvrtvals[1].replace(/\b[\d.-]*/, '');
   let calc = true;
   const origVal = val;
   const gaboVal = 1.8288;
