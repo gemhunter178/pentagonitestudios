@@ -63,7 +63,7 @@ if (helpTrg !== 0) {
       break;
     
     default:
-      msg = '!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. 6 sig figs results | ' + accptUnits;
+      msg = '!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]". 6 sig figs results | ' + accptUnits;
       break;
   }
 } else {
@@ -186,18 +186,22 @@ if (helpTrg !== 0) {
       
       case 'light-seconds':
         val = val / 299792458;
+        unit2 = ' light-seconds';
         break;
       
       case 'furlong':
         val = val / 201.168;
+        unit2 = ' furlongs';
         break;
       
       case 'smoot':
         val = val / 1.7018;
+        unit2 = ' smoots';
         break;
       
       case 'gabo':
         val = val / gaboVal;
+        unit2 = ' gabos';
         break;
       
       default:
@@ -261,14 +265,17 @@ if (helpTrg !== 0) {
       
       case 'm^3':
         val = val / 1000;
+        unit2 = ' cubic meters';
         break;
       
       case 'cm^3':
         val = val / 0.001;
+        unit2 = ' cubic centimeters';
         break;
       
       case 'gal':
         val = val / 3.785411784;
+        unit2 = ' gallons';
         break;
       
       case 'qt':
@@ -289,14 +296,17 @@ if (helpTrg !== 0) {
       
       case 'tsp':
         val = val / 0.00492892159375;
+        unit2 = ' teaspoons';
         break;
       
       case 'Tbsp':
         val = val / 0.01478676478125;
+        unit2 = ' Tablespoons';
         break;
       
       case 'gabo^3':
         val = (val / 1000) / (gaboVal ** 3);
+        unit2 = ' cubic gabos';
         break;
       
       default:
@@ -352,10 +362,12 @@ if (helpTrg !== 0) {
       
       case 'Jupiter':
         val = val / 1.898e+27;
+        unit2 = ' Jupiters';
         break;
       
       case 'solar_mass':
         val = val / 1.989e+30;
+        unit2 = ' solar masses';
         break;
       
       default:

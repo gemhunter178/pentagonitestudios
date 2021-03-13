@@ -1746,7 +1746,7 @@
       <span class="k">break</span><span class="p">;</span>
     
     <span class="nl">default</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units. 6 sig figs results | </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span><span class="p">;</span>
+      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]". 6 sig figs results | </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -1869,18 +1869,22 @@
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">light-seconds</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">299792458</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> light-seconds</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">furlong</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">201.168</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> furlongs</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">smoot</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">1.7018</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> smoots</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="nx">gaboVal</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> gabos</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="nl">default</span><span class="p">:</span>
@@ -1944,14 +1948,17 @@
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">m^3</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> cubic meters</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">cm^3</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.001</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> cubic centimeters</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">gal</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">3.785411784</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> gallons</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">qt</span><span class="dl">'</span><span class="p">:</span>
@@ -1972,14 +1979,17 @@
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">tsp</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.00492892159375</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> teaspoons</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">Tbsp</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">0.01478676478125</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> Tablespoons</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">gabo^3</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nx">gaboVal</span> <span class="o">**</span> <span class="mi">3</span><span class="p">);</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> cubic gabos</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="nl">default</span><span class="p">:</span>
@@ -2035,10 +2045,12 @@
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">Jupiter</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">1.898</span><span class="nx">e</span><span class="o">+</span><span class="mi">27</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> Jupiters</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="k">case</span> <span class="dl">'</span><span class="s1">solar_mass</span><span class="dl">'</span><span class="p">:</span>
         <span class="nx">val</span> <span class="o">=</span> <span class="nx">val</span> <span class="o">/</span> <span class="mf">1.989</span><span class="nx">e</span><span class="o">+</span><span class="mi">30</span><span class="p">;</span>
+        <span class="nx">unit2</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> solar masses</span><span class="dl">'</span><span class="p">;</span>
         <span class="k">break</span><span class="p">;</span>
       
       <span class="nl">default</span><span class="p">:</span>
