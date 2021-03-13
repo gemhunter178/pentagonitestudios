@@ -180,8 +180,7 @@
             
             
             <p>variables: <code>LMS</code></p>
-            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* ignore an apparent trailing space in a sentence*/</span>
-<span class="cm">/* eslint-disable no-trailing-spaces*/</span>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* eslint-disable no-trailing-spaces */</span>
 
 <span class="kd">const</span> <span class="nx">LMS</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">This is a nice stick</span><span class="dl">'</span><span class="p">,</span>
   <span class="dl">'</span><span class="s1">I like sticks (peck peck)</span><span class="dl">'</span><span class="p">,</span>
@@ -1721,7 +1720,7 @@
 		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">current accepted units for temperature: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">temperature</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">, </span><span class="dl">'</span><span class="p">);</span>
 		  <span class="k">break</span><span class="p">;</span>
 		
-		<span class="k">case</span> <span class="k">default</span><span class="p">:</span>
+		<span class="nl">default</span><span class="p">:</span>
 		  <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Converter program v1 by Gem. Please enter convert in the form "[number][inputUnit] [outputUnit]" or "help [unittype]" for implemented units</span><span class="dl">'</span><span class="p">;</span>
 		  <span class="k">break</span><span class="p">;</span>
 		
