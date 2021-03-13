@@ -17,7 +17,7 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 }
 
 text = text.replace(/\s+to/i, '');
-let cvrtvals = text.split(' ');
+const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2) {
   helpTrg = 1;
 }
@@ -31,7 +31,7 @@ const accptUnits = 'current unit types: temperature, length, volume, mass/weight
 let val = parseFloat(cvrtvals[0]);
 if (isNaN(val) && helpTrg === 0) {
   helpTrg = 2;
-} else if (val <= 0) {
+} else if (/format_time/.test(cvrtvals[0]) {
   helpTrg = -1;
 }
 
@@ -39,29 +39,29 @@ if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
     case -1:
-      msg = 'You thought entering that value would be funny, did you?';
+      msg = '"format_time" cannot be used as input abbybaPensive ';
       break;
-    
+
     case 2:
       msg = 'requires a value to convert from lycelIdk';
       break;
-    
+
     case 3:
       msg = 'current accepted units for temperature: ' + temperature.join(', ');
       break;
-    
+
     case 4:
       msg = 'current accepted units for length: ' + length.join(', ');
       break;
-    
+
     case 5:
       msg = 'current accepted units for volume: ' + volume.join(', ');
       break;
-    
+
     case 6:
-      msg = 'current accepted units for mass/earth-reative weight: ' + massweight.join(', ');
+      msg = 'current accepted units for mass/earth-relative weight: ' + massweight.join(', ');
       break;
-    
+
     default:
       msg = '!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]". 6 sig figs results | ' + accptUnits;
       break;
@@ -70,309 +70,314 @@ if (helpTrg !== 0) {
   let unit1 = cvrtvals[0].replace(/\b[\d\.]*/, '');
   let unit2 = cvrtvals[1].replace(/\b[\d\.]*/, '');
   let calc = true;
+  const origVal = val;
   const gaboVal = 1.8288;
   if (temperature.includes(unit1) && temperature.includes(unit2)) {
     switch (unit1) {
       case 'C':
         break;
-      
+
       case 'F':
-        val = (val-32) * 5/9;
+        val = (val-32) * 5 / 9;
         break;
-      
+
       case 'K':
         val = val - 273.15;
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in temperature conversion, start';
+        msg = 'error tmp1';
         break;
     }
     switch (unit2) {
       case 'C':
         break;
-      
+
       case 'F':
         val = val * 1.8 + 32;
         break;
-      
+
       case 'K':
         val = val + 273.15;
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in temperature conversion, end';
+        msg = 'error tmp2';
         break;
     }
   } else if (length.includes(unit1) && length.includes(unit2)) {
     switch (unit1) {
       case 'm':
         break;
-      
+
       case 'cm':
         val = val / 100;
         break;
-      
+
       case 'mm':
         val = val / 1000;
         break;
-        
+
       case 'km':
         val = val * 1000;
         break;
-        
+
       case 'ft':
         val = val * 0.3048;
         break;
-      
+
       case 'in':
         val = val * 0.0254;
         break;
-      
+
       case 'mi':
         val = val * 1609.344;
         break;
-      
+
       case 'light-seconds':
         val = val * 299792458;
         break;
-      
+
       case 'furlong':
         val = val * 201.168;
         break;
-      
+
       case 'smoot':
         val = val * 1.7018;
         break;
-      
+
       case 'gabo':
         val = val * gaboVal;
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in length conversion, start';
+        msg = 'err len1';
         break;
     }
     switch (unit2) {
       case 'm':
         break;
-      
+
       case 'cm':
         val = val * 100;
         break;
-      
+
       case 'mm':
         val = val * 1000;
         break;
-        
+
       case 'km':
         val = val / 1000;
         break;
-        
+
       case 'ft':
         val = val / 0.3048;
         break;
-      
+
       case 'in':
         val = val / 0.0254;
         break;
-      
+
       case 'mi':
         val = val / 1609.344;
         break;
-      
+
       case 'light-seconds':
         val = val / 299792458;
         unit2 = ' light-seconds';
         break;
-      
+
       case 'furlong':
         val = val / 201.168;
         unit2 = ' furlongs';
         break;
-      
+
       case 'smoot':
         val = val / 1.7018;
         unit2 = ' smoots';
         break;
-      
+
       case 'gabo':
         val = val / gaboVal;
         unit2 = ' gabos';
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in length conversion, end';
+        msg = 'err len2';
         break;
     }
   } else if (volume.includes(unit1) && volume.includes(unit2)) {
     switch (unit1) {
       case 'L':
         break;
-      
+
       case 'm^3':
         val = val * 1000;
         break;
-      
+
       case 'cm^3':
         val = val * 0.001;
         break;
-      
+
       case 'gal':
         val = val * 3.785411784;
         break;
-      
+
       case 'qt':
         val =  val * 0.946352946;
         break;
-      
+
       case 'pt':
         val = val * 0.473176473;
         break;
-      
+
       case 'c':
         val = val * 0.2365882365;
         break;
-      
+
       case 'floz':
         val = val * 0.0295735295625;
         break;
-      
+
       case 'tsp':
         val = val * 0.00492892159375;
         break;
-      
+
       case 'Tbsp':
         val = val * 0.01478676478125;
         break;
-      
+
       case 'gabo^3':
         val = val * (gaboVal ** 3) * 1000;
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in volume conversion, start';
+        msg = 'err vol1';
         break;
     }
     switch (unit2) {
       case 'L':
         break;
-      
+
       case 'm^3':
         val = val / 1000;
         unit2 = ' cubic meters';
         break;
-      
+
       case 'cm^3':
         val = val / 0.001;
         unit2 = ' cubic centimeters';
         break;
-      
+
       case 'gal':
         val = val / 3.785411784;
         unit2 = ' gallons';
         break;
-      
+
       case 'qt':
         val =  val / 0.946352946;
+        unit2 = ' quarts';
         break;
-      
+
       case 'pt':
         val = val / 0.473176473;
+        unit2 = ' pints';
         break;
-      
+
       case 'c':
         val = val / 0.2365882365;
+        unit2 = ' cups';
         break;
-      
+
       case 'floz':
         val = val / 0.0295735295625;
+        unit2 = ' fluid ounces';
         break;
-      
+
       case 'tsp':
         val = val / 0.00492892159375;
         unit2 = ' teaspoons';
         break;
-      
+
       case 'Tbsp':
         val = val / 0.01478676478125;
         unit2 = ' Tablespoons';
         break;
-      
+
       case 'gabo^3':
         val = (val / 1000) / (gaboVal ** 3);
         unit2 = ' cubic gabos';
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in volume conversion, end';
+        msg = 'err vol2';
         break;
     }
   } else if (massweight.includes(unit1) && massweight.includes(unit2)) {
     switch (unit1) {
       case 'kg':
         break;
-      
+
       case 'g':
         val = val / 1000;
         break;
-      
+
       case 'lbs':
         val = val / 2.20462262;
         break;
-        
+
       case 'ct':
         val = val * 0.0002;
         break;
-      
+
       case 'Jupiter':
         val = val * 1.898e+27;
         break;
-      
+
       case 'solar_mass':
         val = val * 1.989e+30;
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in mass/weight conversion, start';
+        msg = 'err m/w1';
         break;
     }
     switch (unit2) {
       case 'kg':
         break;
-      
+
       case 'g':
         val = val * 1000;
         break;
-      
+
       case 'lbs':
         val = val * 2.20462262;
         break;
-        
+
       case 'ct':
         val = val / 0.0002;
         break;
-      
+
       case 'Jupiter':
         val = val / 1.898e+27;
         unit2 = ' Jupiters';
         break;
-      
+
       case 'solar_mass':
         val = val / 1.989e+30;
         unit2 = ' solar masses';
         break;
-      
+
       default:
         calc = false;
-        msg = 'error in mass/weight conversion, end';
+        msg = 'err m/w2';
         break;
     }
   } else {
@@ -381,7 +386,7 @@ if (helpTrg !== 0) {
   }
   
   if (calc) {
-    msg = cvrtvals[0] + ' = ' + val.toPrecision(6) + unit2;
+    msg = origVal + unit1 + ' = ' + val.toPrecision(6) + unit2;
   }    
 }
 
