@@ -43,8 +43,8 @@ if (helpTrg !== 0) {
       break;
   }
 } else {
-  const unit1 = cvrtvals[0].replace(/\d/, '');
-  const unit2 = cvrtvals[1].replace(/\d/, '');
+  const unit1 = cvrtvals[0].replace(/\d/g, '');
+  const unit2 = cvrtvals[1].replace(/\d/g, '');
   let calc = true;
   if (temperature.includes(unit1) && temperature.includes(unit2)) {
     switch (unit1) {
@@ -83,7 +83,7 @@ if (helpTrg !== 0) {
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature | debug: val-' + val + 'unit1-' + unit1 + 'unit2-' + unit2;
+    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | current types accepted: temperature | debug: val-' + val + ' unit1-' + unit1 + ' unit2-' + unit2;
   }
   
   if (calc) {
