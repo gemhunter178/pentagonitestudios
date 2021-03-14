@@ -110,470 +110,185 @@ if (helpTrg !== 0) {
   let calc = true;
   const origVal = val;
   const gaboVal = 1.8288;
-  if (temperature.includes(unit1) && temperature.includes(unit2)) {
-    switch (unit1) {
-      case 'C':
-        break;
-
-      case 'F':
-        val = (val - 32) * 5 / 9;
-        break;
-
-      case 'K':
-        val = val - 273.15;
-        break;
-
-      default:
-        calc = false;
-        msg = 'error tmp1';
-        break;
+  const conversions = (function () {
+    const factor = i => ({
+        from: j => j * i,
+        to: j => j / i
+      });
+    return {
+      temperature: {
+        C: factor(1),
+        F: {
+          from: val => (val - 32) * 5 / 9,
+          to: val => val * 1.8 + 32
+        },
+        K: {
+          from: val => val - 273.15,
+          to: val => val + 273.15
+        }
+      },
+      length: {
+        m: factor(1),
+        cm: factor(1 / 100),
+        mm: factor(1 / 1000),
+        km: factor(1000),
+        ft: factor(0.3048),
+        in: factor(0.0254),
+        mi: factor(1609.344),
+        'light-seconds': {
+          suffix: ' light-seconds',
+          ...factor(299792458)
+        },
+        au: {
+          suffix: ' astronomical units',
+          ...factor(1 / 149597870700)
+        },
+        furlong: {
+          suffix: ' furlongs',
+          ...factor(201.168)
+        },
+        gabo: {
+          suffix: ' gabos',
+          ...factor(gaboVal)
+        },
+        smoot: {
+          suffix: ' smoots',
+          ...factor(1.7018)
+        }
+      },
+      volume: {
+        L: factor(1),
+        'm^3': {
+          suffix: ' cubic meters',
+          ...factor(1000)
+        },
+        'cm^3': {
+          suffix: ' cubic centimeters',
+          ...factor(0.001)
+        },
+        gal: {
+          suffix: ' gallons',
+          ...factor(3.785411784)
+        },
+        qt: {
+          suffix: ' quarts',
+          ...factor(0.946352946)
+        },
+        c: {
+          suffix: ' cups',
+          ...factor(0.2365882365)
+        },
+        floz: {
+          suffix: ' fluid ounces',
+          ...factor(0.0295735295625)
+        },
+        tsp: {
+          suffix: ' teaspoons',
+          ...factor(0.00492892159375)
+        },
+        Tbsp: {
+          suffix: ' Tablespoons',
+          ...factor(0.01478676478125)
+        },
+        bdft: {
+          suffix: ' board feet',
+          ...factor(2.359737216)
+        },
+        'gabo^3': {
+          suffix: ' cubic gabos',
+          from: val => val * (gaboVal ** 3) * 1000,
+          to: val => (val / 1000) / (gaboVal ** 3)
+        }
+      },
+      massweight: {
+        kg: factor(1),
+        g: factor(1 / 1000),
+        metric_ton: {
+          suffix: ' metric tons',
+          ...factor(1000)
+        },
+        ton: {
+          from: val => val * 2000 / 2.20462262,
+          to: val => val / 2000 * 2.20462262
+        },
+        lbs: factor(1 / 2.20462262),
+        oz: {
+          suffix: ' ounces',
+          ...factor(1 / 35.27396195)
+        },
+        ct: {
+          suffix: ' carats',
+          ...factor(0.0002)
+        },
+        amu: {
+          suffix: ' atomic mass units',
+          ...factor(1 / 6.02217364335e+26)
+        },
+        Jupiter: {
+          suffix: ' Jupiters',
+          ...factor(1.898e+27)
+        },
+        solar_mass: {
+          suffix: ' solar masses',
+          ...factor(1.989e+30)
+        }
+      },
+      area: {
+        'm^2': {
+          suffix: ' square meters',
+          ...factor(1)
+        },
+        'cm^2': { suffix: ' square centimeters', ...factor(0.0001) },
+        'km^2': { suffix: ' square kilometers', ...factor(1000000) },
+        'ft^2': { suffix: ' square feet', ...factor(0.09290304) },
+        'in^2': { suffix: ' square inches', ...factor(0.00064516) },
+        acre: { suffix: ' acres', ...factor(4046.8564224) },
+        'gabo^2': {
+          suffix: ' square gabos',
+          from: val => val * (gaboVal ** 2),
+          to: val => val / (gaboVal ** 2)
+        }
+      }
+    };
+  })();
+  if (conversions.temperature.hasOwnProperty(unit1) && conversions.temperature.hasOwnProperty(unit2)) {
+    val = conversions.temperature[unit1].from(val);
+    val = conversions.temperature[unit2].to(val);
+  } else if (conversions.length.hasOwnProperty(unit1) && conversions.length.hasOwnProperty(unit2)) {
+    val = conversions.length[unit1].from(val);
+    if (conversions.length[unit1].suffix !== undefined) {
+      unit1 = conversions.length[unit1].suffix;
     }
-    switch (unit2) {
-      case 'C':
-        break;
-
-      case 'F':
-        val = val * 1.8 + 32;
-        break;
-
-      case 'K':
-        val = val + 273.15;
-        break;
-
-      default:
-        calc = false;
-        msg = 'error tmp2';
-        break;
+    val = conversions.length[unit2].to(val);
+    if (conversions.length[unit2].suffix !== undefined) {
+      unit2 = conversions.length[unit2].suffix;
     }
-  } else if (length.includes(unit1) && length.includes(unit2)) {
-    switch (unit1) {
-      case 'm':
-        break;
-
-      case 'cm':
-        val = val / 100;
-        break;
-
-      case 'mm':
-        val = val / 1000;
-        break;
-
-      case 'km':
-        val = val * 1000;
-        break;
-
-      case 'ft':
-        val = val * 0.3048;
-        break;
-
-      case 'in':
-        val = val * 0.0254;
-        break;
-
-      case 'mi':
-        val = val * 1609.344;
-        break;
-
-      case 'light-seconds':
-        val = val * 299792458;
-        unit1 = ' light-seconds';
-        break;
-
-      case 'au':
-        val = val * 149597870700;
-        unit1 = ' astronomical units';
-        break;
-
-      case 'furlong':
-        val = val * 201.168;
-        unit1 = ' furlongs';
-        break;
-
-      case 'smoot':
-        val = val * 1.7018;
-        unit1 = ' smoots';
-        break;
-
-      case 'gabo':
-        val = val * gaboVal;
-        unit1 = ' gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err len1';
-        break;
+  } else if (conversions.volume.hasOwnProperty(unit1) && conversions.volume.hasOwnProperty(unit2)) {
+    val = conversions.volume[unit1].from(val);
+    if (conversions.volume[unit1].suffix !== undefined) {
+      unit1 = conversions.volume[unit1].suffix;
     }
-    switch (unit2) {
-      case 'm':
-        break;
-
-      case 'cm':
-        val = val * 100;
-        break;
-
-      case 'mm':
-        val = val * 1000;
-        break;
-
-      case 'km':
-        val = val / 1000;
-        break;
-
-      case 'ft':
-        val = val / 0.3048;
-        break;
-
-      case 'in':
-        val = val / 0.0254;
-        break;
-
-      case 'mi':
-        val = val / 1609.344;
-        break;
-
-      case 'light-seconds':
-        val = val / 299792458;
-        unit2 = ' light-seconds';
-        break;
-
-      case 'au':
-        val = val / 149597870700;
-        unit2 = ' astronomical units';
-        break;
-
-      case 'furlong':
-        val = val / 201.168;
-        unit2 = ' furlongs';
-        break;
-
-      case 'smoot':
-        val = val / 1.7018;
-        unit2 = ' smoots';
-        break;
-
-      case 'gabo':
-        val = val / gaboVal;
-        unit2 = ' gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err len2';
-        break;
+    val = conversions.volume[unit2].to(val);
+    if (conversions.volume[unit2].suffix !== undefined) {
+      unit2 = conversions.volume[unit2].suffix;
     }
-  } else if (volume.includes(unit1) && volume.includes(unit2)) {
-    switch (unit1) {
-      case 'L':
-        break;
-
-      case 'm^3':
-        val = val * 1000;
-        unit1 = ' cubic meters';
-        break;
-
-      case 'cm^3':
-        val = val * 0.001;
-        unit1 = ' cubic centimeters';
-        break;
-
-      case 'gal':
-        val = val * 3.785411784;
-        unit1 = ' gallons';
-        break;
-
-      case 'qt':
-        val = val * 0.946352946;
-        unit1 = ' quarts';
-        break;
-
-      case 'pt':
-        val = val * 0.473176473;
-        unit1 = ' pints';
-        break;
-
-      case 'c':
-        val = val * 0.2365882365;
-        unit1 = ' cups';
-        break;
-
-      case 'floz':
-        val = val * 0.0295735295625;
-        unit1 = ' fluid ounces';
-        break;
-
-      case 'tsp':
-        val = val * 0.00492892159375;
-        unit1 = ' teaspoons';
-        break;
-
-      case 'Tbsp':
-        val = val * 0.01478676478125;
-        unit1 = ' Tablespoons';
-        break;
-
-      case 'bdft':
-        val = val * 2.359737216;
-        unit1 = ' board feet';
-        break;
-
-      case 'gabo^3':
-        val = val * (gaboVal ** 3) * 1000;
-        unit1 = ' cubic gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err vol1';
-        break;
+  } else if (conversions.massweight.hasOwnProperty(unit1) && conversions.massweight.hasOwnProperty(unit2)) {
+    val = conversions.massweight[unit1].from(val);
+    if (conversions.massweight[unit1].suffix !== undefined) {
+      unit1 = conversions.massweight[unit1].suffix;
     }
-    switch (unit2) {
-      case 'L':
-        break;
-
-      case 'm^3':
-        val = val / 1000;
-        unit2 = ' cubic meters';
-        break;
-
-      case 'cm^3':
-        val = val / 0.001;
-        unit2 = ' cubic centimeters';
-        break;
-
-      case 'gal':
-        val = val / 3.785411784;
-        unit2 = ' gallons';
-        break;
-
-      case 'qt':
-        val = val / 0.946352946;
-        unit2 = ' quarts';
-        break;
-
-      case 'pt':
-        val = val / 0.473176473;
-        unit2 = ' pints';
-        break;
-
-      case 'c':
-        val = val / 0.2365882365;
-        unit2 = ' cups';
-        break;
-
-      case 'floz':
-        val = val / 0.0295735295625;
-        unit2 = ' fluid ounces';
-        break;
-
-      case 'tsp':
-        val = val / 0.00492892159375;
-        unit2 = ' teaspoons';
-        break;
-
-      case 'Tbsp':
-        val = val / 0.01478676478125;
-        unit2 = ' Tablespoons';
-        break;
-
-      case 'bdft':
-        val = val / 2.359737216;
-        unit2 = ' board feet';
-        break;
-
-      case 'gabo^3':
-        val = (val / 1000) / (gaboVal ** 3);
-        unit2 = ' cubic gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err vol2';
-        break;
+    val = conversions.massweight[unit2].to(val);
+    if (conversions.massweight[unit2].suffix !== undefined) {
+      unit2 = conversions.massweight[unit2].suffix;
     }
-  } else if (massweight.includes(unit1) && massweight.includes(unit2)) {
-    switch (unit1) {
-      case 'kg':
-        break;
-
-      case 'g':
-        val = val / 1000;
-        break;
-
-      case 'metric_ton':
-        val = val * 1000;
-        unit1 = ' metric tons';
-        break;
-
-      case 'ton':
-        val = val * 2000 / 2.20462262;
-        break;
-
-      case 'lbs':
-        val = val / 2.20462262;
-        break;
-
-      case 'oz':
-        val = val / 35.27396195;
-        unit1 = ' ounces';
-        break;
-
-      case 'ct':
-        val = val * 0.0002;
-        unit1 = ' carats';
-        break;
-
-      case 'amu':
-        val = val / 6.02217364335e+26;
-        unit1 = ' atomic mass units';
-        break;
-
-      case 'Jupiter':
-        val = val * 1.898e+27;
-        unit1 = ' Jupiters';
-        break;
-
-      case 'solar_mass':
-        val = val * 1.989e+30;
-        unit1 = ' solar masses';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err m/w1';
-        break;
+  } else if (conversions.area.hasOwnProperty(unit1) && conversions.area.hasOwnProperty(unit2)) {
+    val = conversions.area[unit1].from(val);
+    if (conversions.area[unit1].suffix !== undefined) {
+      unit1 = conversions.area[unit1].suffix;
     }
-    switch (unit2) {
-      case 'kg':
-        break;
-
-      case 'g':
-        val = val * 1000;
-        break;
-
-      case 'metric_ton':
-        val = val / 1000;
-        unit2 = ' metric tons';
-        break;
-
-      case 'ton':
-        val = val / 2000 * 2.20462262;
-        break;
-
-      case 'lbs':
-        val = val * 2.20462262;
-        break;
-
-      case 'oz':
-        val = val * 35.27396195;
-        unit2 = ' ounces';
-        break;
-
-      case 'ct':
-        val = val / 0.0002;
-        unit2 = ' carats';
-        break;
-
-      case 'amu':
-        val = val * 6.02217364335e+26;
-        unit2 = ' atomic mass units';
-        break;
-
-      case 'Jupiter':
-        val = val / 1.898e+27;
-        unit2 = ' Jupiters';
-        break;
-
-      case 'solar_mass':
-        val = val / 1.989e+30;
-        unit2 = ' solar masses';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err m/w2';
-        break;
-    }
-  } else if (area.includes(unit1) && area.includes(unit2)) {
-    switch (unit1) {
-      case 'm^2':
-        unit1 = ' square meters';
-        break;
-
-      case 'cm^2':
-        val = val * 0.0001;
-        unit1 = ' square centimeters';
-        break;
-
-      case 'km^2':
-        val = val * 1000000;
-        unit1 = ' square kilometers';
-        break;
-
-      case 'ft^2':
-        val = val * 0.09290304;
-        unit1 = ' square feet';
-        break;
-
-      case 'in^2':
-        val = val * 0.00064516;
-        unit1 = ' square inches';
-        break;
-
-      case 'acre':
-        val = val * 4046.8564224;
-        unit1 = ' acres';
-        break;
-
-      case 'gabo^2':
-        val = val * (gaboVal ** 2);
-        unit1 = ' square gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err ara1';
-        break;
-    }
-    switch (unit2) {
-      case 'm^2':
-        unit2 = ' square meters';
-        break;
-
-      case 'cm^2':
-        val = val / 0.0001;
-        unit2 = ' square centimeters';
-        break;
-
-      case 'km^2':
-        val = val / 1000000;
-        unit2 = ' square kilometers';
-        break;
-
-      case 'ft^2':
-        val = val / 0.09290304;
-        unit2 = ' square feet';
-        break;
-
-      case 'in^2':
-        val = val / 0.00064516;
-        unit2 = ' square inches';
-        break;
-
-      case 'acre':
-        val = val / 4046.8564224;
-        unit2 = ' acres';
-        break;
-
-      case 'gabo^2':
-        val = val / (gaboVal ** 2);
-        unit2 = ' square gabos';
-        break;
-
-      default:
-        calc = false;
-        msg = 'err ara2';
-        break;
+    val = conversions.area[unit2].to(val);
+    if (conversions.area[unit2].suffix !== undefined) {
+      unit2 = conversions.area[unit2].suffix;
     }
   } else {
     calc = false;
