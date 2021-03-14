@@ -30,7 +30,7 @@ if (cvrtvals.length < 2) {
 }
 /* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'furlong', 'smoot', 'gabo'];
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'au', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'bdft', 'gabo^3'];
 const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'Jupiter', 'solar_mass'];
 const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
@@ -162,6 +162,11 @@ if (helpTrg !== 0) {
         unit1 = ' light-seconds';
         break;
 
+      case 'au':
+        val = val * 149597870700;
+        unit1 = ' astronomical units';
+        break;
+
       case 'furlong':
         val = val * 201.168;
         unit1 = ' furlongs';
@@ -213,6 +218,11 @@ if (helpTrg !== 0) {
       case 'light-seconds':
         val = val / 299792458;
         unit2 = ' light-seconds';
+        break;
+
+      case 'au':
+        val = val / 149597870700;
+        unit2 = ' astronomical units';
         break;
 
       case 'furlong':
