@@ -16,5 +16,6 @@ const testFor = [
   'rude',
   'cringe',
   'tired',
-  'mushy'
+  'mushy',
+  'ugle'
 ];
