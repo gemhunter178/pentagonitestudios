@@ -18,7 +18,7 @@ order: 4
 /* global text:true */
 
 /* whitespace issues */
-/* eslint-disable no-tabs, indent, no-unused-expressions */
+/* eslint-disable no-tabs, indent, no-unused-expressions, no-prototype-builtins */
 
 let msg;
 let helpTrg = 0;
