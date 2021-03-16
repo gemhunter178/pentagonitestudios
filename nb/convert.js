@@ -124,7 +124,7 @@ if (helpTrg !== 0) {
         },
         au: {
           suffix: ' astronomical units',
-          ...factor(1 / 149597870700)
+          ...factor(149597870700)
         },
         furlong: {
           suffix: ' furlongs',
