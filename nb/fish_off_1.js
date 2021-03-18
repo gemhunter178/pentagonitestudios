@@ -1,7 +1,7 @@
 let fishoutput;
 
 if (Math.random() <= 0.1) {
-  fishoutput = "You caught a fish! Kappa";
+  fishoutput = 'You caught a fish! Kappa';
 } else {
   const endEmote = [
     'pcrowEyes',
@@ -17,7 +17,7 @@ if (Math.random() <= 0.1) {
     'maizFlushed',
     'pcrowW',
     'kaestr1Eyes',
-    'abibeaLurk',
+    'abibeaLurk'
   ];
-  fishoutput = "Go fish. " + endEmote[Math.floor(Math.random() * endEmote.length)];
+  fishoutput = 'Go fish. ' + endEmote[Math.floor(Math.random() * endEmote.length)];
 }
