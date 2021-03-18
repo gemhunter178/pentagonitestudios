@@ -1981,7 +1981,7 @@
           <span>
             <a href="/nb/fish_0.js" target="_blank"><b>fish_0.js</b></a>
             <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/fish_0.min.js" class="copybtn fa fa-clipboard"></i>:
-            <span class="command-description"><p>The original fish code! (with some added functionality to work with the current command) just change <code class="language-plaintext highlighter-rouge">fish_1.json</code> to <code class="language-plaintext highlighter-rouge">fish_0.json</code> to use the legacy code</p>
+            <span class="command-description"><p>The original fish code! (with some added functionality to work with the current command) just change <code class="language-plaintext highlighter-rouge">fish_1.js</code> to <code class="language-plaintext highlighter-rouge">fish_0.js</code> to use the legacy code</p>
 </span>
           </span>
           <div class="command-detailbox">
@@ -2081,7 +2081,7 @@
           <span>
             <a href="/nb/fish_off.js" target="_blank"><b>fish_off.js</b></a>
             <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/fish_off.min.js" class="copybtn fa fa-clipboard"></i>:
-            <span class="command-description"><p>change <code class="language-plaintext highlighter-rouge">fish_[x].json</code> (x being version number) to <code class="language-plaintext highlighter-rouge">fish_off.json</code> to disable fishing without deleting the command</p>
+            <span class="command-description"><p>change <code class="language-plaintext highlighter-rouge">fish_[x].js</code> (x being version number) to <code class="language-plaintext highlighter-rouge">fish_off.js</code> to disable fishing without deleting the command</p>
 </span>
           </span>
           <div class="command-detailbox">
@@ -2089,6 +2089,44 @@
             
             <p>variables: <code>fishoutput</code></p>
             <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">const</span> <span class="nx">fishoutput</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">!fish is closed. Thanks for fishing with us!! kaestr1Hug</span><span class="dl">'</span><span class="p">;</span></code></pre></figure>
+          </div>
+        </li>
+      
+        <li>
+          <span class="expand-detailbox">+</span>
+          <span>
+            <a href="/nb/fish_off_1.js" target="_blank"><b>fish_off_1.js</b></a>
+            <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/fish_off_1.min.js" class="copybtn fa fa-clipboard"></i>:
+            <span class="command-description"><p>an alternative to <code class="language-plaintext highlighter-rouge">fish_off.js</code> based on Gabo’s code. Use <code class="language-plaintext highlighter-rouge">fish_off_1.js</code> to disable fishing with some quips.</p>
+</span>
+          </span>
+          <div class="command-detailbox">
+            
+            
+            <p>variables: <code>fishoutput</code>, <code>endEmote</code></p>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fishoutput</span><span class="p">;</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">fishoutput</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">You caught a fish! Kappa</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">endEmote</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="dl">'</span><span class="s1">pcrowEyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">bryce4Eyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">cjyaEyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">lycelEyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">maizEyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">archit3Eyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">smolEyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">abbybaTea</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">lycelW</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">pcrowO</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">maizFlushed</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">pcrowW</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">kaestr1Eyes</span><span class="dl">'</span><span class="p">,</span>
+    <span class="dl">'</span><span class="s1">abibeaLurk</span><span class="dl">'</span><span class="p">,</span>
+  <span class="p">];</span>
+  <span class="nx">fishoutput</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Go fish. </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">endEmote</span><span class="p">[</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="nx">endEmote</span><span class="p">.</span><span class="nx">length</span><span class="p">)];</span>
+<span class="p">}</span></code></pre></figure>
           </div>
         </li>
       
