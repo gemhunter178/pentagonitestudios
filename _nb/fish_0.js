@@ -1,5 +1,5 @@
 ---
-description: The original fish code! (with some added functionality to work with the current command) just change `fish_1.json` to `fish_0.json` to use the legacy code
+description: The original fish code! (with some added functionality to work with the current command) just change `fish_1.js` to `fish_0.js` to use the legacy code
 variables:
   - fsh
   - msg

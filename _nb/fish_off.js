@@ -1,6 +1,6 @@
 ---
 description: |
-  change `fish_[x].json` (x being version number) to `fish_off.json` to disable fishing without deleting the command
+  change `fish_[x].js` (x being version number) to `fish_off.js` to disable fishing without deleting the command
 variables:
   - fishoutput
 tag: specific commands
