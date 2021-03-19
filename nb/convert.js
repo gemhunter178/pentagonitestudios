@@ -249,13 +249,10 @@ if (helpTrg !== 0) {
         hours: factor(3600),
         minutes: factor(60),
         seconds: factor(1),
-        sol: {
-          suffix: 'sols (martian days)',
-          ...factor(88775.24409)
-        },
+        sol: { suffix: 'sols (martian days)', ...factor(88775.24409) },
         format_time: {
           suffix: '',
-          to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + Math.floor((val % 60) + 's'
+          to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + Math.floor((val % 60) + 's';
         }
       }
     };
