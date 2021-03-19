@@ -1963,7 +1963,10 @@
   <span class="p">}</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">val</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">number</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">val</span> <span class="o">=</span> <span class="p">(</span><span class="nx">val</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mi">6</span><span class="p">)).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\.</span><span class="sr">0+</span><span class="se">\b</span><span class="sr">/</span><span class="p">,</span><span class="dl">''</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="nx">origVal</span> <span class="o">+</span> <span class="nx">unit1</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> = </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">val</span> <span class="o">+</span> <span class="nx">unit2</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -2103,7 +2106,7 @@
           <div class="command-detailbox">
             
             
-            <p>variables: <code>fishoutput</code>, <code>endEmote</code></p>
+            <p>variables: <code>fishoutput</code></p>
             <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">let</span> <span class="nx">fishoutput</span><span class="p">;</span>
 
 <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mf">0.1</span><span class="p">)</span> <span class="p">{</span>

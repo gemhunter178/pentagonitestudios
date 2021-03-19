@@ -279,7 +279,10 @@ if (helpTrg !== 0) {
   }
 
   if (calc) {
-    msg = origVal + unit1 + ' = ' + val.toPrecision(6) + unit2;
+    if (typeof val === 'number') {
+      val = (val.toPrecision(6)).replace(/\.0+\b/,'');
+    }
+    msg = origVal + unit1 + ' = ' + val + unit2;
   }
 }
 
