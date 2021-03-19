@@ -34,6 +34,8 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
     helpTrg = 6;
   } else if (/\barea/i.test(text)) {
     helpTrg = 7;
+  } else if (/\btime/i.test(text)) {
+    helpTrg = 8;
   }
 } else if (/\s*debug\s*/.test(text)) {
   helpTrg = -2;
@@ -51,7 +53,8 @@ const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'light-seconds', 'au', 
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'bdft', 'gabo^3'];
 const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'amu', 'Jupiter', 'solar_mass'];
 const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
-const accptUnits = 'current unit types: temperature, length, area, volume, mass/weight';
+const time = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'sol', 'format_time'];
+const accptUnits = 'current unit types: temperature, length, area, volume, mass/weight, time';
 
 let val = parseFloat(cvrtvals[0]);
 const getUnitRegex = /^[\d.-]*/;
@@ -98,6 +101,10 @@ if (helpTrg !== 0) {
 
     case 7:
       msg = 'current accepted units for area: ' + area.join(', ');
+      break;
+
+    case 8:
+      msg = 'current accepted units for time: ' + time.join(', ') + ' *format_time can only be used as output';
       break;
 
     default:
@@ -248,6 +255,25 @@ if (helpTrg !== 0) {
           from: val => val * (gaboVal ** 2),
           to: val => val / (gaboVal ** 2)
         }
+      },
+      time: {
+        years: {
+          suffix: 'non-leap years',
+          ...factor(31536000)
+        },
+        weeks: factor(604800),
+        days: factor(86400),
+        hours: factor(3600),
+        minutes: factor(60),
+        seconds: factor(1),
+        sol: {
+          suffix: 'sols (martian days)',
+          ...factor(88775.24409)
+        },
+        format_time: {
+          suffix: '',
+          to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + Math.floor((val % 60) + 's'
+        }
       }
     };
   })();
@@ -290,6 +316,15 @@ if (helpTrg !== 0) {
     if (conversions.area[unit2].suffix !== undefined) {
       unit2 = conversions.area[unit2].suffix;
     }
+  } else if (conversions.time.hasOwnProperty(unit1) && conversions.time.hasOwnProperty(unit2)) {
+    val = conversions.time[unit1].from(val);
+    if (conversions.time[unit1].suffix !== undefined) {
+      unit1 = conversions.time[unit1].suffix;
+    }
+    val = conversions.time[unit2].to(val);
+    if (conversions.time[unit2].suffix !== undefined) {
+      unit2 = conversions.time[unit2].suffix;
+    }
   } else {
     calc = false;
     msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits;
@@ -297,7 +332,7 @@ if (helpTrg !== 0) {
 
   if (calc) {
     if (typeof val === 'number') {
-      val = (val.toPrecision(6)).replace(/\.0+\b/,'');
+      val = (val.toPrecision(6)).replace(/\.0+\b/, '');
     }
     msg = origVal + unit1 + ' = ' + val + unit2;
   }
