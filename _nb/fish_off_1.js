@@ -3,7 +3,6 @@ description: |
   an alternative to `fish_off.js` based on Gabo's code. Use `fish_off_1.js` to disable fishing with some quips.
 variables:
   - fishoutput
-  - endEmote
 tag: specific commands
 order: 3
 ---
