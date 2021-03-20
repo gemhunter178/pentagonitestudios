@@ -143,7 +143,7 @@ if (helpTrg !== 0) {
         'm^3': { suffix: ' cubic meters', ...factor(1000) },
         'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
         gal: { suffix: ' gallons', ...factor(3.785411784) },
-        qt: {  suffix: ' quarts', ...factor(0.946352946) },
+        qt: { suffix: ' quarts', ...factor(0.946352946) },
         c: { suffix: ' cups', ...factor(0.2365882365) },
         floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
         tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
