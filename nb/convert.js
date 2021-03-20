@@ -32,9 +32,9 @@ if (cvrtvals.length < 2) {
 }
 /* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'light-seconds', 'AWG', 'au', 'furlong', 'smoot', 'gabo'];
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'bdft', 'gabo^3'];
-const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'amu', 'Jupiter', 'solar_mass'];
+const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'stone', 'amu', 'Jupiter', 'solar_mass'];
 const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
 const time = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'sol', 'format_time'];
 const accptUnits = 'current unit types: temperature, length, area, volume, mass/weight, time';
@@ -126,70 +126,29 @@ if (helpTrg !== 0) {
         in: factor(0.0254),
         mi: factor(1609.344),
         nau_mile: { suffix: ' nautical miles', ...factor(1852) },
-        'light-seconds': {
-          suffix: ' light-seconds',
-          ...factor(299792458)
-        },
+        'light-seconds': { suffix: ' light-seconds', ...factor(299792458) },
         AWG: {
           suffix: ' American Wire Gauge',
           from: val => 0.000127 * 92 ** ((36 - val) / 39),
           to: val => -39 * Math.log(val / 0.000127) / Math.log(92) + 36
         },
-        au: {
-          suffix: ' astronomical units',
-          ...factor(149597870700)
-        },
-        furlong: {
-          suffix: ' furlongs',
-          ...factor(201.168)
-        },
-        gabo: {
-          suffix: ' gabos',
-          ...factor(gaboVal)
-        },
-        smoot: {
-          suffix: ' smoots',
-          ...factor(1.7018)
-        }
+        au: { suffix: ' astronomical units', ...factor(149597870700) },
+        hand: { suffix: ' hands (used for horses)', ...factor(0.1016) },
+        furlong: { suffix: ' furlongs', ...factor(201.168) },
+        gabo: { suffix: ' gabos', ...factor(gaboVal) },
+        smoot: { suffix: ' smoots', ...factor(1.7018) }
       },
       volume: {
         L: factor(1),
-        'm^3': {
-          suffix: ' cubic meters',
-          ...factor(1000)
-        },
-        'cm^3': {
-          suffix: ' cubic centimeters',
-          ...factor(0.001)
-        },
-        gal: {
-          suffix: ' gallons',
-          ...factor(3.785411784)
-        },
-        qt: {
-          suffix: ' quarts',
-          ...factor(0.946352946)
-        },
-        c: {
-          suffix: ' cups',
-          ...factor(0.2365882365)
-        },
-        floz: {
-          suffix: ' fluid ounces',
-          ...factor(0.0295735295625)
-        },
-        tsp: {
-          suffix: ' teaspoons',
-          ...factor(0.00492892159375)
-        },
-        Tbsp: {
-          suffix: ' Tablespoons',
-          ...factor(0.01478676478125)
-        },
-        bdft: {
-          suffix: ' board feet',
-          ...factor(2.359737216)
-        },
+        'm^3': { suffix: ' cubic meters', ...factor(1000) },
+        'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
+        gal: { suffix: ' gallons', ...factor(3.785411784) },
+        qt: {  suffix: ' quarts', ...factor(0.946352946) },
+        c: { suffix: ' cups', ...factor(0.2365882365) },
+        floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
+        tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
+        Tbsp: { suffix: ' Tablespoons', ...factor(0.01478676478125) },
+        bdft: { suffix: ' board feet', ...factor(2.359737216) },
         'gabo^3': {
           suffix: ' cubic gabos',
           from: val => val * (gaboVal ** 3) * 1000,
@@ -199,35 +158,18 @@ if (helpTrg !== 0) {
       massweight: {
         kg: factor(1),
         g: factor(1 / 1000),
-        metric_ton: {
-          suffix: ' metric tons',
-          ...factor(1000)
-        },
+        metric_ton: { suffix: ' metric tons', ...factor(1000) },
         ton: {
           from: val => val * 2000 / 2.20462262,
           to: val => val / 2000 * 2.20462262
         },
         lbs: factor(1 / 2.20462262),
-        oz: {
-          suffix: ' ounces',
-          ...factor(1 / 35.27396195)
-        },
-        ct: {
-          suffix: ' carats',
-          ...factor(0.0002)
-        },
-        amu: {
-          suffix: ' atomic mass units',
-          ...factor(1 / 6.02217364335e+26)
-        },
-        Jupiter: {
-          suffix: ' Jupiters',
-          ...factor(1.898e+27)
-        },
-        solar_mass: {
-          suffix: ' solar masses',
-          ...factor(1.989e+30)
-        }
+        oz: { suffix: ' ounces', ...factor(1 / 35.27396195) },
+        ct: { suffix: ' carats', ...factor(0.0002) },
+        stone: { suffix: ' stone', ...factor(1 / 0.15747) },
+        amu: { suffix: ' atomic mass units', ...factor(1 / 6.02217364335e+26) },
+        Jupiter: { suffix: ' Jupiters', ...factor(1.898e+27) },
+        solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) }
       },
       area: {
         'm^2': {
