@@ -50,7 +50,7 @@ if (cvrtvals.length < 2) {
 }
 /* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
+const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'league', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
 const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'bdft', 'gabo^3'];
 const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'stone', 'amu', 'Jupiter', 'solar_mass'];
 const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
@@ -144,6 +144,7 @@ if (helpTrg !== 0) {
         in: factor(0.0254),
         mi: factor(1609.344),
         nau_mile: { suffix: ' nautical miles', ...factor(1852) },
+        league: { suffix: ' nautical leagues', ...factor(5556) },
         'light-seconds': { suffix: ' light-seconds', ...factor(299792458) },
         AWG: {
           suffix: ' American Wire Gauge',
