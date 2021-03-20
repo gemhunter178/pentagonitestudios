@@ -125,7 +125,7 @@ if (helpTrg !== 0) {
         ft: factor(0.3048),
         in: factor(0.0254),
         mi: factor(1609.344),
-        'nau_mile': { suffix: ' nautical miles', ...factor(1852) },
+        nau_mile: { suffix: ' nautical miles', ...factor(1852) },
         'light-seconds': {
           suffix: ' light-seconds',
           ...factor(299792458)
