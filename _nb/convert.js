@@ -150,7 +150,7 @@ if (helpTrg !== 0) {
           suffix: ' American Wire Gauge',
           from: val => 0.000127 * 92 ** ((36 - val) / 39),
           to: val => -39 * Math.log(val / 0.000127) / Math.log(92) + 36
-        }
+        },
         au: {
           suffix: ' astronomical units',
           ...factor(149597870700)
