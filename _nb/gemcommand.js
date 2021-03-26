@@ -85,10 +85,10 @@ if (/^Gemhunter178$/i.test(user)) {
       if (opt.length > 1) {
         msg = opt[1].toUpperCase() + ' GO TO SLEEP!';
       } else {
-        msg = 'GO TO SLEEP smolGrump';
+        msg = 'GO TO SLEEP! smolGrump';
       }
       msg;
-      break;        
+      break;
 
     case 'typo':
       let wrd1 = 'Gem';
