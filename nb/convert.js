@@ -50,7 +50,7 @@ let val = parseFloat(cvrtvals[0]);
 const getUnitRegex = /^[\d.-]*/;
 
 if (isNaN(val) && helpTrg === 0) {
-  helpTrg = 2;
+  val = 1;
 } else if (/format_time/.test(cvrtvals[0])) {
   helpTrg = -1;
 }
@@ -59,7 +59,7 @@ if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
     case -3:
-      msg = 'input format: "[val] [inputUnit] [outputUnit]" with those spaces.';
+      msg = 'input format: "[val] [inputUnit] [outputUnit]" with spaces.';
       break;
 
     case -2: {
@@ -74,7 +74,7 @@ if (helpTrg !== 0) {
       break;
 
     case 2:
-      msg = 'requires a value to convert from lycelIdk';
+      msg = 'defaulted value to 1';
       break;
 
     case 3:
