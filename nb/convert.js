@@ -27,7 +27,7 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 
 text = text.replace(/\s+to\s+/i, ' ');
 const cvrtvals = text.split(' ');
-if (cvrtvals.length < 2) {
+if (cvrtvals.length < 2 && helpTrg === 0) {
   helpTrg = -3;
 } else if (cvrtvals.length > 2) {
   cvrtvals[0] += cvrtvals[1];
@@ -62,7 +62,7 @@ if (helpTrg !== 0) {
     case -2: {
       const dUnit1 = cvrtvals[0].replace(getUnitRegex, '');
       const dUnit2 = cvrtvals[1].replace(getUnitRegex, '');
-      msg = '!convert by Gem. debug: text- ' + text + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
+      msg = 'debug: text- ' + text + ' | in0- ' + cvrtvals[0] + ' | in1- ' + cvrtvals[1] + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
       break;
     }
 
@@ -99,7 +99,7 @@ if (helpTrg !== 0) {
       break;
 
     default:
-      msg = 'Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]".| ' + accptUnits;
+      msg = '!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]".| ' + accptUnits;
       break;
   }
 } else {
