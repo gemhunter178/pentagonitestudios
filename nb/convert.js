@@ -28,7 +28,7 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 text = text.replace(/\s+to\s+/i, ' ');
 const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2) {
-  helpTrg = 1;
+  helpTrg = -3;
 } else if (cvrtvals.length > 2) {
   cvrtvals[0] += cvrtvals[1];
   cvrtvals[1] = cvrtvals[2];
@@ -55,10 +55,14 @@ if (isNaN(val) && helpTrg === 0) {
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
+    case -3:
+      msg = 'input format: "[val] [inputUnit] [outputUnit]" with those spaces.';
+      break;
+
     case -2: {
       const dUnit1 = cvrtvals[0].replace(getUnitRegex, '');
       const dUnit2 = cvrtvals[1].replace(getUnitRegex, '');
-      msg = 'debug: text- ' + text + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
+      msg = '!convert by Gem. debug: text- ' + text + ' | val- ' + val + ' | unit1- ' + dUnit1 + ' | unit2- ' + dUnit2;
       break;
     }
 
@@ -95,7 +99,7 @@ if (helpTrg !== 0) {
       break;
 
     default:
-      msg = '!convert by Gem. Input format: "[number][inputUnit] [outputUnit]" or "help [unittype]". Output may be rounded | ' + accptUnits;
+      msg = 'Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]".| ' + accptUnits;
       break;
   }
 } else {
@@ -257,7 +261,7 @@ if (helpTrg !== 0) {
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or it has yet to be implemented smolShrug | ' + accptUnits;
+    msg = 'Either unit types do not match or not implemented | ' + accptUnits;
   }
 
   if (calc) {
