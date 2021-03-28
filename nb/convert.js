@@ -23,6 +23,9 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 } else if (/\s*debug\s*/.test(text)) {
   helpTrg = -2;
   text = text.replace(/\s*debug\s*/, ' ');
+  if (text.charAt(0) === ' ') {
+    text = text.substr(1);
+  }
 }
 
 text = text.replace(/\s+to\s+/i, ' ');
