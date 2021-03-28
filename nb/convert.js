@@ -29,7 +29,11 @@ text = text.replace(/\s+to\s+/i, ' ');
 const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2) {
   helpTrg = 1;
+} else if (cvrtvals.length > 2) {
+  cvrtvals[0] += cvrtvals[1];
+  cvrtvals[1] = cvrtvals[2];
 }
+
 /* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
 const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'league', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
