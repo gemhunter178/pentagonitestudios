@@ -101,7 +101,7 @@ if (helpTrg !== 0) {
       break;
 
     default:
-      msg = '!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]".| ' + accptUnits;
+      msg = '!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]". ' + accptUnits;
       break;
   }
 } else {
@@ -173,6 +173,8 @@ if (helpTrg !== 0) {
         mile: 'mi',
         miles: 'mi',
         leagues: 'league',
+        gauge: 'AWG',
+        gaugewire: 'AWG',
         astronomicalunits: 'au',
         hands: 'hand',
         gabos: 'gabo',
@@ -199,6 +201,7 @@ if (helpTrg !== 0) {
         liters: 'L',
         cubicmeter: 'm^3',
         cubicmeters: 'm^3',
+        cubicm: 'm^3',
         cubiccentimeter: 'cm^3',
         cubiccentimeters: 'cm^3',
         cubiccm: 'cm^3',
@@ -210,6 +213,7 @@ if (helpTrg !== 0) {
         cups: 'c',
         fluidounce: 'floz',
         fluidounces: 'floz',
+        fl_oz: 'floz',
         teaspoon: 'tsp',
         teaspoons: 'tsp',
         tablespoon: 'Tbsp',
@@ -267,15 +271,19 @@ if (helpTrg !== 0) {
         squaremeter: 'm^2',
         squaremeters: 'm^2',
         sqmeter: 'm^2',
+        squarem: 'm^2',
         squarecentimeter: 'cm^2',
         squarecentimeters: 'cm^2',
         sqcm: 'cm^2',
+        squarecm: 'cm^2',
         squarefoot: 'ft^2',
         squarefeet: 'ft^2',
         sqft: 'ft^2',
+        squareft: 'ft^2',
         squareinch: 'in^2',
         squareinches: 'in^2',
         sqin: 'in^2',
+        squarein: 'in^2',
         acres: 'acre',
         squaregabo: 'gabo^2',
         squaregabos: 'gabo^2',

@@ -1675,7 +1675,7 @@
           <span>
             <a href="/nb/convert.js" target="_blank"><b>convert.js</b></a>
             <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/convert.min.js" class="copybtn fa fa-clipboard"></i>:
-            <span class="command-description"><p>[WIP] requires an input string ‘<em>text</em>’ in the form ‘[number][inputUnit] to [outputUnit]’ or ‘[number][inputUnit] [outputUnit]’. this will attempt to convert the input to output.</p>
+            <span class="command-description"><p>Convert units to other units. Requires an input string ‘<em>text</em>’ in the form ‘[number] [inputUnit] [outputUnit]’ or some other accounted for input variations. Space between ‘inputUnit’ and ‘outputUnit’ is always required.</p>
 </span>
           </span>
           <div class="command-detailbox">
@@ -1785,7 +1785,7 @@
       <span class="k">break</span><span class="p">;</span>
 
     <span class="nl">default</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]".| </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span><span class="p">;</span>
+      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]". </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">accptUnits</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -1857,6 +1857,8 @@
         <span class="na">mile</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">miles</span><span class="p">:</span> <span class="dl">'</span><span class="s1">mi</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">leagues</span><span class="p">:</span> <span class="dl">'</span><span class="s1">league</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">gauge</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AWG</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">gaugewire</span><span class="p">:</span> <span class="dl">'</span><span class="s1">AWG</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">astronomicalunits</span><span class="p">:</span> <span class="dl">'</span><span class="s1">au</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">hands</span><span class="p">:</span> <span class="dl">'</span><span class="s1">hand</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">gabos</span><span class="p">:</span> <span class="dl">'</span><span class="s1">gabo</span><span class="dl">'</span><span class="p">,</span>
@@ -1883,6 +1885,7 @@
         <span class="na">liters</span><span class="p">:</span> <span class="dl">'</span><span class="s1">L</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">cubicmeter</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^3</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">cubicmeters</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^3</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">cubicm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^3</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">cubiccentimeter</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^3</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">cubiccentimeters</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^3</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">cubiccm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^3</span><span class="dl">'</span><span class="p">,</span>
@@ -1894,6 +1897,7 @@
         <span class="na">cups</span><span class="p">:</span> <span class="dl">'</span><span class="s1">c</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">fluidounce</span><span class="p">:</span> <span class="dl">'</span><span class="s1">floz</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">fluidounces</span><span class="p">:</span> <span class="dl">'</span><span class="s1">floz</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">fl_oz</span><span class="p">:</span> <span class="dl">'</span><span class="s1">floz</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">teaspoon</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tsp</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">teaspoons</span><span class="p">:</span> <span class="dl">'</span><span class="s1">tsp</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">tablespoon</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Tbsp</span><span class="dl">'</span><span class="p">,</span>
@@ -1951,15 +1955,19 @@
         <span class="na">squaremeter</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squaremeters</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">sqmeter</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">squarem</span><span class="p">:</span> <span class="dl">'</span><span class="s1">m^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squarecentimeter</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squarecentimeters</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">sqcm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">squarecm</span><span class="p">:</span> <span class="dl">'</span><span class="s1">cm^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squarefoot</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ft^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squarefeet</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ft^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">sqft</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ft^2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">squareft</span><span class="p">:</span> <span class="dl">'</span><span class="s1">ft^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squareinch</span><span class="p">:</span> <span class="dl">'</span><span class="s1">in^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squareinches</span><span class="p">:</span> <span class="dl">'</span><span class="s1">in^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">sqin</span><span class="p">:</span> <span class="dl">'</span><span class="s1">in^2</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">squarein</span><span class="p">:</span> <span class="dl">'</span><span class="s1">in^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">acres</span><span class="p">:</span> <span class="dl">'</span><span class="s1">acre</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squaregabo</span><span class="p">:</span> <span class="dl">'</span><span class="s1">gabo^2</span><span class="dl">'</span><span class="p">,</span>
         <span class="na">squaregabos</span><span class="p">:</span> <span class="dl">'</span><span class="s1">gabo^2</span><span class="dl">'</span><span class="p">,</span>
