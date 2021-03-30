@@ -27,6 +27,9 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   if (text.charAt(0) === ' ') {
     text = text.substr(1);
   }
+  if (text.charAt(-1) === ' ') {
+    text = text.slice(0, -1);
+  }
 }
 
 text = text.replace(/\s+to\s+/i, ' ');
