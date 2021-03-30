@@ -20,9 +20,10 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
   } else if (/\btime/i.test(text)) {
     helpTrg = 8;
   }
-} else if (/\s*debug\s*/.test(text)) {
+} else if (/\bdebug\b/.test(text)) {
   helpTrg = -2;
-  text = text.replace(/\s*debug\s*/, ' ');
+  text = text.replace(/\bdebug\b/, '');
+  text = text.replace(/\s\s+/g, ' ');
   if (text.charAt(0) === ' ') {
     text = text.substr(1);
   }
@@ -51,7 +52,7 @@ const accptUnits = 'current unit types: temperature, length, area, volume, mass/
 let val = parseFloat(cvrtvals[0]);
 const getUnitRegex = /^[\d.-]*/;
 
-if (isNaN(val) && helpTrg === 0) {
+if (isNaN(val) && (helpTrg === 0 || helpTrg === -2)) {
   val = 1;
 } else if (/format_time/.test(cvrtvals[0])) {
   helpTrg = -1;
@@ -231,7 +232,21 @@ if (helpTrg !== 0) {
         stone: { suffix: ' stone', ...factor(1 / 0.15747) },
         amu: { suffix: ' atomic mass units', ...factor(1 / 6.02217364335e+26) },
         Jupiter: { suffix: ' Jupiters', ...factor(1.898e+27) },
-        solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) }
+        solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) },
+
+        kilogram: 'kg',
+        kilograms: 'kg',
+        gram: 'g',
+        grams: 'g',
+        tons: 'ton',
+        pound: 'lbs',
+        pounds: 'lbs',
+        ounce: 'oz',
+        ounces: 'oz',
+        carat: 'ct',
+        carats: 'ct',
+        Jupiters: 'Jupiter',
+        sun_mass: 'solar_mass'
       },
       area: {
         'm^2': {
@@ -247,7 +262,24 @@ if (helpTrg !== 0) {
           suffix: ' square gabos',
           from: val => val * (gaboVal ** 2),
           to: val => val / (gaboVal ** 2)
-        }
+        },
+
+        squaremeter: 'm^2',
+        squaremeters: 'm^2',
+        sqmeter: 'm^2',
+        squarecentimeter: 'cm^2',
+        squarecentimeters: 'cm^2',
+        sqcm: 'cm^2',
+        squarefoot: 'ft^2',
+        squarefeet: 'ft^2',
+        sqft: 'ft^2',
+        squareinch: 'in^2',
+        squareinches: 'in^2',
+        sqin: 'in^2',
+        acres: 'acre',
+        squaregabo: 'gabo^2',
+        squaregabos: 'gabo^2',
+        sqgabo: 'gabo^2'
       },
       time: {
         years: { suffix: ' non-leap years', ...factor(31536000) },
@@ -260,7 +292,34 @@ if (helpTrg !== 0) {
         format_time: {
           suffix: '',
           to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + (val % 60) + 's'
-        }
+        },
+
+        y: 'years',
+        yr: 'years',
+        yrs: 'years',
+        year: 'years',
+        w: 'weeks',
+        wk: 'weeks',
+        wks: 'weeks',
+        week: 'weeks',
+        d: 'days',
+        dy: 'days',
+        day: 'days',
+        h: 'hours',
+        hr: 'hours',
+        hrs: 'hours',
+        hour: 'hours',
+        m: 'minutes',
+        min: 'minutes',
+        mins: 'minutes',
+        minute: 'minutes',
+        s: 'seconds',
+        sec: 'seconds',
+        secs: 'seconds',
+        second: 'seconds',
+        sols: 'sol',
+        time: 'format_time',
+        f_t: 'format_time'
       }
     };
   })();
@@ -292,6 +351,8 @@ if (helpTrg !== 0) {
       unit2 = conversions.volume[unit2].suffix;
     }
   } else if (conversions.massweight.hasOwnProperty(unit1) && conversions.massweight.hasOwnProperty(unit2)) {
+    if (typeof (conversions.massweight[unit1]) === 'string') { unit1 = conversions.massweight[unit1]; }
+    if (typeof (conversions.massweight[unit2]) === 'string') { unit2 = conversions.massweight[unit2]; }
     val = conversions.massweight[unit1].from(val);
     if (conversions.massweight[unit1].suffix !== undefined) {
       unit1 = conversions.massweight[unit1].suffix;
@@ -301,6 +362,8 @@ if (helpTrg !== 0) {
       unit2 = conversions.massweight[unit2].suffix;
     }
   } else if (conversions.area.hasOwnProperty(unit1) && conversions.area.hasOwnProperty(unit2)) {
+    if (typeof (conversions.area[unit1]) === 'string') { unit1 = conversions.area[unit1]; }
+    if (typeof (conversions.area[unit2]) === 'string') { unit2 = conversions.area[unit2]; }
     val = conversions.area[unit1].from(val);
     if (conversions.area[unit1].suffix !== undefined) {
       unit1 = conversions.area[unit1].suffix;
@@ -310,6 +373,8 @@ if (helpTrg !== 0) {
       unit2 = conversions.area[unit2].suffix;
     }
   } else if (conversions.time.hasOwnProperty(unit1) && conversions.time.hasOwnProperty(unit2)) {
+    if (typeof (conversions.time[unit1]) === 'string') { unit1 = conversions.time[unit1]; }
+    if (typeof (conversions.time[unit2]) === 'string') { unit2 = conversions.time[unit2]; }
     val = conversions.time[unit1].from(val);
     if (conversions.time[unit1].suffix !== undefined) {
       unit1 = conversions.time[unit1].suffix;
