@@ -1715,7 +1715,7 @@
 <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+to</span><span class="se">\s</span><span class="sr">+/i</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
 <span class="kd">const</span> <span class="nx">cvrtvals</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
 <span class="k">if</span> <span class="p">(</span><span class="nx">cvrtvals</span><span class="p">.</span><span class="nx">length</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">&amp;&amp;</span> <span class="nx">helpTrg</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">helpTrg</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
+  <span class="nx">helpTrg</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">cvrtvals</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
   <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
@@ -1742,10 +1742,6 @@
 <span class="k">if</span> <span class="p">(</span><span class="nx">helpTrg</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
   <span class="cm">/* error handling, basically */</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">helpTrg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">input format: "[val] [inputUnit] [outputUnit]" with spaces.</span><span class="dl">'</span><span class="p">;</span>
-      <span class="k">break</span><span class="p">;</span>
-
     <span class="k">case</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span> <span class="p">{</span>
       <span class="kd">const</span> <span class="nx">dUnit1</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="nx">getUnitRegex</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
       <span class="kd">const</span> <span class="nx">dUnit2</span> <span class="o">=</span> <span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="nx">getUnitRegex</span><span class="p">,</span> <span class="dl">''</span><span class="p">);</span>
@@ -1758,7 +1754,7 @@
       <span class="k">break</span><span class="p">;</span>
 
     <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
-      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">defaulted value to 1</span><span class="dl">'</span><span class="p">;</span>
+      <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">input format: "[val] [inputUnit] [outputUnit]" with spaces.</span><span class="dl">'</span><span class="p">;</span>
       <span class="k">break</span><span class="p">;</span>
 
     <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
