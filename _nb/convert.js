@@ -47,6 +47,8 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 }
 
 text = text.replace(/\s+to\s+/i, ' ');
+text = text.replace(/\bcubic\s+/ig, 'cubic');
+text = text.replace(/\bsquare\s+/ig, 'square');
 const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2 && helpTrg === 0) {
   helpTrg = 2;
@@ -208,7 +210,30 @@ if (helpTrg !== 0) {
           suffix: ' cubic gabos',
           from: val => val * (gaboVal ** 3) * 1000,
           to: val => (val / 1000) / (gaboVal ** 3)
-        }
+        },
+
+        liter: 'L',
+        liters: 'L',
+        cubicmeter: 'm^3',
+        cubicmeters: 'm^3',
+        cubiccentimeter: 'cm^3',
+        cubiccentimeters: 'cm^3',
+        cubiccm: 'cm^3',
+        gallon: 'gal',
+        gallons: 'gal',
+        quart: 'qt',
+        quarts: 'qt',
+        cup: 'c',
+        cups: 'c',
+        fluidounce: 'floz',
+        fluidounces: 'floz',
+        teaspoon: 'tsp',
+        teaspoons: 'tsp',
+        tablespoon: 'Tbsp',
+        tablespoons: 'Tbsp',
+        boardfeet: 'bdft',
+        cubicgabo: 'gabo^3',
+        cubicgabos: 'gabo^3'
       },
       massweight: {
         kg: factor(1),
@@ -274,6 +299,8 @@ if (helpTrg !== 0) {
       unit2 = conversions.length[unit2].suffix;
     }
   } else if (conversions.volume.hasOwnProperty(unit1) && conversions.volume.hasOwnProperty(unit2)) {
+    if (typeof (conversions.volume[unit1]) === 'string') { unit1 = conversions.volume[unit1]; }
+    if (typeof (conversions.volume[unit2]) === 'string') { unit2 = conversions.volume[unit2]; }
     val = conversions.volume[unit1].from(val);
     if (conversions.volume[unit1].suffix !== undefined) {
       unit1 = conversions.volume[unit1].suffix;
