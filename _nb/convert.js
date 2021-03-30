@@ -49,7 +49,7 @@ if (/\bhelp\b/i.test(text) || text.length === 0) {
 text = text.replace(/\s+to\s+/i, ' ');
 const cvrtvals = text.split(' ');
 if (cvrtvals.length < 2 && helpTrg === 0) {
-  helpTrg = -3;
+  helpTrg = 2;
 } else if (cvrtvals.length > 2) {
   cvrtvals[0] += cvrtvals[1];
   cvrtvals[1] = cvrtvals[2];
@@ -76,10 +76,6 @@ if (isNaN(val) && helpTrg === 0) {
 if (helpTrg !== 0) {
   /* error handling, basically */
   switch (helpTrg) {
-    case -3:
-      msg = 'input format: "[val] [inputUnit] [outputUnit]" with spaces.';
-      break;
-
     case -2: {
       const dUnit1 = cvrtvals[0].replace(getUnitRegex, '');
       const dUnit2 = cvrtvals[1].replace(getUnitRegex, '');
@@ -92,7 +88,7 @@ if (helpTrg !== 0) {
       break;
 
     case 2:
-      msg = 'defaulted value to 1';
+      msg = 'input format: "[val] [inputUnit] [outputUnit]" with spaces.';
       break;
 
     case 3:
