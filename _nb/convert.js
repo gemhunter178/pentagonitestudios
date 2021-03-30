@@ -141,9 +141,13 @@ if (helpTrg !== 0) {
           from: val => val - 273.15,
           to: val => val + 273.15
         },
+
         Celsius: 'C',
+        celsius: 'C',
         Fahrenheit: 'F',
-        Kelvin: 'K'
+        fahrenheit: 'F',
+        Kelvin: 'K',
+        kelvin: 'K'
       },
       length: {
         m: factor(1),
@@ -165,7 +169,29 @@ if (helpTrg !== 0) {
         hand: { suffix: ' hands (used for horses)', ...factor(0.1016) },
         furlong: { suffix: ' furlongs', ...factor(201.168) },
         gabo: { suffix: ' gabos', ...factor(gaboVal) },
-        smoot: { suffix: ' smoots', ...factor(1.7018) }
+        smoot: { suffix: ' smoots', ...factor(1.7018) },
+
+        meter: 'm',
+        meters: 'm',
+        centimeter: 'cm',
+        centimeters: 'cm',
+        millimeter: 'mm',
+        millimeters: 'mm',
+        kilometer: 'km',
+        kilometers: 'km',
+        kilometre: 'km',
+        kilometres: 'km',
+        foot: 'ft',
+        feet: 'ft',
+        inch: 'in',
+        inches: 'in',
+        mile: 'mi',
+        miles: 'mi',
+        leagues: 'league',
+        astronomicalunits: 'au',
+        hands: 'hand',
+        gabos: 'gabo',
+        smoots: 'smoot'
       },
       volume: {
         L: factor(1),
@@ -237,6 +263,8 @@ if (helpTrg !== 0) {
     val = conversions.temperature[unit1].from(val);
     val = conversions.temperature[unit2].to(val);
   } else if (conversions.length.hasOwnProperty(unit1) && conversions.length.hasOwnProperty(unit2)) {
+    if (typeof (conversions.length[unit1]) === 'string') { unit1 = conversions.length[unit1]; }
+    if (typeof (conversions.length[unit2]) === 'string') { unit2 = conversions.length[unit2]; }
     val = conversions.length[unit1].from(val);
     if (conversions.length[unit1].suffix !== undefined) {
       unit1 = conversions.length[unit1].suffix;
