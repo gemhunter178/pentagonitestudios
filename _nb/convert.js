@@ -140,7 +140,10 @@ if (helpTrg !== 0) {
         K: {
           from: val => val - 273.15,
           to: val => val + 273.15
-        }
+        },
+        Celsius: 'C',
+        Fahrenheit: 'F',
+        Kelvin: 'K'
       },
       length: {
         m: factor(1),
@@ -229,6 +232,8 @@ if (helpTrg !== 0) {
     };
   })();
   if (conversions.temperature.hasOwnProperty(unit1) && conversions.temperature.hasOwnProperty(unit2)) {
+    if (typeof (conversions.temperature[unit1]) === 'string') { unit1 = conversions.temperature[unit1]; }
+    if (typeof (conversions.temperature[unit2]) === 'string') { unit2 = conversions.temperature[unit2]; }
     val = conversions.temperature[unit1].from(val);
     val = conversions.temperature[unit2].to(val);
   } else if (conversions.length.hasOwnProperty(unit1) && conversions.length.hasOwnProperty(unit2)) {

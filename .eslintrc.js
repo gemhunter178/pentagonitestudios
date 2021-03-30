@@ -10,7 +10,8 @@ module.exports = {
   },
   rules: {
     "no-unused-vars": "off",
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "no-multiple-empty-lines": "off"
   },
   "plugins": [
     "frontmatter"
