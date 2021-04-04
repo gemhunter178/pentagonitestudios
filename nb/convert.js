@@ -46,7 +46,7 @@ if (cvrtvals.length < 2 && helpTrg === 0) {
 /* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
 const temperature = ['C', 'F', 'K'];
 const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'league', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
-const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'bdft', 'gabo^3'];
+const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'stick_of_butter', 'bdft', 'gabo^3'];
 const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'stone', 'amu', 'Jupiter', 'solar_mass'];
 const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
 const time = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'sol', 'format_time'];
@@ -193,6 +193,7 @@ if (helpTrg !== 0) {
         floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
         tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
         Tbsp: { suffix: ' Tablespoons', ...factor(0.01478676478125) },
+        stick_of_butter: { suffix: ' US sticks of butter', ...factor(0.11829411825) },
         bdft: { suffix: ' board feet', ...factor(2.359737216) },
         'gabo^3': {
           suffix: ' cubic gabos',
@@ -221,6 +222,9 @@ if (helpTrg !== 0) {
         teaspoons: 'tsp',
         tablespoon: 'Tbsp',
         tablespoons: 'Tbsp',
+        butter: 'stick_of_butter',
+        butterstick: 'stick_of_butter',
+        buttersticks: 'stick_of_butter',
         boardfeet: 'bdft',
         cubicgabo: 'gabo^3',
         cubicgabos: 'gabo^3'
