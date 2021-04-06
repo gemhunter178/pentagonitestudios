@@ -270,6 +270,7 @@ if (helpTrg !== 0) {
         tons: 'ton',
         pound: 'lbs',
         pounds: 'lbs',
+        ozs: 'oz',
         ounce: 'oz',
         ounces: 'oz',
         carat: 'ct',
