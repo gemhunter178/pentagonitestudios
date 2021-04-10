@@ -245,11 +245,13 @@ if (helpTrg !== 0) {
         Jupiter: { suffix: ' Jupiters', ...factor(1.898e+27) },
         solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) },
 
+        kgs: 'kg',
         kilogram: 'kg',
         kilograms: 'kg',
         gram: 'g',
         grams: 'g',
         tons: 'ton',
+        lb: 'lbs',
         pound: 'lbs',
         pounds: 'lbs',
         ozs: 'oz',
