@@ -224,6 +224,7 @@ if (helpTrg !== 0) {
         cubicmeter: 'm^3',
         cubicmeters: 'm^3',
         cubicm: 'm^3',
+        cc: 'cm^3',
         cubiccentimeter: 'cm^3',
         cubiccentimeters: 'cm^3',
         cubiccm: 'cm^3',
