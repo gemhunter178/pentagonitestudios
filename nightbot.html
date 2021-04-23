@@ -1741,7 +1741,7 @@
 
 <span class="k">if</span> <span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="nx">helpTrg</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">||</span> <span class="nx">helpTrg</span> <span class="o">===</span> <span class="o">-</span><span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
   <span class="nx">val</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/format_time/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="sr">/^format_time$|^time$|^f_t$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">cvrtvals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
   <span class="nx">helpTrg</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
 

@@ -57,7 +57,7 @@ const getUnitRegex = /^[\d.-]*/;
 
 if (isNaN(val) && (helpTrg === 0 || helpTrg === -2)) {
   val = 1;
-} else if (/format_time/.test(cvrtvals[0])) {
+} else if (/^format_time$|^time$|^f_t$/.test(cvrtvals[0])) {
   helpTrg = -1;
 }
 
