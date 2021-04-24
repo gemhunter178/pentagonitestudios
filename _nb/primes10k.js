@@ -7,7 +7,6 @@ order: 3
 ---
 
 const primes = [
-  '1',
   '2',
   '3',
   '5',
