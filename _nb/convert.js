@@ -234,7 +234,7 @@ if (helpTrg !== 0) {
         quart: 'qt',
         quarts: 'qt',
 		pint: 'pt',
-		pints 'pt',
+		pints: 'pt',
         cup: 'c',
         cups: 'c',
         fluidounce: 'floz',
