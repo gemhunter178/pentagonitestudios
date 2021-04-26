@@ -203,6 +203,7 @@ if (helpTrg !== 0) {
       },
       volume: {
         L: factor(1),
+		mL: factor(0.001),
         'm^3': { suffix: ' cubic meters', ...factor(1000) },
         'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
         gal: { suffix: ' gallons', ...factor(3.785411784) },
@@ -222,6 +223,10 @@ if (helpTrg !== 0) {
 
         liter: 'L',
         liters: 'L',
+		mil: 'mL',
+		ml: 'mL',
+		milliliter: 'mL',
+		milliliters: 'mL',
         cubicmeter: 'm^3',
         cubicmeters: 'm^3',
         cubicm: 'm^3',
