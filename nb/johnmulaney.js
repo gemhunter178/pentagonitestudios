@@ -2,7 +2,7 @@
 
 const jm = ['Ooooooh... I\'m sorryyyyyyyyyyyyy',
   'Nah sister, you\'re not getting me to no secondary location. You want it? Go GET IT',
-  'Now you\ve thrown him off his RHYTHM',
+  'Now you\'ve thrown him off his RHYTHM',
   'I\'m like "NO! That\'s the thing I\'m sensitive about!"',
   'She is a dynamite, 5-foot Jewish bitch and she is the BEST',
   'Cause he never forgets a bitch...EVER',
