@@ -49,4 +49,12 @@ const jm = ['Ooooooh... I\'m sorryyyyyyyyyyyyy',
   'Here are the numbers of where we\'ll be, and this is where we keep the dog food, and you\'re a horse',
   'Should we get a plate of fries to the table? Should we share some fries? If I get fries you\'ll have a couple, right?',
   'How dare you clap for the worst financial decision I\'ve made in my life?',
-  'You know, my nana drove me to my prom'];
+  'You know, my nana drove me to my prom',
+  'This is an on-fire garbage can...could be a nursery.',
+  'Just \'cause you\'re accurate does not mean you\'re interesting.',
+  'Hey, do you want me to kill that guy for you? I will totally kill that guy for you!',
+  'You could pour soup in my lap and I\'ll probably apologize to you.',
+  'Like the back of a dolphin, my back',
+  'God can\'t hear you',
+  'You know, Leonard Bernstein… was one of the great composers and conductors of the 20th century, but sometimes he would be gay.',
+  'I\'ll keep all my emotions right here, and then one day, I\'ll die.'];

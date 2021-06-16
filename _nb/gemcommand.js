@@ -65,7 +65,7 @@ if (!isNaN(msgNum)) {
   msgFlavor = msgNum + ': ' + messages[msgNum];
 }
 
-let msg = desc + ' - Gem (she/them) - ' + msgFlavor;
+let msg = desc + ' - Gem (she/they) - ' + msgFlavor;
 if (showPromo) {
   let prmNum = 0;
   if (Math.random() > 0.7) {
