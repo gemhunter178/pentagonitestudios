@@ -130,7 +130,7 @@ if (helpTrg !== 0) {
   let unit2 = cvrtvals[1].replace(getUnitRegex, '');
   let calc = true;
   const origVal = val;
-  const gaboVal = 1.8288;
+  const gaboVal = 1.8288 * 73 / 72;
   const conversions = (function () {
     const factor = i => ({
         from: j => j * i,
