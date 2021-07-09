@@ -412,7 +412,7 @@ if (helpTrg !== 0) {
     }
   } else {
     calc = false;
-    msg = 'Either unit types do not match or not implemented | ' + accptUnits;
+    msg = 'Error in matching units! do check !convert help or maybe your capitalizations?';
   }
 
   if (calc) {
