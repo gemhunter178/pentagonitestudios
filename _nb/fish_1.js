@@ -55,7 +55,7 @@ if ((Math.random()) < 0.9) {
   }
   fishoutput = user + ' caught a fish of ' + fsh.toFixed(2) + 'kg! (' + (fsh * 2.20462).toFixed(2) + 'lbs) ' + msg[sz];
   if (/6[.]*9/.test(fishoutput)) {
-    fishoutput += '... nice. ';
+    fishoutput += '- nice ';
   }
 } else {
   fishoutput = 'Oh no! The fish escaped!! lycelHands ';
