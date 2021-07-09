@@ -2276,6 +2276,9 @@
     <span class="nx">sz</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nx">fishoutput</span> <span class="o">=</span> <span class="nx">user</span> <span class="o">+</span> <span class="dl">'</span><span class="s1"> caught a fish of </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">fsh</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">kg! (</span><span class="dl">'</span> <span class="o">+</span> <span class="p">(</span><span class="nx">fsh</span> <span class="o">*</span> <span class="mf">2.20462</span><span class="p">).</span><span class="nx">toFixed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">lbs) </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">msg</span><span class="p">[</span><span class="nx">sz</span><span class="p">];</span>
+  <span class="k">if</span><span class="p">(</span><span class="sr">/6</span><span class="se">[</span><span class="sr">.</span><span class="se">]</span><span class="sr">*9/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">fishoutput</span><span class="p">)){</span>
+    <span class="nx">fishoutput</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">... nice. </span><span class="dl">"</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
   <span class="nx">fishoutput</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Oh no! The fish escaped!! lycelHands </span><span class="dl">'</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
