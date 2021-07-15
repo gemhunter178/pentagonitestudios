@@ -2162,7 +2162,7 @@
     <span class="p">}</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nx">calc</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Error in matching units! do check !convert help or maybe your capitalizations?</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">msg</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Error in matching units! do check </span><span class="se">\'</span><span class="s1">!convert help</span><span class="se">\'</span><span class="s1"> or maybe your capitalizations?</span><span class="dl">'</span><span class="p">;</span>
   <span class="p">}</span>
 
   <span class="k">if</span> <span class="p">(</span><span class="nx">calc</span><span class="p">)</span> <span class="p">{</span>
@@ -2174,6 +2174,137 @@
 <span class="p">}</span>
 
 <span class="nx">msg</span><span class="p">;</span></code></pre></figure>
+          </div>
+        </li>
+      
+        <li>
+          <span class="expand-detailbox">+</span>
+          <span>
+            <a href="/nb/morse.js" target="_blank"><b>morse.js</b></a>
+            <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/morse.min.js" class="copybtn fa fa-clipboard"></i>:
+            <span class="command-description"><p>Convert to and from morse code. Requires input string ‘<em>text</em>’. Morse code to word conversions mush start with ‘.’,’,’, or ‘<em>’. spaces in morse should be ‘</em>’.</p>
+</span>
+          </span>
+          <div class="command-detailbox">
+            
+            
+            <p>variables: <code>text</code></p>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* global text:true */</span>
+
+
+<span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">===</span> <span class="dl">''</span><span class="p">){</span>
+  <span class="nx">text</span> <span class="o">=</span> <span class="s2">`we're going to need something to translate...`</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">help</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">text</span> <span class="o">=</span> <span class="s2">`use plain text or '.', '-', and '_' (for spaces) as a query!`</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">([</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">_</span><span class="dl">'</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])){</span>
+    <span class="c1">//probably a morse to word</span>
+    <span class="c1">//handle when underscores aren't space seperated</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span><span class="dl">'</span><span class="s1"> _ </span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/g</span><span class="p">,</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">toWord</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="dl">'</span><span class="s1">.-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-...</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-.-.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">C</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">D</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">E</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">..-.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">F</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">G</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">....</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">H</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">I</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.---</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">J</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-.-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">K</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.-..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">L</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">M</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">N</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">---</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">O</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.--.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">P</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--.-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Q</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.-.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">R</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">...</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">S</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">T</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">..-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">U</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">...-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">V</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.--</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">W</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-..-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-.--</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Y</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Z</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.----</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">..---</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">...--</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">....-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">4</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">.....</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">5</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-....</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">6</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">--...</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">7</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">---..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">8</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">----.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">9</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">-----</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">_</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">⠀</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">toWord</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
+        <span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">toWord</span><span class="p">[</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">//probably a word to morse</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
+    <span class="kd">const</span> <span class="nx">toMorse</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">A</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">B</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-...</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">C</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-.-.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">D</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">E</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">F</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..-.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">G</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">H</span><span class="p">:</span> <span class="dl">'</span><span class="s1">....</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">I</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">J</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.---</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">K</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-.-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">L</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.-..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">M</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">N</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">O</span><span class="p">:</span> <span class="dl">'</span><span class="s1">---</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">P</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.--.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">Q</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--.-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">R</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.-.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">S</span><span class="p">:</span> <span class="dl">'</span><span class="s1">...</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">T</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">U</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">V</span><span class="p">:</span> <span class="dl">'</span><span class="s1">...-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">W</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.--</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">X</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-..-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">Y</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-.--</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">Z</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.----</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..---</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">...--</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">4</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">....-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">5</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.....</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">6</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-....</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">7</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--...</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">8</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">---..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">9</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">----.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-----</span><span class="dl">'</span><span class="p">,</span>
+      <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">⠀</span><span class="dl">'</span>
+    <span class="p">}</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">toMorse</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
+        <span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">toMorse</span><span class="p">[</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">morse: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">text</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">470</span><span class="p">);</span>
+      <span class="nx">text</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">[exceeds char limit]</span><span class="dl">'</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">text</span><span class="p">;</span></code></pre></figure>
           </div>
         </li>
       
