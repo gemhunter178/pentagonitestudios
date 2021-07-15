@@ -1,16 +1,16 @@
 /* global text:true */
+/* eslint-disable no-unused-expressions, no-prototype-builtins */
 
-
-if (text === ''){
-  text = `we're going to need something to translate...`;
+if (text === '') {
+  text = 'we\'re going to need something to translate...';
 } else if (text === 'help') {
-  text = `use plain text or '.', '-', and '_' (for spaces) as a query!`;
+  text = 'use plain text or \'.\', \'-\', and \'_\' (for spaces) as a query!';
 } else {
-  if (['.','-','_'].includes(text[0])){
-    //probably a morse to word
-    //handle when underscores aren't space seperated
-    text.replace(/_/g,' _ ');
-    text.replace(/\s+/g,' ');
+  if (['.', '-', '_'].includes(text[0])) {
+    // probably a morse to word
+    // handle when underscores aren't space seperated
+    text.replace(/_/g, ' _ ');
+    text.replace(/\s+/g, ' ');
     const toWord = {
       '.-': 'A',
       '-...': 'B',
@@ -48,18 +48,18 @@ if (text === ''){
       '---..': '8',
       '----.': '9',
       '-----': '0',
-      '_': ' ',
+      _: ' ',
       '⠀': ' '
-    }
+    };
     text = text.split(' ');
-    for (let i = 0; i < text.length; i++){
-      if (toWord.hasOwnProperty(text[i])){
+    for (let i = 0; i < text.length; i++) {
+      if (toWord.hasOwnProperty(text[i])) {
         text[i] = toWord[text[i]];
       }
     }
-    text = text.join('');
+    text = ' ' + text.join('');
   } else {
-    //probably a word to morse
+    // probably a word to morse
     text = text.toUpperCase();
     const toMorse = {
       A: '.-',
@@ -88,27 +88,27 @@ if (text === ''){
       X: '-..-',
       Y: '-.--',
       Z: '--..',
-      '1': '.----',
-      '2': '..---',
-      '3': '...--',
-      '4': '....-',
-      '5': '.....',
-      '6': '-....',
-      '7': '--...',
-      '8': '---..',
-      '9': '----.',
-      '0': '-----',
+      1: '.----',
+      2: '..---',
+      3: '...--',
+      4: '....-',
+      5: '.....',
+      6: '-....',
+      7: '--...',
+      8: '---..',
+      9: '----.',
+      0: '-----',
       ' ': '⠀'
-    }
+    };
     text = text.split('');
-    for (let i = 0; i < text.length; i++){
-      if (toMorse.hasOwnProperty(text[i])){
+    for (let i = 0; i < text.length; i++) {
+      if (toMorse.hasOwnProperty(text[i])) {
         text[i] = toMorse[text[i]];
       }
     }
     text = 'morse: ' + text.join(' ');
     if (text.length > 500) {
-      text = text.slice(0,470);
+      text = text.slice(0, 470);
       text += '[exceeds char limit]';
     }
   }

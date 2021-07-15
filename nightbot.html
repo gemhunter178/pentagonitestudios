@@ -2190,18 +2190,18 @@
             
             <p>variables: <code>text</code></p>
             <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* global text:true */</span>
+<span class="cm">/* eslint-disable no-unused-expressions, no-prototype-builtins */</span>
 
-
-<span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">===</span> <span class="dl">''</span><span class="p">){</span>
-  <span class="nx">text</span> <span class="o">=</span> <span class="s2">`we're going to need something to translate...`</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">===</span> <span class="dl">''</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">we</span><span class="se">\'</span><span class="s1">re going to need something to translate...</span><span class="dl">'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">help</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">text</span> <span class="o">=</span> <span class="s2">`use plain text or '.', '-', and '_' (for spaces) as a query!`</span><span class="p">;</span>
+  <span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">use plain text or </span><span class="se">\'</span><span class="s1">.</span><span class="se">\'</span><span class="s1">, </span><span class="se">\'</span><span class="s1">-</span><span class="se">\'</span><span class="s1">, and </span><span class="se">\'</span><span class="s1">_</span><span class="se">\'</span><span class="s1"> (for spaces) as a query!</span><span class="dl">'</span><span class="p">;</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">([</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">,</span><span class="dl">'</span><span class="s1">_</span><span class="dl">'</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="mi">0</span><span class="p">])){</span>
-    <span class="c1">//probably a morse to word</span>
-    <span class="c1">//handle when underscores aren't space seperated</span>
-    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span><span class="dl">'</span><span class="s1"> _ </span><span class="dl">'</span><span class="p">);</span>
-    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/g</span><span class="p">,</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">([</span><span class="dl">'</span><span class="s1">.</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">-</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">_</span><span class="dl">'</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="c1">// probably a morse to word</span>
+    <span class="c1">// handle when underscores aren't space seperated</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/_/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> _ </span><span class="dl">'</span><span class="p">);</span>
+    <span class="nx">text</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/g</span><span class="p">,</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
     <span class="kd">const</span> <span class="nx">toWord</span> <span class="o">=</span> <span class="p">{</span>
       <span class="dl">'</span><span class="s1">.-</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">A</span><span class="dl">'</span><span class="p">,</span>
       <span class="dl">'</span><span class="s1">-...</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">B</span><span class="dl">'</span><span class="p">,</span>
@@ -2239,18 +2239,18 @@
       <span class="dl">'</span><span class="s1">---..</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">8</span><span class="dl">'</span><span class="p">,</span>
       <span class="dl">'</span><span class="s1">----.</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">9</span><span class="dl">'</span><span class="p">,</span>
       <span class="dl">'</span><span class="s1">-----</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">_</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">_</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">,</span>
       <span class="dl">'</span><span class="s1">⠀</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span>
-    <span class="p">}</span>
+    <span class="p">};</span>
     <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">toWord</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">toWord</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">toWord</span><span class="p">[</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
       <span class="p">}</span>
     <span class="p">}</span>
-    <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
+    <span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">text</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">//probably a word to morse</span>
+    <span class="c1">// probably a word to morse</span>
     <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span>
     <span class="kd">const</span> <span class="nx">toMorse</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">A</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.-</span><span class="dl">'</span><span class="p">,</span>
@@ -2279,27 +2279,27 @@
       <span class="na">X</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-..-</span><span class="dl">'</span><span class="p">,</span>
       <span class="na">Y</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-.--</span><span class="dl">'</span><span class="p">,</span>
       <span class="na">Z</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--..</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">1</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.----</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">2</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..---</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">3</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">...--</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">4</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">....-</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">5</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.....</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">6</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-....</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">7</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--...</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">8</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">---..</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">9</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">----.</span><span class="dl">'</span><span class="p">,</span>
-      <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-----</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">1</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.----</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">2</span><span class="p">:</span> <span class="dl">'</span><span class="s1">..---</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">3</span><span class="p">:</span> <span class="dl">'</span><span class="s1">...--</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">4</span><span class="p">:</span> <span class="dl">'</span><span class="s1">....-</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">5</span><span class="p">:</span> <span class="dl">'</span><span class="s1">.....</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">6</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-....</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">7</span><span class="p">:</span> <span class="dl">'</span><span class="s1">--...</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">8</span><span class="p">:</span> <span class="dl">'</span><span class="s1">---..</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">9</span><span class="p">:</span> <span class="dl">'</span><span class="s1">----.</span><span class="dl">'</span><span class="p">,</span>
+      <span class="mi">0</span><span class="p">:</span> <span class="dl">'</span><span class="s1">-----</span><span class="dl">'</span><span class="p">,</span>
       <span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">:</span> <span class="dl">'</span><span class="s1">⠀</span><span class="dl">'</span>
-    <span class="p">}</span>
+    <span class="p">};</span>
     <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-      <span class="k">if</span> <span class="p">(</span><span class="nx">toMorse</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">])){</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">text</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">toMorse</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]))</span> <span class="p">{</span>
         <span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">toMorse</span><span class="p">[</span><span class="nx">text</span><span class="p">[</span><span class="nx">i</span><span class="p">]];</span>
       <span class="p">}</span>
     <span class="p">}</span>
     <span class="nx">text</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">morse: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">text</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">470</span><span class="p">);</span>
+      <span class="nx">text</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">470</span><span class="p">);</span>
       <span class="nx">text</span> <span class="o">+=</span> <span class="dl">'</span><span class="s1">[exceeds char limit]</span><span class="dl">'</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
