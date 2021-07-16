@@ -57,7 +57,7 @@ if (text === '') {
         text[i] = toWord[text[i]];
       }
     }
-    text = '⠀' + text.join('');
+    text = 'text: ' + text.join('');
   } else {
     // probably a word to morse
     text = text.toUpperCase();
