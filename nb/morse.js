@@ -49,7 +49,7 @@ if (text === '') {
       '----.': '9',
       '-----': '0',
       _: ' ',
-      '⠀': ' '
+      '|': ' '
     };
     text = text.split(' ');
     for (let i = 0; i < text.length; i++) {
@@ -98,7 +98,7 @@ if (text === '') {
       8: '---..',
       9: '----.',
       0: '-----',
-      ' ': '⠀'
+      ' ': '|'
     };
     text = text.split('');
     for (let i = 0; i < text.length; i++) {
