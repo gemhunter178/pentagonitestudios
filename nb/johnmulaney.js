@@ -54,4 +54,6 @@ const jm = ['Ooooooh... I\'m sorryyyyyyyyyyyyy',
   'You spend most of your day telling a robot that you\'re not a robot. Think about that for 2 minutes and tell me that you don\'t want to walk into the ocean!',
   'Tell him we\'re here',
   'If I have a low IQ, I\'m going to be thrilled \'cause like... I beat the system.',
-  'I got a coat, look at me.'];
+  'I got a coat, look at me.',
+  'Then I got schooled because they introduced a bunch of new shit.',
+  'I say \'knock knock\' OUT LOUD'];
