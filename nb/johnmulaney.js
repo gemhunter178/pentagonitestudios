@@ -49,4 +49,9 @@ const jm = ['Ooooooh... I\'m sorryyyyyyyyyyyyy',
   'Like the back of a dolphin, my back',
   'God can\'t hear you',
   'You know, Leonard Bernstein… was one of the great composers and conductors of the 20th century, but sometimes he would be gay.',
-  'I\'ll keep all my emotions right here, and then one day, I\'ll die.'];
+  'I\'ll keep all my emotions right here, and then one day, I\'ll die.',
+  'You walrus-mustached son of a bitch',
+  'You spend most of your day telling a robot that you\'re not a robot. Think about that for 2 minutes and tell me that you don\'t want to walk into the ocean!',
+  'Tell him we\'re here',
+  'If I have a low IQ, I\'m going to be thrilled \'cause like... I beat the system.',
+  'I got a coat, look at me.'];
