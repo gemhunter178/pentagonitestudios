@@ -1,6 +1,6 @@
 ---
 description: |
-  Convert to and from morse code. Requires input string '_text_'. Morse code to word conversions must start with &#46;, &#44;, or &#95;. spaces in morse should be &#95; or &#124;.
+  Convert to and from morse code. Requires input string '_text_'. Morse code to word conversions must start with periods, dashes, or underscores. Spaces in morse should use &#95; or &#124;.
 variables:
   - text
 tag: functions
