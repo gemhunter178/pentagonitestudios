@@ -87,7 +87,7 @@ for (let i = 0; i < words.length; i++) {
       } else if (Math.random() < 0.5) {
         ltrs[j] += ltrs[j];
       } else {
-        if (adjChars.hasOwnProperty(ltrs[j]) {
+        if (adjChars.hasOwnProperty(ltrs[j])) {
           ltrs[j] = adjChars[ltrs[j]][Math.floor(Math.random() * 4)];
         }
       }
