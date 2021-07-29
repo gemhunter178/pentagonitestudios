@@ -1722,6 +1722,30 @@
         <li>
           <span class="expand-detailbox">+</span>
           <span>
+            <a href="/nb/testFor.js" target="_blank"><b>testFor.js</b></a>
+            <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/testFor.min.js" class="copybtn fa fa-clipboard"></i>:
+            <span class="command-description"><p>requires an input string “<em>text</em>” and array “<em>testFor</em>” that “<em>text</em>” will be tested against. Outputs “<em>trg</em>” that is true if triggered. Uses regex, case insensitive.</p>
+</span>
+          </span>
+          <div class="command-detailbox">
+            
+            
+            <p>variables: <code>trg</code>, <code>text</code>, <code>testFor</code>, <code>regTest</code></p>
+            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Tell ESLint that there will be a global mutable `testFor` variable and a global `text` variable */</span>
+<span class="cm">/* global testFor:true, text */</span>
+
+<span class="kd">let</span> <span class="nx">trg</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="cm">/* original regex solution from jfriend00 on stackoverflow */</span>
+<span class="kd">const</span> <span class="nx">regTest</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">testFor</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">|</span><span class="dl">'</span><span class="p">),</span> <span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">regTest</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">trg</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+          </div>
+        </li>
+      
+        <li>
+          <span class="expand-detailbox">+</span>
+          <span>
             <a href="/nb/typo_2.js" target="_blank"><b>typo_2.js</b></a>
             <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/typo_2.min.js" class="copybtn fa fa-clipboard"></i>:
             <span class="command-description"><p>same as the typo_1.js but with an improved function of also making typos with letters commonly mistyped on a QWERTY keyboard.</p>
@@ -1735,7 +1759,7 @@
 <span class="cm">/* global text:true */</span>
 
 <span class="cm">/* These ESLint errors should be handled, but for now I just want to get it to pass */</span>
-<span class="cm">/* eslint-disable prefer-const */</span>
+<span class="cm">/* eslint-disable prefer-const, no-prototype-builtins */</span>
 
 <span class="kd">let</span> <span class="nx">iptNum</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
 <span class="k">if</span> <span class="p">(</span><span class="nx">text</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -1764,7 +1788,7 @@
   <span class="nx">repeatNum</span> <span class="o">=</span> <span class="nx">iptNum</span> <span class="o">-</span> <span class="mi">6</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c1">//loosely based on https://datagenetics.com/blog/november42012/index.html</span>
+<span class="c1">// loosely based on https://datagenetics.com/blog/november42012/index.html</span>
 <span class="kd">const</span> <span class="nx">adjChars</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">a</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">s</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">s</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">w</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">x</span><span class="dl">'</span><span class="p">],</span>
   <span class="na">b</span><span class="p">:</span> <span class="p">[</span><span class="dl">'</span><span class="s1">f</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">g</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">n</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">h</span><span class="dl">'</span><span class="p">],</span>
@@ -1821,30 +1845,6 @@
   <span class="nx">words</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="nx">ltrs</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">''</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">text</span> <span class="o">=</span> <span class="nx">words</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span></code></pre></figure>
-          </div>
-        </li>
-      
-        <li>
-          <span class="expand-detailbox">+</span>
-          <span>
-            <a href="/nb/testFor.js" target="_blank"><b>testFor.js</b></a>
-            <i title="https://pentagonitestudios.com" data-target-url="https://pentagonitestudios.com/nb/testFor.min.js" class="copybtn fa fa-clipboard"></i>:
-            <span class="command-description"><p>requires an input string “<em>text</em>” and array “<em>testFor</em>” that “<em>text</em>” will be tested against. Outputs “<em>trg</em>” that is true if triggered. Uses regex, case insensitive.</p>
-</span>
-          </span>
-          <div class="command-detailbox">
-            
-            
-            <p>variables: <code>trg</code>, <code>text</code>, <code>testFor</code>, <code>regTest</code></p>
-            <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="cm">/* Tell ESLint that there will be a global mutable `testFor` variable and a global `text` variable */</span>
-<span class="cm">/* global testFor:true, text */</span>
-
-<span class="kd">let</span> <span class="nx">trg</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-<span class="cm">/* original regex solution from jfriend00 on stackoverflow */</span>
-<span class="kd">const</span> <span class="nx">regTest</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">RegExp</span><span class="p">(</span><span class="nx">testFor</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">|</span><span class="dl">'</span><span class="p">),</span> <span class="dl">'</span><span class="s1">i</span><span class="dl">'</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">regTest</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">text</span><span class="p">))</span> <span class="p">{</span>
-  <span class="nx">trg</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-<span class="p">}</span></code></pre></figure>
           </div>
         </li>
       
