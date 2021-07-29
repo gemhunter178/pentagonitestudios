@@ -6,7 +6,7 @@ variables:
   - testFor
   - regTest
 tag: functions
-order: 3
+order: 4
 ---
 
 /* Tell ESLint that there will be a global mutable `testFor` variable and a global `text` variable */

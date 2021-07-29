@@ -4,7 +4,7 @@ description: |
 variables:
   - text
 tag: functions
-order: 5
+order: 6
 ---
 /* global text:true */
 /* eslint-disable no-unused-expressions, no-prototype-builtins */
