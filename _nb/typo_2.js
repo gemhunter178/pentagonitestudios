@@ -6,14 +6,14 @@ variables:
   - iptNum
   - repeatNum
 tag: functions
-order: 3
+order: 4
 ---
 
 /* Tell ESLint that there will be the following global variables */
 /* global text:true */
 
 /* These ESLint errors should be handled, but for now I just want to get it to pass */
-/* eslint-disable prefer-const */
+/* eslint-disable prefer-const, no-prototype-builtins */
 
 let iptNum = 1;
 if (text.length === 0) {
@@ -42,7 +42,7 @@ if (iptNum > 10 || iptNum < 0) {
   repeatNum = iptNum - 6;
 }
 
-//loosely based on https://datagenetics.com/blog/november42012/index.html
+// loosely based on https://datagenetics.com/blog/november42012/index.html
 const adjChars = {
   a: ['s', 's', 'w', 'x'],
   b: ['f', 'g', 'n', 'h'],
