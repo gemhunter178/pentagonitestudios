@@ -1,5 +1,5 @@
 ---
-description: same as the typo_1.js but with an improved function of also making typos with letters commonly mistyped on a QWERTY keyboard.
+description: same as typo_1.js but with an improved function of also making typos with letters commonly mistyped on a QWERTY keyboard.
 variables:
   - text
   - words

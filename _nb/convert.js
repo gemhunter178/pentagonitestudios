@@ -75,7 +75,8 @@ const getUnitRegex = /^[\d.-]*/;
 
 if (isNaN(val) && (helpTrg === 0 || helpTrg === -2)) {
   val = 1;
-} else if (/^format_time$|^time$|^f_t$/.test(cvrtvals[0])) {
+}
+if (/^format_time$|^time$|^f_t$/.test(cvrtvals[0])) {
   helpTrg = -1;
 }
 
@@ -203,12 +204,12 @@ if (helpTrg !== 0) {
       },
       volume: {
         L: factor(1),
-		mL: factor(0.001),
+        mL: factor(0.001),
         'm^3': { suffix: ' cubic meters', ...factor(1000) },
         'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
         gal: { suffix: ' gallons', ...factor(3.785411784) },
         qt: { suffix: ' quarts', ...factor(0.946352946) },
-		pt: { suffix: ' pints', ...factor(0.473176473) },
+        pt: { suffix: ' pints', ...factor(0.473176473) },
         c: { suffix: ' cups', ...factor(0.2365882365) },
         floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
         tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
@@ -223,10 +224,10 @@ if (helpTrg !== 0) {
 
         liter: 'L',
         liters: 'L',
-		mil: 'mL',
-		ml: 'mL',
-		milliliter: 'mL',
-		milliliters: 'mL',
+        mil: 'mL',
+        ml: 'mL',
+        milliliter: 'mL',
+        milliliters: 'mL',
         cubicmeter: 'm^3',
         cubicmeters: 'm^3',
         cubicm: 'm^3',
@@ -238,8 +239,8 @@ if (helpTrg !== 0) {
         gallons: 'gal',
         quart: 'qt',
         quarts: 'qt',
-		pint: 'pt',
-		pints: 'pt',
+        pint: 'pt',
+        pints: 'pt',
         cup: 'c',
         cups: 'c',
         fluidounce: 'floz',
