@@ -3,6 +3,51 @@
 /* whitespace issues */
 /* eslint-disable no-tabs, indent, no-unused-expressions, no-prototype-builtins */
 
+// a 2 matrix row implementation of Levenshtein
+function Levenshtein (string1, string2) {
+  const len = string2.length;
+  let test1 = Array(len + 1).fill(null);
+  // initialize row 0
+  for (let i = 0; i <= len; i++) {
+    test1[i] = i;
+  }
+  for (let i = 0; i < string1.length; i++) {
+    const test2 = Array(len + 1).fill(null);
+    test2[0] = i + 1;
+    for (let j = 0; j < len; j++) {
+      const change = string1[i] === string2[j] ? 0 : 1;
+      test2[j + 1] = Math.min(test1[j + 1] + 1, test2[j] + 1, test1[j] + change);
+    }
+    test1 = test2;
+  }
+  return test1[len];
+}
+
+// returns an array of weighted minimum distances and their associated attribute
+// will do a case insensitive search (utilizing .toLowerCase())
+function closestObjectAttribute (inputString, inputObject) {
+  let maxMatch = [];
+  for (const attribute in inputObject) {
+    let lDist = Levenshtein(inputString.toLowerCase(), attribute.toLowerCase());
+    // weighting for longer attributes
+    if (attribute.length > inputString.length) {
+      lDist = lDist - Math.floor((attribute.length - inputString.length) * 0.75);
+    }
+    if (maxMatch.length === 0) {
+      maxMatch = [
+        [lDist, attribute]
+      ];
+    } else if (lDist < maxMatch[0][0]) {
+      maxMatch = [
+        [lDist, attribute]
+      ];
+    } else if (lDist === maxMatch[0][0]) {
+      maxMatch.push([lDist, attribute]);
+    }
+  }
+  return maxMatch;
+}
+
 let msg;
 let helpTrg = 0;
 if (/\bhelp\b/i.test(text) || text.length === 0) {
@@ -43,15 +88,6 @@ if (cvrtvals.length < 2 && helpTrg === 0) {
   cvrtvals[1] = cvrtvals[2];
 }
 
-/* acceptable unit declarations. Yes, I get I can use an array of arrays... maybe some other day. */
-const temperature = ['C', 'F', 'K'];
-const length = ['m', 'cm', 'mm', 'km', 'ft', 'in', 'mi', 'nau_mile', 'league', 'light-seconds', 'AWG', 'au', 'hand', 'furlong', 'smoot', 'gabo'];
-const volume = ['L', 'm^3', 'cm^3', 'gal', 'qt', 'pt', 'c', 'floz', 'tsp', 'Tbsp', 'stick_of_butter', 'bdft', 'gabo^3'];
-const massweight = ['kg', 'g', 'metric_ton', 'ton', 'lbs', 'oz', 'ct', 'stone', 'amu', 'Jupiter', 'solar_mass'];
-const area = ['m^2', 'cm^2', 'km^2', 'ft^2', 'in^2', 'acre', 'gabo^2'];
-const time = ['years', 'weeks', 'days', 'hours', 'minutes', 'seconds', 'sol', 'format_time'];
-const accptUnits = 'current unit types: temperature, length, area, volume, mass/weight, time';
-
 let val = parseFloat(cvrtvals[0]);
 const getUnitRegex = /^[\d.-]*/;
 
@@ -60,6 +96,257 @@ if (isNaN(val) && (helpTrg === 0 || helpTrg === -2)) {
 }
 if (/^format_time$|^time$|^f_t$/.test(cvrtvals[0])) {
   helpTrg = -1;
+}
+
+const gaboVal = 1.8288 * 73 / 72;
+const conversions = (function () {
+  const factor = i => ({
+      from: j => j * i,
+      to: j => j / i
+    });
+  return {
+    temperature: {
+      C: factor(1),
+      F: {
+        from: val => (val - 32) * 5 / 9,
+        to: val => val * 1.8 + 32
+      },
+      K: {
+        from: val => val - 273.15,
+        to: val => val + 273.15
+      },
+
+      Celsius: 'C',
+      celsius: 'C',
+      Fahrenheit: 'F',
+      fahrenheit: 'F',
+      Kelvin: 'K',
+      kelvin: 'K'
+    },
+    length: {
+      m: factor(1),
+      cm: factor(1 / 100),
+      mm: factor(1 / 1000),
+      km: factor(1000),
+      ft: factor(0.3048),
+      in: factor(0.0254),
+      mi: factor(1609.344),
+      nau_mile: { suffix: ' nautical miles', ...factor(1852) },
+      league: { suffix: ' nautical leagues', ...factor(5556) },
+      'light-seconds': { suffix: ' light-seconds', ...factor(299792458) },
+      AWG: {
+        suffix: ' American Wire Gauge',
+        from: val => 0.000127 * 92 ** ((36 - val) / 39),
+        to: val => -39 * Math.log(val / 0.000127) / Math.log(92) + 36
+      },
+      au: { suffix: ' astronomical units', ...factor(149597870700) },
+      hand: { suffix: ' hands (used for horses)', ...factor(0.1016) },
+      furlong: { suffix: ' furlongs', ...factor(201.168) },
+      gabo: { suffix: ' gabos', ...factor(gaboVal) },
+      smoot: { suffix: ' smoots', ...factor(1.7018) },
+
+      meter: 'm',
+      meters: 'm',
+      centimeter: 'cm',
+      centimeters: 'cm',
+      millimeter: 'mm',
+      millimeters: 'mm',
+      kilometer: 'km',
+      kilometers: 'km',
+      kilometre: 'km',
+      kilometres: 'km',
+      foot: 'ft',
+      feet: 'ft',
+      inch: 'in',
+      inches: 'in',
+      mile: 'mi',
+      miles: 'mi',
+      leagues: 'league',
+      gauge: 'AWG',
+      gaugewire: 'AWG',
+      astronomicalunits: 'au',
+      hands: 'hand',
+      gabos: 'gabo',
+      smoots: 'smoot'
+    },
+    volume: {
+      L: factor(1),
+      mL: factor(0.001),
+      'm^3': { suffix: ' cubic meters', ...factor(1000) },
+      'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
+      gal: { suffix: ' gallons', ...factor(3.785411784) },
+      qt: { suffix: ' quarts', ...factor(0.946352946) },
+      pt: { suffix: ' pints', ...factor(0.473176473) },
+      c: { suffix: ' cups', ...factor(0.2365882365) },
+      floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
+      tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
+      Tbsp: { suffix: ' Tablespoons', ...factor(0.01478676478125) },
+      stick_of_butter: { suffix: ' US sticks of butter', ...factor(0.11829411825) },
+      bdft: { suffix: ' board feet', ...factor(2.359737216) },
+      'gabo^3': {
+        suffix: ' cubic gabos',
+        from: val => val * (gaboVal ** 3) * 1000,
+        to: val => (val / 1000) / (gaboVal ** 3)
+      },
+
+      liter: 'L',
+      liters: 'L',
+      mil: 'mL',
+      ml: 'mL',
+      milliliter: 'mL',
+      milliliters: 'mL',
+      cubicmeter: 'm^3',
+      cubicmeters: 'm^3',
+      cubicm: 'm^3',
+      cc: 'cm^3',
+      cubiccentimeter: 'cm^3',
+      cubiccentimeters: 'cm^3',
+      cubiccm: 'cm^3',
+      gallon: 'gal',
+      gallons: 'gal',
+      quart: 'qt',
+      quarts: 'qt',
+      pint: 'pt',
+      pints: 'pt',
+      cup: 'c',
+      cups: 'c',
+      fluidounce: 'floz',
+      fluidounces: 'floz',
+      fl_oz: 'floz',
+      teaspoon: 'tsp',
+      teaspoons: 'tsp',
+      tablespoon: 'Tbsp',
+      tablespoons: 'Tbsp',
+      butter: 'stick_of_butter',
+      butterstick: 'stick_of_butter',
+      buttersticks: 'stick_of_butter',
+      boardfeet: 'bdft',
+      cubicgabo: 'gabo^3',
+      cubicgabos: 'gabo^3'
+    },
+    massweight: {
+      kg: factor(1),
+      g: factor(1 / 1000),
+      metric_ton: { suffix: ' metric tons', ...factor(1000) },
+      ton: {
+        from: val => val * 2000 / 2.20462262,
+        to: val => val / 2000 * 2.20462262
+      },
+      lbs: factor(1 / 2.20462262),
+      oz: { suffix: ' ounces', ...factor(1 / 35.27396195) },
+      ct: { suffix: ' carats', ...factor(0.0002) },
+      stone: { suffix: ' stone', ...factor(1 / 0.15747) },
+      amu: { suffix: ' atomic mass units', ...factor(1 / 6.02217364335e+26) },
+      Jupiter: { suffix: ' Jupiters', ...factor(1.898e+27) },
+      solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) },
+
+      kgs: 'kg',
+      kilogram: 'kg',
+      kilograms: 'kg',
+      gram: 'g',
+      grams: 'g',
+      tons: 'ton',
+      lb: 'lbs',
+      pound: 'lbs',
+      pounds: 'lbs',
+      ozs: 'oz',
+      ounce: 'oz',
+      ounces: 'oz',
+      carat: 'ct',
+      carats: 'ct',
+      Jupiters: 'Jupiter',
+      sun_mass: 'solar_mass'
+    },
+    area: {
+      'm^2': {
+        suffix: ' square meters',
+        ...factor(1)
+      },
+      'cm^2': { suffix: ' square centimeters', ...factor(0.0001) },
+      'km^2': { suffix: ' square kilometers', ...factor(1000000) },
+      'ft^2': { suffix: ' square feet', ...factor(0.09290304) },
+      'in^2': { suffix: ' square inches', ...factor(0.00064516) },
+      acre: { suffix: ' acres', ...factor(4046.8564224) },
+      'gabo^2': {
+        suffix: ' square gabos',
+        from: val => val * (gaboVal ** 2),
+        to: val => val / (gaboVal ** 2)
+      },
+
+      squaremeter: 'm^2',
+      squaremeters: 'm^2',
+      sqmeter: 'm^2',
+      squarem: 'm^2',
+      squarecentimeter: 'cm^2',
+      squarecentimeters: 'cm^2',
+      sqcm: 'cm^2',
+      squarecm: 'cm^2',
+      squarefoot: 'ft^2',
+      squarefeet: 'ft^2',
+      sqft: 'ft^2',
+      squareft: 'ft^2',
+      squareinch: 'in^2',
+      squareinches: 'in^2',
+      sqin: 'in^2',
+      squarein: 'in^2',
+      acres: 'acre',
+      squaregabo: 'gabo^2',
+      squaregabos: 'gabo^2',
+      sqgabo: 'gabo^2'
+    },
+    time: {
+      years: { suffix: ' non-leap years', ...factor(31536000) },
+      weeks: { suffix: ' weeks', ...factor(604800) },
+      days: { suffix: ' days', ...factor(86400) },
+      hours: { suffix: ' hours', ...factor(3600) },
+      minutes: { suffix: ' minutes', ...factor(60) },
+      seconds: { suffix: ' seconds', ...factor(1) },
+      sol: { suffix: ' sols (martian days)', ...factor(88775.24409) },
+      format_time: {
+        suffix: '',
+        to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + (val % 60) + 's'
+      },
+
+      y: 'years',
+      yr: 'years',
+      yrs: 'years',
+      year: 'years',
+      w: 'weeks',
+      wk: 'weeks',
+      wks: 'weeks',
+      week: 'weeks',
+      d: 'days',
+      dy: 'days',
+      day: 'days',
+      h: 'hours',
+      hr: 'hours',
+      hrs: 'hours',
+      hour: 'hours',
+      m: 'minutes',
+      min: 'minutes',
+      mins: 'minutes',
+      minute: 'minutes',
+      s: 'seconds',
+      sec: 'seconds',
+      secs: 'seconds',
+      second: 'seconds',
+      sols: 'sol',
+      time: 'format_time',
+      f_t: 'format_time'
+    }
+  };
+})();
+
+// returns all available units for a certain category
+function dispOptions (measureType) {
+  let msgAdd = '';
+  for (const attribute in measureType) {
+    if (typeof measureType[attribute] !== 'string') {
+      msgAdd += (attribute + ', ');
+    }
+  }
+  msgAdd = msgAdd.substr(0, msgAdd.length - 2);
+  return msgAdd;
 }
 
 if (helpTrg !== 0) {
@@ -73,7 +360,7 @@ if (helpTrg !== 0) {
     }
 
     case -1:
-      msg = '"format_time" cannot be used as input here abbybaPensive ';
+      msg = '\'format_time\' cannot be used as input here abbybaPensive ';
       break;
 
     case 2:
@@ -81,339 +368,78 @@ if (helpTrg !== 0) {
       break;
 
     case 3:
-      msg = 'current accepted units for temperature: ' + temperature.join(', ');
+      msg = 'current accepted units for temperature: ' + dispOptions(conversions.temperature);
       break;
 
     case 4:
-      msg = 'current accepted units for length: ' + length.join(', ');
+      msg = 'current accepted units for length: ' + dispOptions(conversions.length);
       break;
 
     case 5:
-      msg = 'current accepted units for volume: ' + volume.join(', ');
+      msg = 'current accepted units for volume: ' + dispOptions(conversions.volume);
       break;
 
     case 6:
-      msg = 'current accepted units for mass/earth-relative weight: ' + massweight.join(', ');
+      msg = 'current accepted units for mass/earth-relative weight: ' + dispOptions(conversions.massweight);
       break;
 
     case 7:
-      msg = 'current accepted units for area: ' + area.join(', ');
+      msg = 'current accepted units for area: ' + dispOptions(conversions.area);
       break;
 
     case 8:
-      msg = 'current accepted units for time: ' + time.join(', ') + ' *format_time can only be used as output';
+      msg = 'current accepted units for time: ' + dispOptions(conversions.time) + ' *format_time can only be used as output';
       break;
 
     default:
-      msg = '!convert by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]". ' + accptUnits;
+      msg = 'convert function by Gem. Input format: "[number] [inputUnit] [outputUnit]" or "help [unittype]" -> ' + dispOptions(conversions);
       break;
   }
 } else {
   let unit1 = cvrtvals[0].replace(getUnitRegex, '');
   let unit2 = cvrtvals[1].replace(getUnitRegex, '');
-  let calc = true;
+  let calc = false;
   const origVal = val;
-  const gaboVal = 1.8288 * 73 / 72;
-  const conversions = (function () {
-    const factor = i => ({
-        from: j => j * i,
-        to: j => j / i
-      });
-    return {
-      temperature: {
-        C: factor(1),
-        F: {
-          from: val => (val - 32) * 5 / 9,
-          to: val => val * 1.8 + 32
-        },
-        K: {
-          from: val => val - 273.15,
-          to: val => val + 273.15
-        },
-
-        Celsius: 'C',
-        celsius: 'C',
-        Fahrenheit: 'F',
-        fahrenheit: 'F',
-        Kelvin: 'K',
-        kelvin: 'K'
-      },
-      length: {
-        m: factor(1),
-        cm: factor(1 / 100),
-        mm: factor(1 / 1000),
-        km: factor(1000),
-        ft: factor(0.3048),
-        in: factor(0.0254),
-        mi: factor(1609.344),
-        nau_mile: { suffix: ' nautical miles', ...factor(1852) },
-        league: { suffix: ' nautical leagues', ...factor(5556) },
-        'light-seconds': { suffix: ' light-seconds', ...factor(299792458) },
-        AWG: {
-          suffix: ' American Wire Gauge',
-          from: val => 0.000127 * 92 ** ((36 - val) / 39),
-          to: val => -39 * Math.log(val / 0.000127) / Math.log(92) + 36
-        },
-        au: { suffix: ' astronomical units', ...factor(149597870700) },
-        hand: { suffix: ' hands (used for horses)', ...factor(0.1016) },
-        furlong: { suffix: ' furlongs', ...factor(201.168) },
-        gabo: { suffix: ' gabos', ...factor(gaboVal) },
-        smoot: { suffix: ' smoots', ...factor(1.7018) },
-
-        meter: 'm',
-        meters: 'm',
-        centimeter: 'cm',
-        centimeters: 'cm',
-        millimeter: 'mm',
-        millimeters: 'mm',
-        kilometer: 'km',
-        kilometers: 'km',
-        kilometre: 'km',
-        kilometres: 'km',
-        foot: 'ft',
-        feet: 'ft',
-        inch: 'in',
-        inches: 'in',
-        mile: 'mi',
-        miles: 'mi',
-        leagues: 'league',
-        gauge: 'AWG',
-        gaugewire: 'AWG',
-        astronomicalunits: 'au',
-        hands: 'hand',
-        gabos: 'gabo',
-        smoots: 'smoot'
-      },
-      volume: {
-        L: factor(1),
-        mL: factor(0.001),
-        'm^3': { suffix: ' cubic meters', ...factor(1000) },
-        'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
-        gal: { suffix: ' gallons', ...factor(3.785411784) },
-        qt: { suffix: ' quarts', ...factor(0.946352946) },
-        pt: { suffix: ' pints', ...factor(0.473176473) },
-        c: { suffix: ' cups', ...factor(0.2365882365) },
-        floz: { suffix: ' fluid ounces', ...factor(0.0295735295625) },
-        tsp: { suffix: ' teaspoons', ...factor(0.00492892159375) },
-        Tbsp: { suffix: ' Tablespoons', ...factor(0.01478676478125) },
-        stick_of_butter: { suffix: ' US sticks of butter', ...factor(0.11829411825) },
-        bdft: { suffix: ' board feet', ...factor(2.359737216) },
-        'gabo^3': {
-          suffix: ' cubic gabos',
-          from: val => val * (gaboVal ** 3) * 1000,
-          to: val => (val / 1000) / (gaboVal ** 3)
-        },
-
-        liter: 'L',
-        liters: 'L',
-        mil: 'mL',
-        ml: 'mL',
-        milliliter: 'mL',
-        milliliters: 'mL',
-        cubicmeter: 'm^3',
-        cubicmeters: 'm^3',
-        cubicm: 'm^3',
-        cc: 'cm^3',
-        cubiccentimeter: 'cm^3',
-        cubiccentimeters: 'cm^3',
-        cubiccm: 'cm^3',
-        gallon: 'gal',
-        gallons: 'gal',
-        quart: 'qt',
-        quarts: 'qt',
-        pint: 'pt',
-        pints: 'pt',
-        cup: 'c',
-        cups: 'c',
-        fluidounce: 'floz',
-        fluidounces: 'floz',
-        fl_oz: 'floz',
-        teaspoon: 'tsp',
-        teaspoons: 'tsp',
-        tablespoon: 'Tbsp',
-        tablespoons: 'Tbsp',
-        butter: 'stick_of_butter',
-        butterstick: 'stick_of_butter',
-        buttersticks: 'stick_of_butter',
-        boardfeet: 'bdft',
-        cubicgabo: 'gabo^3',
-        cubicgabos: 'gabo^3'
-      },
-      massweight: {
-        kg: factor(1),
-        g: factor(1 / 1000),
-        metric_ton: { suffix: ' metric tons', ...factor(1000) },
-        ton: {
-          from: val => val * 2000 / 2.20462262,
-          to: val => val / 2000 * 2.20462262
-        },
-        lbs: factor(1 / 2.20462262),
-        oz: { suffix: ' ounces', ...factor(1 / 35.27396195) },
-        ct: { suffix: ' carats', ...factor(0.0002) },
-        stone: { suffix: ' stone', ...factor(1 / 0.15747) },
-        amu: { suffix: ' atomic mass units', ...factor(1 / 6.02217364335e+26) },
-        Jupiter: { suffix: ' Jupiters', ...factor(1.898e+27) },
-        solar_mass: { suffix: ' solar masses', ...factor(1.989e+30) },
-
-        kgs: 'kg',
-        kilogram: 'kg',
-        kilograms: 'kg',
-        gram: 'g',
-        grams: 'g',
-        tons: 'ton',
-        lb: 'lbs',
-        pound: 'lbs',
-        pounds: 'lbs',
-        ozs: 'oz',
-        ounce: 'oz',
-        ounces: 'oz',
-        carat: 'ct',
-        carats: 'ct',
-        Jupiters: 'Jupiter',
-        sun_mass: 'solar_mass'
-      },
-      area: {
-        'm^2': {
-          suffix: ' square meters',
-          ...factor(1)
-        },
-        'cm^2': { suffix: ' square centimeters', ...factor(0.0001) },
-        'km^2': { suffix: ' square kilometers', ...factor(1000000) },
-        'ft^2': { suffix: ' square feet', ...factor(0.09290304) },
-        'in^2': { suffix: ' square inches', ...factor(0.00064516) },
-        acre: { suffix: ' acres', ...factor(4046.8564224) },
-        'gabo^2': {
-          suffix: ' square gabos',
-          from: val => val * (gaboVal ** 2),
-          to: val => val / (gaboVal ** 2)
-        },
-
-        squaremeter: 'm^2',
-        squaremeters: 'm^2',
-        sqmeter: 'm^2',
-        squarem: 'm^2',
-        squarecentimeter: 'cm^2',
-        squarecentimeters: 'cm^2',
-        sqcm: 'cm^2',
-        squarecm: 'cm^2',
-        squarefoot: 'ft^2',
-        squarefeet: 'ft^2',
-        sqft: 'ft^2',
-        squareft: 'ft^2',
-        squareinch: 'in^2',
-        squareinches: 'in^2',
-        sqin: 'in^2',
-        squarein: 'in^2',
-        acres: 'acre',
-        squaregabo: 'gabo^2',
-        squaregabos: 'gabo^2',
-        sqgabo: 'gabo^2'
-      },
-      time: {
-        years: { suffix: ' non-leap years', ...factor(31536000) },
-        weeks: { suffix: ' weeks', ...factor(604800) },
-        days: { suffix: ' days', ...factor(86400) },
-        hours: { suffix: ' hours', ...factor(3600) },
-        minutes: { suffix: ' minutes', ...factor(60) },
-        seconds: { suffix: ' seconds', ...factor(1) },
-        sol: { suffix: ' sols (martian days)', ...factor(88775.24409) },
-        format_time: {
-          suffix: '',
-          to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + (val % 60) + 's'
-        },
-
-        y: 'years',
-        yr: 'years',
-        yrs: 'years',
-        year: 'years',
-        w: 'weeks',
-        wk: 'weeks',
-        wks: 'weeks',
-        week: 'weeks',
-        d: 'days',
-        dy: 'days',
-        day: 'days',
-        h: 'hours',
-        hr: 'hours',
-        hrs: 'hours',
-        hour: 'hours',
-        m: 'minutes',
-        min: 'minutes',
-        mins: 'minutes',
-        minute: 'minutes',
-        s: 'seconds',
-        sec: 'seconds',
-        secs: 'seconds',
-        second: 'seconds',
-        sols: 'sol',
-        time: 'format_time',
-        f_t: 'format_time'
+  for (const attribute in conversions) {
+    if (conversions[attribute].hasOwnProperty(unit1) && conversions[attribute].hasOwnProperty(unit2)) {
+      if (typeof (conversions[attribute][unit1]) === 'string') { unit1 = conversions[attribute][unit1]; }
+      if (typeof (conversions[attribute][unit2]) === 'string') { unit2 = conversions[attribute][unit2]; }
+      val = conversions[attribute][unit1].from(val);
+      if (conversions[attribute][unit1].suffix !== undefined) {
+        unit1 = conversions[attribute][unit1].suffix;
       }
-    };
-  })();
-  if (conversions.temperature.hasOwnProperty(unit1) && conversions.temperature.hasOwnProperty(unit2)) {
-    if (typeof (conversions.temperature[unit1]) === 'string') { unit1 = conversions.temperature[unit1]; }
-    if (typeof (conversions.temperature[unit2]) === 'string') { unit2 = conversions.temperature[unit2]; }
-    val = conversions.temperature[unit1].from(val);
-    val = conversions.temperature[unit2].to(val);
-  } else if (conversions.length.hasOwnProperty(unit1) && conversions.length.hasOwnProperty(unit2)) {
-    if (typeof (conversions.length[unit1]) === 'string') { unit1 = conversions.length[unit1]; }
-    if (typeof (conversions.length[unit2]) === 'string') { unit2 = conversions.length[unit2]; }
-    val = conversions.length[unit1].from(val);
-    if (conversions.length[unit1].suffix !== undefined) {
-      unit1 = conversions.length[unit1].suffix;
+      val = conversions[attribute][unit2].to(val);
+      if (conversions[attribute][unit2].suffix !== undefined) {
+        unit2 = conversions[attribute][unit2].suffix;
+      }
+      calc = true;
+      break;
     }
-    val = conversions.length[unit2].to(val);
-    if (conversions.length[unit2].suffix !== undefined) {
-      unit2 = conversions.length[unit2].suffix;
+  }
+
+  if (!calc) {
+    // assuming the second unit is the issue
+    for (const attribute in conversions) {
+      if (conversions[attribute].hasOwnProperty(unit1)) {
+        unit2 = closestObjectAttribute(unit2, conversions[attribute])[0][1];
+        if (typeof (conversions[attribute][unit1]) === 'string') { unit1 = conversions[attribute][unit1]; }
+        if (typeof (conversions[attribute][unit2]) === 'string') { unit2 = conversions[attribute][unit2]; }
+        val = conversions[attribute][unit1].from(val);
+        if (conversions[attribute][unit1].suffix !== undefined) {
+          unit1 = conversions[attribute][unit1].suffix;
+        }
+        val = conversions[attribute][unit2].to(val);
+        if (conversions[attribute][unit2].suffix !== undefined) {
+          unit2 = conversions[attribute][unit2].suffix;
+        }
+        calc = true;
+        break;
+      }
     }
-  } else if (conversions.volume.hasOwnProperty(unit1) && conversions.volume.hasOwnProperty(unit2)) {
-    if (typeof (conversions.volume[unit1]) === 'string') { unit1 = conversions.volume[unit1]; }
-    if (typeof (conversions.volume[unit2]) === 'string') { unit2 = conversions.volume[unit2]; }
-    val = conversions.volume[unit1].from(val);
-    if (conversions.volume[unit1].suffix !== undefined) {
-      unit1 = conversions.volume[unit1].suffix;
-    }
-    val = conversions.volume[unit2].to(val);
-    if (conversions.volume[unit2].suffix !== undefined) {
-      unit2 = conversions.volume[unit2].suffix;
-    }
-  } else if (conversions.massweight.hasOwnProperty(unit1) && conversions.massweight.hasOwnProperty(unit2)) {
-    if (typeof (conversions.massweight[unit1]) === 'string') { unit1 = conversions.massweight[unit1]; }
-    if (typeof (conversions.massweight[unit2]) === 'string') { unit2 = conversions.massweight[unit2]; }
-    val = conversions.massweight[unit1].from(val);
-    if (conversions.massweight[unit1].suffix !== undefined) {
-      unit1 = conversions.massweight[unit1].suffix;
-    }
-    val = conversions.massweight[unit2].to(val);
-    if (conversions.massweight[unit2].suffix !== undefined) {
-      unit2 = conversions.massweight[unit2].suffix;
-    }
-  } else if (conversions.area.hasOwnProperty(unit1) && conversions.area.hasOwnProperty(unit2)) {
-    if (typeof (conversions.area[unit1]) === 'string') { unit1 = conversions.area[unit1]; }
-    if (typeof (conversions.area[unit2]) === 'string') { unit2 = conversions.area[unit2]; }
-    val = conversions.area[unit1].from(val);
-    if (conversions.area[unit1].suffix !== undefined) {
-      unit1 = conversions.area[unit1].suffix;
-    }
-    val = conversions.area[unit2].to(val);
-    if (conversions.area[unit2].suffix !== undefined) {
-      unit2 = conversions.area[unit2].suffix;
-    }
-  } else if (conversions.time.hasOwnProperty(unit1) && conversions.time.hasOwnProperty(unit2)) {
-    if (typeof (conversions.time[unit1]) === 'string') { unit1 = conversions.time[unit1]; }
-    if (typeof (conversions.time[unit2]) === 'string') { unit2 = conversions.time[unit2]; }
-    val = conversions.time[unit1].from(val);
-    if (conversions.time[unit1].suffix !== undefined) {
-      unit1 = conversions.time[unit1].suffix;
-    }
-    val = conversions.time[unit2].to(val);
-    if (conversions.time[unit2].suffix !== undefined) {
-      unit2 = conversions.time[unit2].suffix;
-    }
-  } else {
-    calc = false;
-    msg = 'Error in matching units! do check \'!convert help\' or maybe your capitalizations?';
+  }
+
+  if (!calc) {
+    msg = 'Unknown unit \'' + unit1 + '\' ...did you check your capitalizations?';
   }
 
   if (calc) {
@@ -423,5 +449,4 @@ if (helpTrg !== 0) {
     msg = origVal + unit1 + ' = ' + val + unit2;
   }
 }
-
 msg;
