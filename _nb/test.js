@@ -1,5 +1,5 @@
 ---
-description: this is just a single json with a const array "texttest"
+description: this is just a js file with a const array "texttest"
 variables:
   - testtext
 tag: for testing only
