@@ -265,7 +265,6 @@ const conversions = (function () {
       grams: 'g',
       tons: 'ton',
       tonne: 'metric_ton',
-      tons: 'ton',
       lb: 'lbs',
       pound: 'lbs',
       pounds: 'lbs',
