@@ -1,0 +1,42 @@
+---
+layout: template
+title: Accepted Units for Convert - Gem's other website!
+---
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+  <div class="w3-center">
+  <h1 class="w3-xxxlarge w3-animate-bottom" style="padding-bottom: 5vh">Accepted Units: Convert</h1>
+  </div>
+</header>
+
+<div class="w3-container w3-padding" >
+  <p align="center">Additional notes: Space between 'inputUnit' and 'outputUnit' is always required, but most variations are accounted for. In the case of a mismatch, the code will attempt to "fix" the second unit given by using a weighted Levenshtein distance function</p>
+  <ul class="w3-ul w3-border w3-hoverable" id="conversions">
+  </ul>
+</div>
+
+<script src="conversions.js"></script>
+<script>
+  const listObj = document.getElementById('conversions');
+  for (const convertType in conversions){
+    const addConvertType = document.createElement('li');
+    addConvertType.classList.add('w3-theme');
+    addConvertType.setAttribute('id',convertType);
+    if(convertType === 'massweight') {
+        addConvertType.innerHTML = 'Mass/Weight';
+    } else {
+        addConvertType.innerHTML = convertType[0].toUpperCase() + convertType.slice(1);
+    }
+    listObj.appendChild(addConvertType);
+    for(const unit in conversions[convertType]) {
+      if(typeof(conversions[convertType][unit]) !== 'string'){
+        const addUnit = document.createElement('li');
+        addUnit.setAttribute('id', unit);
+        addUnit.innerHTML = unit;
+        listObj.appendChild(addUnit);
+      }
+    }
+  }
+</script>

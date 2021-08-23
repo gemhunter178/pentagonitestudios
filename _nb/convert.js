@@ -1,6 +1,6 @@
 ---
 description: |
-  Convert units to other units. Requires an input string '_text_' in the form '[number] [inputUnit] [outputUnit]' or some other accounted for input variations. Space between 'inputUnit' and 'outputUnit' is always required.
+  Convert units to other units. Requires an input string '_text_' in the form '[number] [inputUnit] [outputUnit]'. See **[the Reference Sheet](nightbot/convert.html)** for more details.
 variables:
   - text
   - msg

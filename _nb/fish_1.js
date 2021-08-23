@@ -1,6 +1,6 @@
 ---
 description: |
-  2021, Feb 08 update: fish are now generated based on a normal distribution. Use **[this](fishcommand.txt)** as the contents of the nightbot command
+  2021, Feb 08 update: fish are now generated based on a normal distribution. Use **[this](nightbot/fishcommand.txt)** as the contents of the nightbot command
 variables:
   - gaus
   - fsh
