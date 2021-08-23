@@ -91,18 +91,46 @@
   </div>
 </header>
 
+<style>
+  .listHover {
+    color:#fff !important; 
+    background-color:#009688 !important;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    cursor: pointer;
+  }
+  .listActive, .listHover:hover {
+    color: #eee !important;
+    background-color: #004a43 !important;
+  }
+  .listCollapsible:after {
+    content: '\002B';
+    float: right;
+    margin-left: 5px;
+  }
+  .listActive:after {
+    content: "\2212";
+  }
+  .collapsible {
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.25s ease-out;
+  }
+</style>
+
 <div class="w3-container w3-padding" >
-  <p align="center">Additional notes: Space between 'inputUnit' and 'outputUnit' is always required, but most variations are accounted for. In the case of a mismatch, the code will attempt to "fix" the second unit given by using a weighted Levenshtein distance function</p>
+  <p align="center" style="margin: 1em 3em">Additional notes: Space between 'inputUnit' and 'outputUnit' is always required, but most variations are accounted for. In the case of a mismatch, the code will attempt to "fix" the second unit given by using a weighted Levenshtein distance function</p>
   <ul class="w3-ul w3-border w3-hoverable" id="conversions">
   </ul>
 </div>
 
 <script src="conversions.js"></script>
 <script>
+  // this script handles making the list
   const listObj = document.getElementById('conversions');
-  for (const convertType in conversions){
+  for (const convertType in conversions) {
     const addConvertType = document.createElement('li');
-    addConvertType.classList.add('w3-theme');
+    addConvertType.classList.add('listHover');
+    addConvertType.classList.add('listCollapsible');
     addConvertType.setAttribute('id',convertType);
     if(convertType === 'massweight') {
         addConvertType.innerHTML = 'Mass/Weight';
@@ -110,14 +138,67 @@
         addConvertType.innerHTML = convertType[0].toUpperCase() + convertType.slice(1);
     }
     listObj.appendChild(addConvertType);
-    for(const unit in conversions[convertType]) {
-      if(typeof(conversions[convertType][unit]) !== 'string'){
+    for (const unit in conversions[convertType]) {
+      if (typeof(conversions[convertType][unit]) !== 'string') {
         const addUnit = document.createElement('li');
+        let unitMsg = '<b>' + unit + '</b>';
+        if (conversions[convertType][unit].suffix) {
+          const unitSuffix = conversions[convertType][unit].suffix.slice(1);
+          if (unitSuffix !== unit) {
+            unitMsg += ' [' + unitSuffix + ']';
+          }
+        }
+        let addMsg = '';
+        // addMsg += ' &#8594 '; now using a float right to separate
+        if (conversions[convertType][unit].to(1) === 1) {
+          addMsg += '<i>***base unit***</i>';
+        } else {
+          let convertFunc = conversions[convertType][unit].to.toString();
+          if (convertFunc === 'j => j / i') {
+            let factorVal = conversions[convertType][unit].to(1);
+            if (factorVal > 1) {
+              convertFunc = 'base unit * ' + factorVal;
+            } else {
+              convertFunc = 'base unit / ' + 1/factorVal;
+            }
+          } else {
+            convertFunc = convertFunc.slice(7);
+            convertFunc = convertFunc.replace(/val/g, 'base unit');
+            convertFunc = convertFunc.replace(/\*\*/g, '^');
+            convertFunc = convertFunc.replace(/Math./g, '');
+          }
+          addMsg += convertFunc;
+        }
+        addUnit.classList.add('collapsible');
         addUnit.setAttribute('id', unit);
-        addUnit.innerHTML = unit;
+        addUnit.setAttribute('style', 'padding: 0 18px; border-bottom: 0;' );
+        addUnit.innerHTML = unitMsg + '<div style = "float: right">' + addMsg + '</div>';
         listObj.appendChild(addUnit);
       }
     }
+  }
+</script>
+
+<script>
+  // collapsibles, following example on https://www.w3schools.com/howto/howto_js_collapsible.asp
+  var collapseList = document.getElementsByClassName('listCollapsible');
+  for (let i = 0; i < collapseList.length; i++) {
+    collapseList[i].addEventListener('click', function () {
+      this.classList.toggle('listActive');
+      let content = this.nextElementSibling;
+      while (content && !content.classList.contains('listHover')) {
+        if (content.style.maxHeight) {
+          content.style.maxHeight = null;
+          content.style.padding = '0 18px';
+          content.style.borderBottom = '0';
+        } else {
+          content.style.maxHeight = content.scrollHeight * 2 + "px";
+          content.style.padding = '8px 18px';
+          content.style.borderBottom = '1px solid #ddd';
+        }
+        content = content.nextElementSibling;
+      }
+    });
   }
 </script>
 
