@@ -11,33 +11,9 @@ title: Accepted Units for Convert - Gem's other website!
   </div>
 </header>
 
-<style>
-  .listHover {
-    color:#fff !important; 
-    background-color:#009688 !important;
-    transition: background-color 0.25s ease-out, color 0.25s ease-out;
-    cursor: pointer;
-  }
-  .listActive, .listHover:hover {
-    color: #eee !important;
-    background-color: #004a43 !important;
-  }
-  .listCollapsible:after {
-    content: '\002B';
-    float: right;
-    margin-left: 5px;
-  }
-  .listActive:after {
-    content: "\2212";
-  }
-  .collapsible {
-    overflow: hidden;
-    max-height: 0;
-    transition: all 0.25s ease-out;
-  }
-</style>
+<link rel="stylesheet" href="/List_extend.css" type="text/css">
 
-<div class="w3-container w3-padding" >
+<div class="w3-container w3-padding" style="margin-bottom: 5px">
   <p align="center" style="margin: 1em 3em">Additional notes: Space between 'inputUnit' and 'outputUnit' is always required, but most other variations are accounted for. In the case of a mismatch, the code will attempt to "fix" the second unit given by using a weighted Levenshtein distance function</p>
   <ul class="w3-ul w3-border w3-hoverable" id="conversions">
   </ul>
@@ -99,25 +75,4 @@ title: Accepted Units for Convert - Gem's other website!
   }
 </script>
 
-<script>
-  // collapsibles, following example on https://www.w3schools.com/howto/howto_js_collapsible.asp
-  var collapseList = document.getElementsByClassName('listCollapsible');
-  for (let i = 0; i < collapseList.length; i++) {
-    collapseList[i].addEventListener('click', function () {
-      this.classList.toggle('listActive');
-      let content = this.nextElementSibling;
-      while (content && !content.classList.contains('listHover')) {
-        if (content.style.maxHeight) {
-          content.style.maxHeight = null;
-          content.style.padding = '0 18px';
-          content.style.borderBottom = '0';
-        } else {
-          content.style.maxHeight = content.scrollHeight * 2 + "px";
-          content.style.padding = '8px 18px';
-          content.style.borderBottom = '1px solid #ddd';
-        }
-        content = content.nextElementSibling;
-      }
-    });
-  }
-</script>
+<script src="/List_entend_collapsible.js"></script>

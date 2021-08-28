@@ -1,0 +1,25 @@
+/* made for refernce lists such as nightbot/convert.html */
+
+.listHover {
+  color:#fff !important; 
+  background-color:#009688 !important;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  cursor: pointer;
+}
+.listActive, .listHover:hover {
+  color: #eee !important;
+  background-color: #004a43 !important;
+}
+.listCollapsible:after {
+  content: '\002B';
+  float: right;
+  margin-left: 5px;
+}
+.listActive:after {
+  content: "\2212";
+}
+.collapsible {
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.25s ease-out;
+}

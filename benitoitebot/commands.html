@@ -1,0 +1,76 @@
+---
+layout: template
+title: Command Reference - Benitoite Bot
+---
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+  <div class="w3-center">
+  <h1 class="w3-xxxlarge w3-animate-bottom" style="padding-bottom: 5vh">BenitoiteBot Reference - Commands</h1>
+  </div>
+</header>
+
+<link rel="stylesheet" href="/List_extend.css" type="text/css">
+
+<div class="w3-container w3-padding" style="margin-bottom: 5px">
+  <p align="center" style="margin: 1em 3em">List of all current default commands in benitoitebot. Last Updated: Aug. 28, 2021</p>
+  <ul class="w3-ul w3-border w3-hoverable" id="commands">
+  </ul>
+</div>
+
+
+<script src="120210828commands_temp.js"></script>
+<script type="module">
+  //import { prefix, defCommands } from "https://cdn.jsdelivr.net/gh/gemhunter178/BenitoiteBot/src/_defCommands.js";
+</script>
+<script>
+  const listObj = document.getElementById('commands');
+  for (let i  = 0; i < defCommands.length; i++) {
+    const addCommandToList = document.createElement('li');
+    addCommandToList.classList.add('listHover');
+    addCommandToList.classList.add('listCollapsible');
+    addCommandToList.setAttribute('id', defCommands[i].name);
+    addCommandToList.innerHTML = prefix + defCommands[i].name;
+    listObj.appendChild(addCommandToList);
+    
+    const addDesc =  document.createElement('li');
+    let innerHTMLMsg = '';
+    switch(defCommands[i].mod) {
+      case -1:
+        innerHTMLMsg = '[BOT OWNER ONLY]<br>';
+        break;
+
+      case 0:
+        innerHTMLMsg = '[EVERYONE]<br>';
+        break;
+
+      case 1:
+        innerHTMLMsg = '[MOD ONLY]\<br>';
+        break;
+
+      case 2:
+        innerHTMLMsg = '[BROADCASTER ONLY]<br>';
+        break;
+
+      default:
+        innerHTMLMsg = '[UNKNOWN]<br>'
+        break;
+    }
+    if(defCommands[i].cd){
+      innerHTMLMsg += 'Default cooldown (in seconds): ' + defCommands[i].cd/1000 + '<br>';
+    }
+    addDesc.classList.add('collapsible');
+    addDesc.setAttribute('id', defCommands[i].name + 'desc');
+    addDesc.setAttribute('style', 'padding: 0 18px; border-bottom: 0;' );
+    if(defCommands[i].name === 'convert'){
+      innerHTMLMsg += 'a convert function that attempts to convert one unit to another. input format: [number] [inputUnit] [outputUnit]';
+    } else {
+      innerHTMLMsg += defCommands[i].desc;
+    }
+    innerHTMLMsg = innerHTMLMsg.replace(/\->/g,' &#8594 ')
+    addDesc.innerHTML = innerHTMLMsg;
+    listObj.appendChild(addDesc);
+  }
+</script>
+<script src="/List_entend_collapsible.js"></script>

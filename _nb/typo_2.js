@@ -6,7 +6,7 @@ variables:
   - iptNum
   - repeatNum
 tag: functions
-order: 4
+order: 3
 ---
 
 /* Tell ESLint that there will be the following global variables */
