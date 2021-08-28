@@ -3,7 +3,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Gem's other website!</title>
+    <title>Command Reference - Benitoite Bot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/Pictures/Logo_favicon.png">
     <link rel="stylesheet" href="/original_template_files/w3.css">
@@ -88,69 +88,73 @@
 <header class="w3-container w3-theme w3-padding" id="myHeader">
   <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
   <div class="w3-center">
-  <h1 class="w3-xxxlarge w3-animate-bottom">Welcome to Gem's Secondary Site!</h1>
-    <div style="padding-bottom: 5vh">
-      <a href="https://gemhunter178.com/" target="_blank"><button class="w3-btn w3-large w3-theme-dark w3-hover-teal" style="font-weight:900;"><i class="fa fa-external-link"></i> main site? [WIP]</button></a>
-    </div>
+  <h1 class="w3-xxxlarge w3-animate-bottom" style="padding-bottom: 5vh">BenitoiteBot Reference - Commands</h1>
   </div>
 </header>
 
+<link rel="stylesheet" href="/List_extend.css" type="text/css">
 
-<div class="w3-row-padding w3-center w3-margin-top">
-  <div class="w3-card w3-container" style="min-height:5vh">
-  <h3>Hosting files | Information and Documentation | Random Code Shenanigans</h3>
-  <p class = "w3-text-theme" style="font-size:120px; margin: 0.2em"><i class="fa fa-files-o" ></i> <i class="fas fa-save"></i> <i class="fas fa-robot w3-hide-small"></i></p>
-  <p>[Making some cool things here!]</p>
-  </div>
+<div class="w3-container w3-padding" style="margin-bottom: 5px">
+  <p align="center" style="margin: 1em 3em">List of all current default commands in benitoitebot. Last Updated: Aug. 28, 2021</p>
+  <ul class="w3-ul w3-border w3-hoverable" id="commands">
+  </ul>
 </div>
 
 
-<div class="w3-center">
-  <p>I redesigned this site to host some code I use for my modding duties as well as a general purpose information page.</p>
-  <p>Did you find this site via Twitch?? If so I mod for
-  <a href="https://www.twitch.tv/elizabethandcaroline" target="_blank">ElizabethandCaroline</a>,
-  <a href="https://www.twitch.tv/kaestrain" target="_blank">Kaestrain</a>,
-  <a href="https://www.twitch.tv/abi_bea" target="_blank">Abi_Bea</a>, and
-  <a href="https://www.twitch.tv/paintbrushtales" target="_blank">PaintBrushTales</a> there!</p>
-  <p>I do art too... here's some places you can find/follow me:</p>
-  <h2>
-	<a href="https://twitter.com/gemhunter178" target="_blank"><i class="fa fa-twitter w3-hover-opacity"></i></a>
-	<a href="https://www.instagram.com/gemhunterdoesart/" target="_blank"><i class="fa fa-instagram w3-hover-opacity"></i></a>
-	<a href="https://www.tumblr.com/blog/gemhunter178" target="_blank"><i class="fa fa-tumblr w3-hover-opacity"></i></a>
-	<a href="https://gemhunter178.deviantart.com/" target="_blank"><i class="fa fa-deviantart w3-hover-opacity"></i></a>
-  <a href="https://gemhunter178.itch.io/" target="_blank"><i class="fab fa-itch-io w3-hover-opacity"></i></a>
-  <a href="https://www.twitch.tv/gemhunter178" target="_blank"><i class="fab fa-twitch w3-hover-opacity"></i></a>
-  </h2>
-</div>
+<script src="120210828commands_temp.js"></script>
+<script type="module">
+  //import { prefix, defCommands } from "https://cdn.jsdelivr.net/gh/gemhunter178/BenitoiteBot/src/_defCommands.js";
+</script>
+<script>
+  const listObj = document.getElementById('commands');
+  for (let i  = 0; i < defCommands.length; i++) {
+    const addCommandToList = document.createElement('li');
+    addCommandToList.classList.add('listHover');
+    addCommandToList.classList.add('listCollapsible');
+    addCommandToList.setAttribute('id', defCommands[i].name);
+    addCommandToList.innerHTML = prefix + defCommands[i].name;
+    listObj.appendChild(addCommandToList);
+    
+    const addDesc =  document.createElement('li');
+    let innerHTMLMsg = '';
+    switch(defCommands[i].mod) {
+      case -1:
+        innerHTMLMsg = '[BOT OWNER ONLY]<br>';
+        break;
 
-<div class="w3-container">
+      case 0:
+        innerHTMLMsg = '[EVERYONE]<br>';
+        break;
 
-<div class="w3-border">
-<div class="w3-bar w3-theme">
-  <button class="w3-bar-item w3-button testbtn w3-padding-16 w3-theme-dark" onclick="openCity(event,&#39;nb&#39;)">Nightbot Extends</button>
-  <button class="w3-bar-item w3-button testbtn w3-padding-16" onclick="openCity(event,&#39;bbot&#39;)">BenitoiteBot</button>
-</div>
+      case 1:
+        innerHTMLMsg = '[MOD ONLY]\<br>';
+        break;
 
-<div id="nb" class="w3-container city w3-animate-opacity" style="display: block;">
-  <h2>Nightbot Command Extends</h2>
-  <p>Here's some .js and .json files I made to extend my nightbot commands</p>
-  <a href="./nightbot.html" class="w3-button w3-theme">Click here to see a list of files</a>
-  <p></p>
-</div>
-<div id="bbot" class="w3-container city w3-animate-opacity" style="display: none;">
-  <h2>BenitoiteBot</h2>
-  <p>I've been coding my own twitch bot to incorporate some features I cannot do with plain nightbot. This document is currently under construction.</p>
-  <a href="./benitoitebot.html" class="w3-button w3-theme">Click here to the reference page (WIP)</a>
-  <p></p>
-</div>
-</div>
+      case 2:
+        innerHTMLMsg = '[BROADCASTER ONLY]<br>';
+        break;
 
-<hr>
-
-
-
-</div>
-
+      default:
+        innerHTMLMsg = '[UNKNOWN]<br>'
+        break;
+    }
+    if(defCommands[i].cd){
+      innerHTMLMsg += 'Default cooldown (in seconds): ' + defCommands[i].cd/1000 + '<br>';
+    }
+    addDesc.classList.add('collapsible');
+    addDesc.setAttribute('id', defCommands[i].name + 'desc');
+    addDesc.setAttribute('style', 'padding: 0 18px; border-bottom: 0;' );
+    if(defCommands[i].name === 'convert'){
+      innerHTMLMsg += 'a convert function that attempts to convert one unit to another. input format: [number] [inputUnit] [outputUnit]';
+    } else {
+      innerHTMLMsg += defCommands[i].desc;
+    }
+    innerHTMLMsg = innerHTMLMsg.replace(/\->/g,' &#8594 ')
+    addDesc.innerHTML = innerHTMLMsg;
+    listObj.appendChild(addDesc);
+  }
+</script>
+<script src="/List_entend_collapsible.js"></script>
 
     <!-- Footer -->
     <footer class="w3-container w3-theme-dark">
