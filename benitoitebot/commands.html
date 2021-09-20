@@ -14,17 +14,18 @@ title: Command Reference - Benitoite Bot
 <link rel="stylesheet" href="/List_extend.css" type="text/css">
 
 <div class="w3-container w3-padding" style="margin-bottom: 5px">
-  <p align="center" style="margin: 1em 3em">List of all current default commands in benitoitebot. Last Updated: Aug. 28, 2021</p>
+  <p align="center" style="margin: 1em 3em">List of all current default commands in benitoitebot. Last Updated: Sept 20, 2021
+  <br>
+  May take a bit to load as it is taking files from <a href="https://www.jsdelivr.com/" target="_blank">jsdelivr.com</a></p>
   <ul class="w3-ul w3-border w3-hoverable" id="commands">
   </ul>
 </div>
 
 
-<script src="120210828commands_temp.js"></script>
+<!-- <script src="120210828commands_temp.js"></script> -->
 <script type="module">
-  //import { prefix, defCommands } from "https://cdn.jsdelivr.net/gh/gemhunter178/BenitoiteBot/src/_defCommands.js";
-</script>
-<script>
+  import { prefix, defCommands } from "https://cdn.jsdelivr.net/gh/gemhunter178/BenitoiteBot@3913ef9/src/_defCommands.js";
+  //import { prefix, defCommands } from "./120210828commands_temp.js";
   const listObj = document.getElementById('commands');
   for (let i  = 0; i < defCommands.length; i++) {
     const addCommandToList = document.createElement('li');
@@ -35,35 +36,40 @@ title: Command Reference - Benitoite Bot
     listObj.appendChild(addCommandToList);
     
     const addDesc =  document.createElement('li');
-    let innerHTMLMsg = '';
+    let innerHTMLMsg = 'User Level: ';
     switch(defCommands[i].mod) {
       case -1:
-        innerHTMLMsg = '[BOT OWNER ONLY]<br>';
+        innerHTMLMsg += '[BOT OWNER ONLY]<br>';
         break;
 
       case 0:
-        innerHTMLMsg = '[EVERYONE]<br>';
+        innerHTMLMsg += '[EVERYONE]<br>';
         break;
 
       case 1:
-        innerHTMLMsg = '[MOD ONLY]\<br>';
+        innerHTMLMsg += '[MOD ONLY]\<br>';
         break;
 
       case 2:
-        innerHTMLMsg = '[BROADCASTER ONLY]<br>';
+        innerHTMLMsg += '[BROADCASTER ONLY]<br>';
         break;
 
       default:
-        innerHTMLMsg = '[UNKNOWN]<br>'
+        innerHTMLMsg += '[UNKNOWN]<br>';
         break;
     }
-    if(defCommands[i].cd){
-      innerHTMLMsg += 'Default cooldown (in seconds): ' + defCommands[i].cd/1000 + '<br>';
+    if (defCommands[i].cd){
+      innerHTMLMsg += 'Default cooldown (in seconds): ' + defCommands[i].cd/1000;
+      if (!defCommands[i].cd_default) {
+        innerHTMLMsg += ' <i style="color:#BBB!important">(command disabled by default)</i>';
+      }
+      innerHTMLMsg += '<br>';
     }
     addDesc.classList.add('collapsible');
     addDesc.setAttribute('id', defCommands[i].name + 'desc');
     addDesc.setAttribute('style', 'padding: 0 18px; border-bottom: 0;' );
-    if(defCommands[i].name === 'convert'){
+    innerHTMLMsg += "Description: ";
+    if (defCommands[i].name === 'convert'){
       innerHTMLMsg += 'a convert function that attempts to convert one unit to another. input format: [number] [inputUnit] [outputUnit]';
     } else {
       innerHTMLMsg += defCommands[i].desc;
@@ -72,5 +78,6 @@ title: Command Reference - Benitoite Bot
     addDesc.innerHTML = innerHTMLMsg;
     listObj.appendChild(addDesc);
   }
+  
 </script>
-<script src="/List_entend_collapsible.js"></script>
+<script type="module" src="/List_entend_collapsible.js"></script>
