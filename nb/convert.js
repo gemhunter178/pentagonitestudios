@@ -303,6 +303,7 @@ const conversions = (function () {
       minutes: { suffix: ' minutes', ...factor(60) },
       seconds: { suffix: ' seconds', ...factor(1) },
       sol: { suffix: ' sols (martian days)', ...factor(88775.24409) },
+      fortnight: { suffix: ' fortnights', ...factor(1209600) },
       format_time: {
         suffix: '',
         to: val => Math.floor(val / 31536000) + 'y ' + Math.floor((val / 86400) % 365) + 'd ' + Math.floor((val / 3600) % 24) + 'h ' + Math.floor((val / 60) % 60) + 'm ' + (val % 60) + 's'
@@ -332,6 +333,7 @@ const conversions = (function () {
       secs: 'seconds',
       second: 'seconds',
       sols: 'sol',
+      fortnights: 'fortnight',
       time: 'format_time',
       f_t: 'format_time'
     }
