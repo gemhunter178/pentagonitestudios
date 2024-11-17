@@ -25,7 +25,7 @@ order: 5
 function Levenshtein (string1, string2) {
   const len = string2.length;
   let test1 = Array(len + 1).fill(null);
-  // initialize row 0
+  // initialise row 0
   for (let i = 0; i <= len; i++) {
     test1[i] = i;
   }
@@ -42,7 +42,7 @@ function Levenshtein (string1, string2) {
 }
 
 // returns an array of weighted minimum distances and their associated attribute
-// will do a case insensitive search (utilizing .toLowerCase())
+// will do a case insensitive search (utilising .toLowerCase())
 function closestObjectAttribute (inputString, inputObject) {
   let maxMatch = [];
   for (const attribute in inputObject) {
@@ -186,19 +186,27 @@ const conversions = (function () {
       gabo: { suffix: ' gabos', ...factor(gaboVal) },
       smoot: { suffix: ' smoots', ...factor(1.7018) },
 
+      metre: 'm'
+      metres: 'm'
       meter: 'm',
       meters: 'm',
+      centimetre: 'cm',
+      centimetres: 'cm',
       centimeter: 'cm',
       centimeters: 'cm',
+      millimetre: 'mm',
+      millimetres: 'mm',
       millimeter: 'mm',
       millimeters: 'mm',
+      micrometre: 'µm',
+      micrometres: 'µm',
       micrometer: 'µm',
       micrometers: 'µm',
       um: 'µm',
-      kilometer: 'km',
-      kilometers: 'km',
       kilometre: 'km',
       kilometres: 'km',
+      kilometer: 'km',
+      kilometers: 'km',
       yard: 'yd',
       yards: 'yd',
       foot: 'ft',
@@ -233,8 +241,8 @@ const conversions = (function () {
     volume: {
       L: factor(1),
       mL: factor(0.001),
-      'm^3': { suffix: ' cubic meters', ...factor(1000) },
-      'cm^3': { suffix: ' cubic centimeters', ...factor(0.001) },
+      'm^3': { suffix: ' cubic metres', ...factor(1000) },
+      'cm^3': { suffix: ' cubic centimetres', ...factor(0.001) },
       imp_gal: { suffix: ' gallons (imperial)', ...factor(4.54609) },
       gal: { suffix: ' gallons (US)', ...factor(3.785411784) },
       pottle: { suffix: ' pottle (US, obsolete)', ...factor(1.892705892) },
@@ -258,16 +266,24 @@ const conversions = (function () {
         to: val => (val / 1000) / (gaboVal ** 3)
       },
 
+      litre: 'L',
+      litres: 'L',
       liter: 'L',
       liters: 'L',
       mil: 'mL',
       ml: 'mL',
+      millilitre: 'mL',
+      millilitres: 'mL',
       milliliter: 'mL',
       milliliters: 'mL',
+      cubicmetre: 'm^3',
+      cubicmetres: 'm^3',
       cubicmeter: 'm^3',
       cubicmeters: 'm^3',
       cubicm: 'm^3',
       cc: 'cm^3',
+      cubiccentimetre: 'cm^3',
+      cubiccentimetres: 'cm^3',
       cubiccentimeter: 'cm^3',
       cubiccentimeters: 'cm^3',
       cubiccm: 'cm^3',
@@ -321,8 +337,12 @@ const conversions = (function () {
       kgs: 'kg',
       kilogram: 'kg',
       kilograms: 'kg',
+      kilogramme: 'kg',
+      kilogrammes: 'kg',
       gram: 'g',
       grams: 'g',
+      gramme: 'g',
+      grammes: 'g',
       tons: 'ton',
       tonne: 'metric_ton',
       tonnes: 'metric_ton',
@@ -348,8 +368,8 @@ const conversions = (function () {
         suffix: ' square meters',
         ...factor(1)
       },
-      'cm^2': { suffix: ' square centimeters', ...factor(0.0001) },
-      'km^2': { suffix: ' square kilometers', ...factor(1000000) },
+      'cm^2': { suffix: ' square centimetres', ...factor(0.0001) },
+      'km^2': { suffix: ' square kilometres', ...factor(1000000) },
       'ft^2': { suffix: ' square feet', ...factor(0.09290304) },
       'in^2': { suffix: ' square inches', ...factor(0.00064516) },
       square_rod: { suffix: ' square rod/perch/pole (obsolete)', ...factor(25.29285264) },
@@ -365,10 +385,15 @@ const conversions = (function () {
         to: val => val / (gaboVal ** 2)
       },
 
+      squaremetre: 'm^2',
+      squaremetres: 'm^2',
       squaremeter: 'm^2',
       squaremeters: 'm^2',
+      sqmetre: 'm^2',
       sqmeter: 'm^2',
       squarem: 'm^2',
+      squarecentimetre: 'cm^2',
+      squarecentimetres: 'cm^2',
       squarecentimeter: 'cm^2',
       squarecentimeters: 'cm^2',
       sqcm: 'cm^2',
@@ -538,7 +563,7 @@ if (helpTrg !== 0) {
   }
 
   if (!calc) {
-    msg = 'Unknown unit \'' + unit1 + '\' ...did you check your capitalizations?';
+    msg = 'Unknown unit \'' + unit1 + '\' ...did you check your capitalisations?';
   }
 
   if (calc) {

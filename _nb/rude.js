@@ -1,5 +1,5 @@
 ---
-description: A list of rude words to use in conjuction with "testfor.js" below. As such, array name is "_testFor_"
+description: A list of rude words to use in conjuction with "testfor.js" below, which allows some auto-blocking/banning, or detecting where a block/ban is in order. As such, array name is "_testFor_"
 variables:
   - testFor
 tag: large arrays

@@ -1,5 +1,5 @@
 ---
-description: 3 separate arrays "_gr1_", "_gr2_", "_gr3_" corresponding to <a href="https://www.pinterest.com/pin/840695455435779270/" target="_blank">@radravioli_'s insult generator</a>
+description: [REMOVED] Previously contained 3 separate arrays "_gr1_", "_gr2_", "_gr3_" corresponding to <a href="https://www.pinterest.com/pin/840695455435779270/" target="_blank">@radravioli_'s insult generator</a>, removed due to disuse and rude out of context. Replaced arrays to follow format of the insult generator, but to tell user this has been removed.
 variables:
   - gr1
   - gr2
@@ -9,6 +9,6 @@ order: 1
 ---
 
 /* original insult generator by @radravioli_ */
-const gr1 = ['lamb sauce', 'chicken', 'gravy', 'soup', 'lamb chop', 'spinach', 'spaghetti', 'quail', 'risotto', 'egg'];
-const gr2 = ['like dog food scraps', 'RAW RAW RAW RAW', 'half dead', 'like a rubber implant', "like gandhi's flip flop", 'pinker than the panther', 'practically cremated', 'offensive', 'like a door stop', 'like wet cardboard', 'in need of jesus', 'like toxic scum'];
-const gr3 = ['absolute donkey', 'dirty pig', 'toilet brush', 'walnut', 'disgrace', 'idiot sandwich', 'yankee doodle donkey', 'lazy cow', 'muppet', 'donut'];
+const gr1 = ['command'];
+const gr2 = ['no longer used'];
+const gr3 = ['should find a new one'];
