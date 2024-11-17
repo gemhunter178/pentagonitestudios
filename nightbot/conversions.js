@@ -68,8 +68,8 @@ const conversions = (function () {
       gabo: { suffix: ' gabos', ...factor(gaboVal) },
       smoot: { suffix: ' smoots', ...factor(1.7018) },
 
-      metre: 'm'
-      metres: 'm'
+      metre: 'm',
+      metres: 'm',
       meter: 'm',
       meters: 'm',
       centimetre: 'cm',
