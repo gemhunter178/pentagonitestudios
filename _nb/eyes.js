@@ -1,5 +1,5 @@
 ---
-description: an array for a bunch of eye emotes we use. Array's name is "_eyes_"
+description: an array for a bunch of "eye" emotes we use, noting that Nightbot may not currently have subscriptions to all of these creators anymore. Array's name is "_eyes_"
 variables:
   - eyes
 tag: large arrays

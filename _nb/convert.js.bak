@@ -1,21 +1,5 @@
----
-description: |
-  Convert units to other units. Requires an input string '_text_' in the form '[number] [inputUnit] [outputUnit]'. See **[the Reference Sheet](nightbot/convert.html)** for more details.
-variables:
-  - text
-  - msg
-  - val
-  - helpTrg
-  - cvrtvals
-  - temperature
-  - length
-  - volume
-  - massweight
-  - area
-  - time
-tag: functions
-order: 5
----
+/* This code is intentionally left off the nightbot.html list as it is a backup I'm afraid to remove */
+
 /* global text:true */
 
 /* whitespace issues */

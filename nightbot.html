@@ -1,11 +1,11 @@
 ---
 layout: template
-title: Gem's other website!
+title: Gem's Code and Docs Website!
 ---
 
 <!-- Header -->
 <header class="w3-container w3-theme w3-padding" id="myHeader">
-  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i>
+  <i onclick="w3_open()" class="fa-solid fa-bars w3-xlarge w3-button w3-theme"></i>
   <div class="w3-center">
   <h1 class="w3-xxxlarge w3-animate-bottom" style="padding-bottom: 5vh">Nightbot Command Files</h1>
   </div>
@@ -49,7 +49,7 @@ title: Gem's other website!
           <span class="expand-detailbox">+</span>
           <span>
             <a href="{% link {{ pg.path }} %}{{ pg.ext }}" target="_blank"><b>{{ pg.slug }}{{ pg.ext }}</b></a>
-            <i title="{{ file_url | prepend: site.url }}" data-target-url="{{ site.url }}{% link {{ pg.path }} %}.min{{ pg.ext }}" class="copybtn fa fa-clipboard"></i>:
+            <i title="{{ file_url | prepend: site.url }}" data-target-url="{{ site.url }}{% link {{ pg.path }} %}.min{{ pg.ext }}" class="copybtn fa-solid fa-clipboard"></i>:
             <span class="command-description">{{ pg.description | markdownify }}</span>
           </span>
           <div class="command-detailbox">

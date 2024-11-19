@@ -6,10 +6,10 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Gem's other website!
+title: Gem's Code and Docs Website!
 email: no-email@example.com
 description: > # this means to ignore newlines until "baseurl:"
-  A collection of files for nightbot commands used in the cannels that
+  A collection of files for nightbot commands used in the channels that
   Gemhunter178 is a moderator in!
 url: "https://pentagonitestudios.com" # the base hostname & protocol for your site
 twitter_username: gemhunter178
