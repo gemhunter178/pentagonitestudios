@@ -202,7 +202,7 @@ const conversions = (function () {
     massweight: {
       kg: factor(1),
       g: factor(1 / 1000),
-      metric_ton: { suffix: ' metric tons', ...factor(1000) },
+      metric_ton: { suffix: ' tonnes (metric tons)', ...factor(1000) },
       ton: { suffix: ' tons (US)', ...factor(2000 / 2.20462262) },
       lbs: factor(1 / 2.20462262),
       oz: { suffix: ' ounces', ...factor(1 / 35.27396195) },
@@ -226,6 +226,7 @@ const conversions = (function () {
       gramme: 'g',
       grammes: 'g',
       tons: 'ton',
+      metric_tons: 'metric_ton',
       tonne: 'metric_ton',
       tonnes: 'metric_ton',
       lb: 'lbs',
@@ -247,7 +248,7 @@ const conversions = (function () {
     },
     area: {
       'm^2': {
-        suffix: ' square meters',
+        suffix: ' square metres',
         ...factor(1)
       },
       'cm^2': { suffix: ' square centimetres', ...factor(0.0001) },
