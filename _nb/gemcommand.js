@@ -50,7 +50,7 @@ const messages = [
 
 const promo = [
   'bluesky! https://bsky.app/profile/gemmakesart.bsky.social',
-  'insta! https://www.instagram.com/gemhunterdoesart/',
+  'insta! https://www.instagram.com/gemmakesart/',
   'twitch!...eventually https://www.twitch.tv/gemhunter178'
 ];
 
