@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/gemhunter178/pentagonitestudios#readme",
   "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-config-standard": "^16.0.2",
+    "eslint": "^10.6.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-frontmatter": "git+https://github.com/thesecretmaster/eslint-plugin-frontmatter.git",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "terser": "^5.14.2"
